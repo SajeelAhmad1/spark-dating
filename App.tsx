@@ -1,45 +1,66 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
+import React from 'react';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import OnboardingScreen1 from '@/screens/onboarding/OnboardingScreen1';
+import OnboardingScreen2 from '@/screens/onboarding/OnboardingScreen2';
+import OnboardingScreen3 from '@/screens/onboarding/OnboardingScreen3';
+import LogoScreen from '@/screens/onboarding/LogoScreen';
+import SignUpScreen from '@/screens/onboarding/SignUpScreen';
+import InviteScreen from '@/screens/onboarding/InviteScreen';
+import WaitingScreen from '@/screens/onboarding/WaitingScreen';
+import LaunchScreen from '@/screens/onboarding/LaunchScreen';
+import NumberSigninScreen from '@/screens/onboarding/NumberSigninScreen';
+import EmailSigninScreen from '@/screens/onboarding/EmailSigninScreen';
+import NumberInputScreen from '@/screens/onboarding/NumberInputScreen';
+import NumberVerifyScreen from '@/screens/onboarding/NumberVerifyScreen';
+import VerificationSuccessScreen from '@/screens/onboarding/VerificationSuccessScreen';
+import ProfileSetupScreen from '@/screens/onboarding/ProfileSetupScreen';
+import PhysicalAttributesScreen from '@/screens/onboarding/PhysicalAttributesScreen';
+import InterestsScreen from '@/screens/onboarding/InterestsScreen';
+import UploadPhotosScreen from '@/screens/onboarding/UploadPhotosScreen';
+import EnableLocationScreen from '@/screens/EnableLocationScreen';
+import SearchScreen from '@/screens/SearchScreen';
+import DiscoveryScreen from '@/screens/DiscoveryScreen';
+import MatchScreen from '@/screens/MatchScreen';
+import RequestsScreen from '@/screens/RequestsScreen';
+import InboxScreen from '@/screens/InboxScreen';
+import ChatScreen from '@/screens/ChatScreen';
 
-import { NewAppScreen } from '@react-native/new-app-screen';
-import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
-import {
-  SafeAreaProvider,
-  useSafeAreaInsets,
-} from 'react-native-safe-area-context';
+const Stack = createStackNavigator();
 
-function App() {
-  const isDarkMode = useColorScheme() === 'dark';
-
+export default function App() {
   return (
-    <SafeAreaProvider>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <AppContent />
-    </SafeAreaProvider>
+    <GestureHandlerRootView className="flex-1">
+      <NavigationContainer>
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          {/* <Stack.Screen name="Onboarding1" component={OnboardingScreen1} />
+          <Stack.Screen name="Onboarding2" component={OnboardingScreen2} />
+          <Stack.Screen name="Onboarding3" component={OnboardingScreen3} />
+          <Stack.Screen name="LogoScreen" component={LogoScreen} />
+          <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
+          <Stack.Screen name="InviteScreen" component={InviteScreen} />
+          <Stack.Screen name="WaitingScreen" component={WaitingScreen} />
+          <Stack.Screen name="LaunchScreen" component={LaunchScreen} />
+          <Stack.Screen name="NumberSigninScreen" component={NumberSigninScreen} />
+          <Stack.Screen name="EmailSigninScreen" component={EmailSigninScreen} />
+          <Stack.Screen name="NumberInputScreen" component={NumberInputScreen} />
+          <Stack.Screen name="NumberVerifyScreen" component={NumberVerifyScreen} />
+          <Stack.Screen name="VerificationSuccessScreen" component={VerificationSuccessScreen} />
+          <Stack.Screen name="ProfileSetupScreen" component={ProfileSetupScreen} />
+          <Stack.Screen name="PhysicalAttributesScreen" component={PhysicalAttributesScreen} />
+          <Stack.Screen name="InterestsScreen" component={InterestsScreen} />
+          <Stack.Screen name="UploadPhotosScreen" component={UploadPhotosScreen} />
+          <Stack.Screen name="EnableLocationScreen" component={EnableLocationScreen} />
+          <Stack.Screen name="SearchScreen" component={SearchScreen} />
+          <Stack.Screen name="DiscoveryScreen" component={DiscoveryScreen} /> */}
+          {/* <Stack.Screen name="DiscoveryScreen" component={DiscoveryScreen} /> */}
+          {/* <Stack.Screen name="MatchScreen" component={MatchScreen} /> */}
+          {/* <Stack.Screen name="RequestsScreen" component={RequestsScreen} /> */}
+          {/* <Stack.Screen name="InboxScreen" component={InboxScreen} /> */}
+          <Stack.Screen name="ChatScreen" component={ChatScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </GestureHandlerRootView>
   );
 }
-
-function AppContent() {
-  const safeAreaInsets = useSafeAreaInsets();
-
-  return (
-    <View style={styles.container}>
-      <NewAppScreen
-        templateFileName="App.tsx"
-        safeAreaInsets={safeAreaInsets}
-      />
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
-
-export default App;
