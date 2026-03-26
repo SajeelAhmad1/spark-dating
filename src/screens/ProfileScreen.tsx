@@ -9,7 +9,13 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import LinearGradient from 'react-native-linear-gradient';
-import { Settings, Edit2, Bell, MapPin, ChevronRight } from 'lucide-react-native';
+import {
+  Settings,
+  Edit2,
+  Bell,
+  MapPin,
+  ChevronRight,
+} from 'lucide-react-native';
 import BottomTabBar from '@/components/common/BottomTabBar';
 import Logo from '@/assets/images/logo.svg';
 import { sf, sr, sw, sh } from '@/utils/responsive';
@@ -20,6 +26,7 @@ const { width: SCREEN_WIDTH } = Dimensions.get('window');
 // ── Profile Screen ─────────────────────────────────────────
 const ProfileScreen = ({ navigation }: any) => {
   const [activeTab, setActiveTab] = useState<BottomTab>('Profile');
+  const [premiumUnlocked, setPremiumUnlocked] = useState(false);
 
   const handleTabPress = (tab: BottomTab) => {
     if (tab === 'Home') navigation.navigate('DiscoveryScreen');
@@ -65,25 +72,35 @@ const ProfileScreen = ({ navigation }: any) => {
               paddingBottom: sh(16),
             }}
           >
-            {/* Logo + App Name */}
-            <View style={{ flexDirection: 'row', alignItems: 'center', gap: sw(8) }}>
-              <Logo width={sf(40)} height={sf(40)} />
-              <Text
+            {/* Left: Edit Icon */}
+            <View style={{ width: sf(36), alignItems: 'flex-start' }}>
+              <TouchableOpacity
                 style={{
-                  fontFamily: 'ZenDots-Regular',
-                  fontSize: sf(20),
-                  lineHeight: sf(20),
-                  color: '#FFFFFF',
-                  letterSpacing: 0,
+                  width: sf(36),
+                  height: sf(36),
+                  borderRadius: sr(92),
+                  backgroundColor: '#FBB20233',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  borderColor: '#FFFFFF',
+                  borderWidth: 1,
                 }}
               >
-                SPARK
+                <Edit2 size={sf(18)} color="#FFFFFF" />
+              </TouchableOpacity>
+            </View>
+
+            {/* Center: Profile Text */}
+            <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+              <Text
+                style={{ color: '#FFF', fontSize: sf(20), fontWeight: '600' }}
+              >
+                Profile
               </Text>
             </View>
 
-            {/* Right Icons: Settings + Edit */}
-            <View style={{ flexDirection: 'row', alignItems: 'center', gap: sw(10) }}>
-              {/* Edit Icon */}
+            {/* Right: Settings Icon */}
+            <View style={{ width: sf(36), alignItems: 'flex-end' }}>
               <TouchableOpacity
                 style={{
                   width: sf(36),
@@ -96,41 +113,10 @@ const ProfileScreen = ({ navigation }: any) => {
                   borderWidth: 1,
                 }}
               >
-                <Edit2 size={sf(20)} color="#FFFFFF" />
-              </TouchableOpacity>
-
-              {/* Settings Icon */}
-              <TouchableOpacity
-                style={{
-                  width: sf(36),
-                  height: sf(36),
-                  borderRadius: sr(92),
-                  backgroundColor: '#FBB20233',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  borderColor: '#FFFFFF',
-                  borderWidth: 1,
-                }}
-              >
-                <Settings size={sf(20)} color="#FFFFFF" />
+                <Settings size={sf(18)} color="#FFFFFF" />
               </TouchableOpacity>
             </View>
           </View>
-
-          {/* ── "Profile" Title ── */}
-          <Text
-            style={{
-              fontFamily: 'Poppins-SemiBold',
-              fontSize: sf(20),
-              lineHeight: sf(20),
-              color: '#FFFFFF',
-              letterSpacing: 0,
-              textAlign: 'center',
-              paddingBottom: sh(12),
-            }}
-          >
-            Profile
-          </Text>
         </LinearGradient>
 
         {/* ── Scrollable Content ── */}
@@ -154,7 +140,9 @@ const ProfileScreen = ({ navigation }: any) => {
             }}
           >
             <Image
-              source={{ uri: 'https://randomuser.me/api/portraits/men/32.jpg' }}
+              source={{
+                uri: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&q=80',
+              }}
               style={{ width: '100%', height: '100%' }}
               resizeMode="cover"
             />
@@ -191,7 +179,13 @@ const ProfileScreen = ({ navigation }: any) => {
                 }}
               >
                 {/* Location */}
-                <View style={{ flexDirection: 'row', alignItems: 'center', gap: sw(4) }}>
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    gap: sw(4),
+                  }}
+                >
                   <MapPin size={sf(14)} color="#FFFFFF" />
                   <Text
                     style={{
@@ -231,8 +225,8 @@ const ProfileScreen = ({ navigation }: any) => {
             }}
           >
             {[
-              'https://randomuser.me/api/portraits/men/33.jpg',
-              'https://randomuser.me/api/portraits/men/34.jpg',
+              'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&q=80',
+              'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&q=80',
             ].map((uri, i) => (
               <View
                 key={i}
@@ -258,15 +252,17 @@ const ProfileScreen = ({ navigation }: any) => {
           </View>
 
           {/* ── Cards Container ── */}
-          <View style={{ marginHorizontal: sw(12), marginTop: sh(12), gap: sh(10) }}>
-
+          <View
+            style={{ marginHorizontal: sw(12), marginTop: sh(20), gap: sh(18) }}
+          >
+            {/* ── Invite Friends Card ── */}
             {/* ── Invite Friends Card ── */}
             <View
               style={{
                 backgroundColor: '#FFFFFF',
                 borderRadius: sr(16),
                 paddingHorizontal: sw(16),
-                paddingVertical: sh(12),
+                paddingVertical: sh(20),
                 shadowColor: '#000000',
                 shadowOpacity: 0.09,
                 shadowRadius: 25,
@@ -274,77 +270,183 @@ const ProfileScreen = ({ navigation }: any) => {
                 elevation: 5,
               }}
             >
-              <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-                <View style={{ flexDirection: 'row', alignItems: 'center', gap: sw(10), flex: 1 }}>
-                  {/* Bell Icon Container */}
+              {premiumUnlocked ? (
+                // ── Premium Unlocked State ──
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                  }}
+                >
                   <View
                     style={{
-                      width: sf(40),
-                      height: sf(40),
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                      gap: sw(10),
+                      flex: 1,
+                    }}
+                  >
+                    {/* Crown Icon Container */}
+                    <View
+                      style={{
+                        width: sf(40),
+                        height: sf(40),
+                        borderRadius: sr(92),
+                        backgroundColor: '#FBB20233',
+                        borderWidth: 0.4,
+                        borderColor: '#DC9B00',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                      }}
+                    >
+                      <Text style={{ fontSize: sf(20) }}>👑</Text>
+                    </View>
+
+                    <View style={{ flex: 1 }}>
+                      <Text
+                        style={{
+                          fontFamily: 'Poppins-SemiBold',
+                          fontSize: sf(15),
+                          lineHeight: sf(15),
+                          color: '#000000',
+                          letterSpacing: 0,
+                        }}
+                      >
+                        Premium Unlocked! ⭐
+                      </Text>
+                      <Text
+                        style={{
+                          fontFamily: 'Poppins-Regular',
+                          fontSize: sf(13),
+                          lineHeight: sf(13),
+                          color: '#555555',
+                          marginTop: sh(8),
+                        }}
+                      >
+                        You've earned free Premium
+                      </Text>
+                    </View>
+                  </View>
+
+                  {/* Green Checkmark */}
+                  <View
+                    style={{
+                      width: sf(32),
+                      height: sf(32),
                       borderRadius: sr(92),
-                      backgroundColor: '#FBB20233',
-                      borderWidth: 0.4,
-                      borderColor: '#DC9B00',
+                      borderWidth: 2,
+                      borderColor: '#22C55E',
                       alignItems: 'center',
                       justifyContent: 'center',
                     }}
                   >
-                    <Bell
-                      width={sf(18)}
-                      height={sf(20)}
-                      size={sf(18)}
-                      color="#DC9B00"
-                      strokeWidth={1.5}
-                    />
-                  </View>
-
-                  <View style={{ flex: 1 }}>
                     <Text
                       style={{
-                        fontFamily: 'Poppins-SemiBold',
-                        fontSize: sf(15),
-                        lineHeight: sf(15),
-                        color: '#000000',
-                        letterSpacing: 0,
+                        color: '#22C55E',
+                        fontSize: sf(16),
+                        fontWeight: '700',
                       }}
                     >
-                      Invite Friends, Get Premium Free!
-                    </Text>
-                    <Text
-                      style={{
-                        fontFamily: 'Poppins-Regular',
-                        fontSize: sf(13),
-                        lineHeight: sf(13),
-                        color: '#555555',
-                        marginTop: sh(4),
-                      }}
-                    >
-                      0 of 2 friends invited
+                      ✓
                     </Text>
                   </View>
                 </View>
-                <ChevronRight size={sf(20)} color="#555555" />
-              </View>
+              ) : (
+                // ── Default State ──
+                <TouchableOpacity onPress={() => setPremiumUnlocked(true)} activeOpacity={0.8}>
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                    }}
+                  >
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        gap: sw(10),
+                        flex: 1,
+                      }}
+                    >
+                      <View
+                        style={{
+                          width: sf(40),
+                          height: sf(40),
+                          borderRadius: sr(92),
+                          backgroundColor: '#FBB20233',
+                          borderWidth: 0.4,
+                          borderColor: '#DC9B00',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                        }}
+                      >
+                        <Bell
+                          width={sf(18)}
+                          height={sf(20)}
+                          size={sf(18)}
+                          color="#DC9B00"
+                          strokeWidth={1.5}
+                        />
+                      </View>
 
-              {/* Progress Bar */}
-              <View style={{ marginTop: sh(10) }}>
-                <View
-                  style={{
-                    height: sh(5),
-                    backgroundColor: '#EDEDED',
-                    borderRadius: sr(99),
-                    marginBottom: sh(4),
-                  }}
-                />
-                <View
-                  style={{
-                    height: sh(5),
-                    backgroundColor: '#EDEDED',
-                    borderRadius: sr(99),
-                    width: '60%',
-                  }}
-                />
-              </View>
+                      <View style={{ flex: 1 }}>
+                        <Text
+                          style={{
+                            fontFamily: 'Poppins-SemiBold',
+                            fontSize: sf(15),
+                            lineHeight: sf(15),
+                            color: '#000000',
+                            letterSpacing: 0,
+                          }}
+                        >
+                          Invite Friends, Get Premium Free!
+                        </Text>
+                        <Text
+                          style={{
+                            fontFamily: 'Poppins-Regular',
+                            fontSize: sf(13),
+                            lineHeight: sf(13),
+                            color: '#555555',
+                            marginTop: sh(8),
+                          }}
+                        >
+                          0 of 2 friends invited
+                        </Text>
+                      </View>
+                    </View>
+                    <ChevronRight size={sf(20)} color="#555555" />
+                  </View>
+
+                  {/* Progress Bar */}
+                  <View
+                    style={{
+                      marginTop: sh(10),
+                      flexDirection: 'row',
+                      gap: sw(6),
+                      justifyContent: 'space-between',
+                    }}
+                  >
+                    <View
+                      style={{
+                        height: sh(10),
+                        backgroundColor: '#EDEDED',
+                        borderRadius: sr(99),
+                        width: '49%',
+                      }}
+                    />
+                    <View
+                      style={{
+                        height: sh(10),
+                        backgroundColor: '#EDEDED',
+                        borderRadius: sr(99),
+                        width: '49%',
+                      }}
+                    />
+                  </View>
+                </TouchableOpacity>
+              )}
             </View>
 
             {/* ── Stats Card ── */}
@@ -353,7 +455,7 @@ const ProfileScreen = ({ navigation }: any) => {
                 backgroundColor: '#FFFFFF',
                 borderRadius: sr(16),
                 paddingHorizontal: sw(16),
-                paddingVertical: sh(16),
+                paddingVertical: sh(28),
                 shadowColor: '#000000',
                 shadowOpacity: 0.09,
                 shadowRadius: 25,
@@ -388,7 +490,7 @@ const ProfileScreen = ({ navigation }: any) => {
                         fontSize: sf(13),
                         lineHeight: sf(13),
                         color: '#555555',
-                        marginTop: sh(4),
+                        marginTop: sh(8),
                         textAlign: 'center',
                       }}
                     >
@@ -414,7 +516,7 @@ const ProfileScreen = ({ navigation }: any) => {
                 backgroundColor: '#FFFFFF',
                 borderRadius: sr(16),
                 paddingHorizontal: sw(16),
-                paddingVertical: sh(16),
+                paddingVertical: sh(20),
                 shadowColor: '#000000',
                 shadowOpacity: 0.09,
                 shadowRadius: 25,
@@ -443,7 +545,8 @@ const ProfileScreen = ({ navigation }: any) => {
                   letterSpacing: 0,
                 }}
               >
-                Adventure lover & coffee enthusiast. Always looking for the next trip. Let's explore together! ✈️
+                Adventure lover & coffee enthusiast. Always looking for the next
+                trip. Let's explore together! ✈️
               </Text>
             </View>
 
@@ -453,7 +556,7 @@ const ProfileScreen = ({ navigation }: any) => {
                 backgroundColor: '#FFFFFF',
                 borderRadius: sr(16),
                 paddingHorizontal: sw(16),
-                paddingVertical: sh(16),
+                paddingVertical: sh(20),
                 shadowColor: '#000000',
                 shadowOpacity: 0.09,
                 shadowRadius: 25,
@@ -473,32 +576,36 @@ const ProfileScreen = ({ navigation }: any) => {
               >
                 Interests
               </Text>
-              <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: sw(8) }}>
-                {['✈️ Travel', '🎵 Music', '☕ Coffee', '📷 Photography'].map((interest, i) => (
-                  <View
-                    key={i}
-                    style={{
-                      backgroundColor: '#FBB20220',
-                      borderRadius: sr(99),
-                      paddingHorizontal: sw(14),
-                      paddingVertical: sh(8),
-                      borderWidth: 1,
-                      borderColor: '#FBB20240',
-                    }}
-                  >
-                    <Text
+              <View
+                style={{ flexDirection: 'row', flexWrap: 'wrap', gap: sw(8) }}
+              >
+                {['✈️ Travel', '🎵 Music', '☕ Coffee', '📷 Photography'].map(
+                  (interest, i) => (
+                    <View
+                      key={i}
                       style={{
-                        fontFamily: 'Poppins-Regular',
-                        fontSize: sf(16),
-                        lineHeight: sf(16),
-                        color: '#000000',
-                        letterSpacing: 0,
+                        backgroundColor: '#FBB20220',
+                        borderRadius: sr(99),
+                        paddingHorizontal: sw(14),
+                        paddingVertical: sh(8),
+                        borderWidth: 1,
+                        borderColor: '#FBB20240',
                       }}
                     >
-                      {interest}
-                    </Text>
-                  </View>
-                ))}
+                      <Text
+                        style={{
+                          fontFamily: 'Poppins-Regular',
+                          fontSize: sf(16),
+                          lineHeight: sf(16),
+                          color: '#000000',
+                          letterSpacing: 0,
+                        }}
+                      >
+                        {interest}
+                      </Text>
+                    </View>
+                  ),
+                )}
               </View>
             </View>
 
@@ -508,7 +615,7 @@ const ProfileScreen = ({ navigation }: any) => {
                 backgroundColor: '#FFFFFF',
                 borderRadius: sr(16),
                 paddingHorizontal: sw(16),
-                paddingVertical: sh(16),
+                paddingVertical: sh(20),
                 shadowColor: '#000000',
                 shadowOpacity: 0.09,
                 shadowRadius: 25,
@@ -531,7 +638,7 @@ const ProfileScreen = ({ navigation }: any) => {
               </Text>
 
               {[
-                { label: 'Height', value: "5' 10\"" },
+                { label: 'Height', value: '5\' 10"' },
                 { label: 'Body Type', value: 'Slim' },
                 { label: 'Ethnicity', value: 'White' },
               ].map((detail, i) => (
@@ -579,7 +686,6 @@ const ProfileScreen = ({ navigation }: any) => {
                 </React.Fragment>
               ))}
             </View>
-
           </View>
         </ScrollView>
 

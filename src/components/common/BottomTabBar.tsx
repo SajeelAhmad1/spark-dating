@@ -2,8 +2,7 @@ import React from 'react';
 import { View, Text, TouchableOpacity, useWindowDimensions } from 'react-native';
 import { Users, MessageSquare } from 'lucide-react-native';
 import Svg, { Path } from 'react-native-svg';
-import LinearGradient from 'react-native-linear-gradient';
-import SearchAvatar from '@/assets/images/searchAvatar.svg';
+import ProfileAvatar from '@/assets/images/profileAvatar.svg';
 import CameraIcon from '@/assets/images/cameraIcon.svg';
 import { sf, sr, sw, sh } from '@/utils/responsive';
 
@@ -265,7 +264,7 @@ const BottomTabBar = ({ activeTab, onTabPress }: BottomTabBarProps) => {
                   borderColor: '#FFFFFF',
                 }}
               >
-                <SearchAvatar width={iconSize + sw(6)} height={iconSize + sw(6)} />
+                <ProfileAvatar width={iconSize + sw(6)} height={iconSize + sw(6)} />
               </View>
             }
           />

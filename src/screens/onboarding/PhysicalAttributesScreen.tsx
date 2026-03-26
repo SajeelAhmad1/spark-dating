@@ -10,64 +10,9 @@ import {
 import { ChevronLeft, ChevronDown } from 'lucide-react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import PrimaryButton from '@/components/common/PrimaryButton';
-
-const HEIGHTS = [
-  '4\'0"',
-  '4\'1"',
-  '4\'2"',
-  '4\'3"',
-  '4\'4"',
-  '4\'5"',
-  '4\'6"',
-  '4\'7"',
-  '4\'8"',
-  '4\'9"',
-  '4\'10"',
-  '4\'11"',
-  '5\'0"',
-  '5\'1"',
-  '5\'2"',
-  '5\'3"',
-  '5\'4"',
-  '5\'5"',
-  '5\'6"',
-  '5\'7"',
-  '5\'8"',
-  '5\'9"',
-  '5\'10"',
-  '5\'11"',
-  '6\'0"',
-  '6\'1"',
-  '6\'2"',
-  '6\'3"',
-  '6\'4"',
-  '6\'5"',
-  '6\'6"',
-];
-
-const BODY_TYPES = [
-  'Slim',
-  'Athletic',
-  'Average',
-  'Curvy',
-  'Heavyset',
-  'Muscular',
-  'Petite',
-  'Plus-size',
-];
-
-const ETHNICITIES = [
-  'Asian',
-  'Black / African Descent',
-  'Hispanic / Latino',
-  'Middle Eastern',
-  'Mixed Race',
-  'Native American',
-  'Pacific Islander',
-  'South Asian',
-  'White / Caucasian',
-  'Other',
-];
+import BODY_TYPES from '@/constants/bodyTypes';
+import ETHNICITIES from '@/constants/ethnicities';
+import HEIGHTS from '@/constants/heights';
 
 type DropdownField = 'height' | 'bodyType' | 'ethnicity' | null;
 
@@ -78,9 +23,9 @@ const PhysicalAttributesScreen = ({ navigation }: any) => {
   const [openDropdown, setOpenDropdown] = useState<DropdownField>(null);
 
   const dropdownOptions: Record<NonNullable<DropdownField>, string[]> = {
-    height: HEIGHTS,
-    bodyType: BODY_TYPES,
-    ethnicity: ETHNICITIES,
+    height: Object.values(HEIGHTS),
+    bodyType: Object.values(BODY_TYPES),
+    ethnicity: Object.values(ETHNICITIES),
   };
 
   const dropdownValues: Record<NonNullable<DropdownField>, string> = {
