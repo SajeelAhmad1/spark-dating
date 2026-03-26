@@ -197,6 +197,7 @@ const InviteScreen = ({ navigation }: any) => {
             variant="gradient"
             icon={<Share2 size={20} color="#ffffff" />}
             iconPosition="middle"
+            textStyle={{ fontSize: 18, lineHeight: 18, letterSpacing: 0, color: '#ffffff' }}
           />
 
           <TouchableOpacity onPress={handleSkip}>

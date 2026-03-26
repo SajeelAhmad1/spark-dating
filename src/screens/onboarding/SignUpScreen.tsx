@@ -45,7 +45,7 @@ export default function SignUpScreen({ navigation }: any) {
           </View>
 
           <Text
-            style={{ fontSize: sf(24), lineHeight: sf(32), letterSpacing: 0.24 }}
+            style={{ fontSize: sf(24), lineHeight: sf(36), letterSpacing: 0.24 }}
             className="font-semibold text-[#ffffff] text-center"
           >
             Match. Snap. Keep the{'\n'}Spark Alive.
@@ -54,7 +54,7 @@ export default function SignUpScreen({ navigation }: any) {
 
         <View style={{ paddingHorizontal: sw(20), paddingBottom: sh(24), gap: sh(12) }}>
           <Text
-            style={{ fontSize: sf(16), lineHeight: sf(20), marginBottom: sh(16) }}
+            style={{ fontSize: sf(16), lineHeight: sf(16), letterSpacing: 0, marginBottom: sh(16) }}
             className="font-medium text-[#ffffff] text-center"
           >
             By tapping "Sign In" you agree to or{' '}
@@ -84,10 +84,10 @@ export default function SignUpScreen({ navigation }: any) {
           />
 
           <View style={{ marginTop: sh(8) }} className="items-center">
-            <Text style={{ fontSize: sf(13) }} className="text-white/80">
+            <Text style={{ fontSize: sf(16) }} className="text-white/80 font-normal">
               Already have an account?{' '}
               <Text
-                className="text-[#FBB202] font-semibold"
+                className="text-[#FBB202] font-medium"
                 onPress={() => navigation.navigate('SignInScreen')}
               >
                 Login

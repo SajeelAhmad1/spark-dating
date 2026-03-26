@@ -28,10 +28,10 @@ const NumberVerifyScreen = ({navigation}: any) => {
 
         {/* ── Header ── */}
         <View className="mt-16 gap-y-2">
-          <Text className="text-black text-[28px] leading-[28px] font-semibold">
+          <Text className="text-black text-[28px] leading-[100%] tracking-[0%] font-semibold">
             Verify Your Number
           </Text>
-          <Text className="text-[#7D858E] text-[15px] leading-[15px] font-normal">
+          <Text className="text-[#7D858E] text-[15px] leading-[100%] tracking-[0%] font-normal">
             Enter the 4 digit code
           </Text>
         </View>
@@ -67,6 +67,7 @@ const NumberVerifyScreen = ({navigation}: any) => {
             colors={['#1E78F5', '#FBB202']}
             variant="gradient"
             style={{ alignSelf: 'stretch' }}
+            textStyle={{fontWeight: '500', fontSize:20, lineHeight: 20, letterSpacing:0, color: '#ffffff'}}
           />
         </View>
 

@@ -33,11 +33,13 @@ const WaitingScreen = ({ navigation }: any) => (
 
         {/* Subtitle */}
         <Text
-          style={{ fontFamily: 'Poppins-Regular', fontSize: 16, lineHeight: 20, letterSpacing: 0 }}
+          style={{ fontFamily: 'Poppins-Regular', fontSize: 16, lineHeight: 16, letterSpacing: 0 }}
           className="text-[#7D858E] text-center"
         >
           Spark goes live when{' '}
-          <Text style={{ fontFamily: 'Poppins-Regular', color: '#1E78F5' }}>
+          <Text style={{ fontFamily: 'Poppins-Medium', color: '#1E78F5' }}
+          className='font-medium'
+          >
             {TARGET.toLocaleString()} people
           </Text>{' '}
           join. Invite friends to speed it up!
@@ -80,10 +82,10 @@ const WaitingScreen = ({ navigation }: any) => (
             <Bell size={24} color="#DC9B00" />
           </View>
           <View className="flex-1 shrink ml-2">
-            <Text style={{ fontFamily: 'Poppins-SemiBold', fontSize: 16, lineHeight: 24, letterSpacing: 0 }} className="text-black">
+            <Text style={{ fontFamily: 'Poppins-SemiBold', fontSize: 16, lineHeight: 16, letterSpacing: 0 }} className="text-black">
               You'll be notified
             </Text>
-            <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 13, lineHeight: 20, letterSpacing: 0 }} className="text-[#555555]">
+            <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 13, lineHeight: 13, letterSpacing: 0 }} className="text-[#555555]">
               We will send you a notification when we reach {TARGET} users
             </Text>
           </View>
@@ -99,6 +101,7 @@ const WaitingScreen = ({ navigation }: any) => (
         variant="gradient"
         icon={<Share2 size={20} color="#ffffff" />}
         iconPosition="start"
+        textStyle={{fontSize: 18, fontWeight: '500', lineHeight: 18, letterSpacing: 0, color: '#ffffff'}}
       />
 
     </View>

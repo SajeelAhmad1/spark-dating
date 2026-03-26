@@ -132,7 +132,7 @@ const PhysicalAttributesScreen = ({ navigation }: any) => {
         <View className="gap-y-5" style={{ marginTop: 12 }}>
           {fields.map(({ key, label, placeholder }) => (
             <View key={key}>
-              <Text className="text-black text-[15px] font-semibold mb-2">
+              <Text className="text-black text-[15px] font-semibold leading-[100%] tracking-[0%] mb-2">
                 {label}
               </Text>
               <TouchableOpacity
@@ -163,7 +163,7 @@ const PhysicalAttributesScreen = ({ navigation }: any) => {
         </View>
 
         {/* ── Skip Note ── */}
-        <Text className="text-[#FBB202] text-[14px] font-normal mt-5">
+        <Text className="text-[#FBB202] text-[15px] font-normal leading-[100%] tracking-[0%] mt-5">
           You can always skip this step and edit later
         </Text>
       </ScrollView>
@@ -176,6 +176,7 @@ const PhysicalAttributesScreen = ({ navigation }: any) => {
           colors={['#1E78F5', '#FBB202']}
           variant="gradient"
           style={{ alignSelf: 'stretch' }}
+          textStyle={{fontSize: 20, fontWeight: '500', lineHeight: 20, letterSpacing: 0}}
         />
       </View>
 

@@ -33,13 +33,13 @@ export default function LogoScreen({ navigation }: any) {
           </View>
 
           {/* App name */}
-          <Text style={{ fontSize: sf(40) }} className="text-[#ffffff] font-normal">
+          <Text style={{ fontSize: sf(40), lineHeight: sf(40), letterSpacing: 0 }} className="text-[#ffffff] font-normal">
             SPARK
           </Text>
 
           {/* Subtitle */}
           <Text
-            style={{ fontSize: sf(15), lineHeight: sf(24) }}
+            style={{ fontSize: sf(15), lineHeight: sf(15), letterSpacing: 0 }}
             className="text-[#222222] font-normal text-center"
           >
             Discover real connections through shared interests{'\n'}and genuine
