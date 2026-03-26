@@ -32,15 +32,15 @@ const OnboardingCard: React.FC<Props> = ({
       {/* Title */}
       <Text
         className="text-[24px] font-semibold text-center text-[#000000] px-5 mb-2"
-        style={{ lineHeight: 30 }}
+        style={{ lineHeight: 24, letterSpacing: 0 }}
       >
         {title}
       </Text>
 
       {/* Subtitle */}
       <Text
-        className="text-[16px] text-[#7D858E] text-center px-5 mb-10"
-        style={{ lineHeight: 20 }}
+        className="text-[16px] font-normal text-[#7D858E] text-center px-5 mb-10"
+        style={{ lineHeight: 16, letterSpacing: 0 }}
       >
         {subtitle}
       </Text>
@@ -66,6 +66,7 @@ const OnboardingCard: React.FC<Props> = ({
           title={buttonLabel}
           onPress={onPress}
           colors={[Colors.gradientStart, Colors.gradientEnd]}
+          textStyle={{ fontSize: 18, fontWeight: '500', lineHeight: 18, letterSpacing: 0 }}
         />
       </View>
     </View>

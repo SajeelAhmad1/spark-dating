@@ -143,6 +143,7 @@ const InterestsScreen = ({ navigation }: any) => {
             alignSelf: 'stretch',
             opacity: canContinue ? 1 : 0.5,
           }}
+          textStyle={{fontSize: 20, fontWeight: '500', lineHeight: 20, letterSpacing: 0}}
         />
       </View>
     </SafeAreaView>

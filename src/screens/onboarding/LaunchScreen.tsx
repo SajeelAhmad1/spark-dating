@@ -64,7 +64,7 @@ const LaunchScreen = ({ navigation }: any) => {
             className="text-[#7D858E] text-center"
           >
             SparkLink is officially live with{' '}
-            <Text style={{ fontFamily: 'Poppins-Regular', color: '#1E78F5' }}>
+            <Text style={{ fontFamily: 'Poppins-SemiBold', color: '#1E78F5' }}>
               1000+ users
             </Text>{' '}
             🎉
@@ -179,6 +179,7 @@ const LaunchScreen = ({ navigation }: any) => {
           onPress={() => navigation.navigate('EnableLocationScreen')}
           colors={['#1E78F5', '#FBB202']}
           variant="gradient"
+          textStyle={{fontSize: 18, fontWeight: '500', lineHeight: 18, letterSpacing: 0}}
         />
       </View>
     </SafeAreaView>

@@ -21,10 +21,10 @@ const NumberEnterScreen = ({navigation}: any) => {
 
         {/* ── Header ── */}
         <View className="mt-16 gap-y-2">
-          <Text className="text-black text-[28px] leading-[28px] font-semibold">
+          <Text className="text-black text-[28px] leading-[100%] tracking-[0%] font-semibold">
             My mobile number
           </Text>
-          <Text className="text-[#7D858E] text-[15px] leading-[15px]">
+          <Text className="text-[#7D858E] text-[15px] font-normal leading-[100%] tracking-[0%]">
             Your streak is waiting 🔥
           </Text>
         </View>
@@ -54,12 +54,12 @@ const NumberEnterScreen = ({navigation}: any) => {
             keyboardType="phone-pad"
             value={phoneNumber}
             onChangeText={setPhoneNumber}
-            className="flex-1 text-black text-[16px] leading-[24px]"
+            className="flex-1 text-black text-[16px] leading-[150%] tracking-[0px] font-medium"
           />
         </View>
 
         {/* ── Helper Text ── */}
-        <Text className="text-[#7D858E] text-[15px] leading-[20px] mt-4">
+        <Text className="text-[#7D858E] text-[15px] font-normal leading-[100%] tracking-[0%] mt-4">
           We'll text you a code to verify you're really you. Message and data
           rates may apply.{' '}
           <Text className="text-[#7D858E]">
@@ -75,14 +75,15 @@ const NumberEnterScreen = ({navigation}: any) => {
             colors={['#1E78F5', '#FBB202']}
             variant="gradient"
             style={{ alignSelf: 'stretch' }}
+            textStyle={{color: '#ffffff', fontSize: 20, fontWeight: '500', lineHeight: 20, letterSpacing: 0}}
           />
         </View>
 
         {/* ── Already have account ── */}
         <View className="mt-4 items-center">
-          <Text className="text-[#7D858E] text-[16px] leading-[16px]">
+          <Text className="text-[#7D858E] text-[16px] leading-[100%] tracking-[0%]">
             Already have an account?{' '}
-            <Text className="text-[#1E78F5] underline">Login</Text>
+            <Text className="text-[#1E78F5] underline font-medium">Login</Text>
           </Text>
         </View>
       </View>

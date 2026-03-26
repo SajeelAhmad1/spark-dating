@@ -33,10 +33,10 @@ export default function SignInScreen({
 
         {/* Header */}
         <View className="gap-y-2" style={{ marginTop: 48 }}>
-          <Text className="text-black text-[28px] leading-[34px]">
+          <Text className="text-black text-[28px] font-semibold leading-[100%] tracking-[0%]">
             Welcome Back!
           </Text>
-          <Text className="text-[#7D858E] text-[14px] leading-[20px]">
+          <Text className="text-[#7D858E] text-[15px] leading-[100%] tracking-[0%]">
             Please enter your number & password to signin
           </Text>
         </View>
@@ -66,7 +66,7 @@ export default function SignInScreen({
           />
 
           <TouchableOpacity onPress={() => {}}>
-            <Text className="text-[#1E78F5] text-[13px]">
+            <Text className="text-[#1E78F5] text-[14px] font-medium leading-[100%]">
               Forgot password!
             </Text>
           </TouchableOpacity>

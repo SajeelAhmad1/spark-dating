@@ -17,11 +17,12 @@ export default function SignInBottomActions({
           colors={['#1E78F5', '#FBB202']}
           variant="gradient"
           style={{ alignSelf: 'stretch' }}
+          textStyle={{fontSize:20, fontWeight: '500'}}
         />
 
-        <Text style={{ fontSize: sf(15) }} className="text-black">
+        <Text className="text-black text-[16px] font-normal leading-[100%]" >
           Don't have an account?{' '}
-          <Text className="text-[#1E78F5]">Sign Up</Text>
+          <Text className="text-[#1E78F5] font-medium">Sign Up</Text>
         </Text>
       </View>
 

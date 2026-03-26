@@ -85,7 +85,7 @@ const ProfileSetupScreen = ({navigation}: any) => {
         {/* ── First & Last Name ── */}
         <View className="mt-6 flex-row gap-x-3">
           <View className="flex-1">
-            <Text className="text-black text-[15px] font-semibold mb-2">First Name</Text>
+            <Text className="text-black text-[15px] font-semibold leading-[100%] tracking-[0%] mb-2">First Name</Text>
             <TextInput
               placeholder="JJ"
               placeholderTextColor="#7D858E"
@@ -95,7 +95,7 @@ const ProfileSetupScreen = ({navigation}: any) => {
             />
           </View>
           <View className="flex-1">
-            <Text className="text-black text-[15px] font-semibold mb-2">Last Name</Text>
+            <Text className="text-black text-[15px] font-semibold leading-[100%] tracking-[0%] mb-2">Last Name</Text>
             <TextInput
               placeholder="Smith"
               placeholderTextColor="#7D858E"
@@ -108,7 +108,7 @@ const ProfileSetupScreen = ({navigation}: any) => {
 
         {/* ── Gender ── */}
         <View className="mt-6">
-          <Text className="text-black text-[15px] font-semibold mb-2">Gender</Text>
+          <Text className="text-black text-[15px] font-semibold leading-[100%] tracking-[0%] mb-2">Gender</Text>
           <View className="flex-row gap-x-3">
             {GENDERS.map((g) => {
               const selected = gender === g;
@@ -144,7 +144,7 @@ const ProfileSetupScreen = ({navigation}: any) => {
 
         {/* ── Date of Birth ── */}
         <View className="mt-6">
-          <Text className="text-black text-[15px] font-semibold mb-2">Date of birth</Text>
+          <Text className="text-black text-[15px] font-semibold leading-[100%] tracking-[0%] mb-2">Date of birth</Text>
           <View className="flex-row gap-x-3">
             {(['day', 'month', 'year'] as NonNullable<DropdownField>[]).map((field) => (
               <TouchableOpacity
@@ -173,7 +173,7 @@ const ProfileSetupScreen = ({navigation}: any) => {
 
         {/* ── Bio ── */}
         <View className="mt-6">
-          <Text className="text-black text-[15px] font-normal mb-2">Add a Bio</Text>
+          <Text className="text-black text-[15px] font-normal leading-[100%] tracking-[0%] mb-2">Add a Bio</Text>
           <TextInput
             placeholder="Write something interesting..."
             placeholderTextColor="#7D858E"
@@ -203,6 +203,7 @@ const ProfileSetupScreen = ({navigation}: any) => {
           colors={['#1E78F5', '#FBB202']}
           variant="gradient"
           style={{ alignSelf: 'stretch' }}
+          textStyle={{fontSize: 20, fontWeight: '500', lineHeight: 20, letterSpacing: 0}}
         />
       </View>
 
