@@ -417,7 +417,10 @@ const EditProfileScreen = ({ navigation }: any) => {
                     <Text
                       style={{
                         fontFamily: 'Poppins-Regular',
-                        fontSize: sf(14),
+                        fontSize: sf(16),
+                        fontWeight: '400',
+                        lineHeight: 16,
+                        letterSpacing: 0,
                         color: '#000000',
                       }}
                     >

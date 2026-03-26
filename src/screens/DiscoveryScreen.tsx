@@ -138,7 +138,7 @@ const DiscoveryScreen = ({ navigation }: any) => {
             maskElement={
               <Text
                 style={{
-                  lineHeight: sf(32),
+                  lineHeight: sf(24),
                   fontSize: sf(24),
                 }}
                 className="font-semibold"
@@ -154,7 +154,7 @@ const DiscoveryScreen = ({ navigation }: any) => {
             >
               <Text
                 style={{
-                  lineHeight: sf(32),
+                  lineHeight: sf(24),
                   fontSize: sf(24),
                   opacity: 0,
                 }}

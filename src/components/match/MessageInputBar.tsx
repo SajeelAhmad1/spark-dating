@@ -35,7 +35,7 @@ export default function MessageInputBar({
           flex: 1,
           fontFamily: 'Poppins-Regular',
           fontSize: 16,
-          lineHeight: 18,
+          lineHeight: 16,
           padding: 4,
           color: '#FFFFFF',
         }}

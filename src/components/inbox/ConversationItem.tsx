@@ -78,7 +78,7 @@ export default function ConversationItem({ item }: { item: Conversation }) {
             <Text
               style={{
                 fontSize: 11,
-                lineHeight: 20,
+                lineHeight: 11,
                 fontWeight: '500',
                 color: item.timeWarning ? '#FF3B30' : '#7D858E',
               }}

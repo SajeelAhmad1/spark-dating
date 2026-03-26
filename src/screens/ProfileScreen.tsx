@@ -540,7 +540,7 @@ const ProfileScreen = ({ navigation }: any) => {
                 style={{
                   fontFamily: 'Poppins-Regular',
                   fontSize: sf(16),
-                  lineHeight: sf(22),
+                  lineHeight: sf(16),
                   color: '#7D858E',
                   letterSpacing: 0,
                 }}
