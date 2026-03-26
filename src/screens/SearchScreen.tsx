@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { View, Text, Animated, Easing } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Svg, { Circle } from 'react-native-svg';
-import SearchAvatar from '@/assets/images/searchAvatar.svg';
+import ProfileAvatar from '@/assets/images/profileAvatar.svg';
 import { sf } from '@/utils/responsive';
 
 // ── Orbit Ring ─────────────────────────────────────────────
@@ -173,7 +173,7 @@ const SearchScreen = ({ navigation }: any) => {
             borderColor: '#ffffff',
           }}
         >
-          <SearchAvatar width={avatarSize} height={avatarSize} />
+          <ProfileAvatar width={avatarSize} height={avatarSize} />
         </View>
       </View>
 
