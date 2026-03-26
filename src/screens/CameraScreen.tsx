@@ -15,6 +15,7 @@ import {
 } from 'react-native-vision-camera';
 import { launchImageLibrary } from 'react-native-image-picker';
 import { Cross, FlashlightIcon, FlashlightOffIcon, GalleryVerticalIcon, FlipHorizontal } from 'lucide-react-native';
+import { sf, sr, sw, sh } from '@/utils/responsive';
 
 interface CameraScreenProps {
   visible: boolean;
@@ -181,8 +182,8 @@ const styles = StyleSheet.create({
     right: 0,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingHorizontal: 20,
-    paddingTop: 50,
+    paddingHorizontal: sw(20),
+    paddingTop: sh(50),
   },
   bottomControls: {
     position: 'absolute',
@@ -192,31 +193,31 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingHorizontal: 30,
-    paddingBottom: 40,
+    paddingHorizontal: sw(30),
+    paddingBottom: sh(40),
   },
   controlButton: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
+    width: sf(50),
+    height: sf(50),
+    borderRadius: sr(25),
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
     alignItems: 'center',
     justifyContent: 'center',
   },
   shutterButton: {
-    width: 72,
-    height: 72,
-    borderRadius: 36,
-    borderWidth: 4,
+    width: sf(72),
+    height: sf(72),
+    borderRadius: sr(36),
+    borderWidth: sf(4),
     borderColor: '#FFFFFF',
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'rgba(0, 0, 0, 0.3)',
   },
   shutterInner: {
-    width: 56,
-    height: 56,
-    borderRadius: 28,
+    width: sf(56),
+    height: sf(56),
+    borderRadius: sr(28),
     backgroundColor: '#FFFFFF',
   },
   capturingOverlay: {
@@ -231,24 +232,24 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#000000',
-    padding: 20,
+    padding: sw(20),
   },
   permissionText: {
     color: '#888',
     fontFamily: 'Poppins-Regular',
-    fontSize: 16,
-    marginBottom: 20,
+    fontSize: sf(16),
+    marginBottom: sh(20),
     textAlign: 'center',
   },
   grantButton: {
-    paddingHorizontal: 24,
-    paddingVertical: 12,
+    paddingHorizontal: sw(24),
+    paddingVertical: sh(12),
     borderRadius: 999,
     backgroundColor: '#1E78F5',
   },
   grantButtonText: {
     color: '#FFFFFF',
     fontFamily: 'Poppins-SemiBold',
-    fontSize: 14,
+    fontSize: sf(14),
   },
 });

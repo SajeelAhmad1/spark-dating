@@ -1,15 +1,15 @@
 import React from 'react';
 import {
   View,
-  Text,
   Image,
   TouchableOpacity,
   SafeAreaView,
   Modal,
-  ActivityIndicator,
+  StyleSheet,
 } from 'react-native';
 import { X, Download } from 'lucide-react-native';
 import PrimaryButton from '@/components/common/PrimaryButton';
+import { sf, sr, sw, sh } from '@/utils/responsive';
 
 interface PhotoPreviewScreenProps {
   visible: boolean;
@@ -36,93 +36,91 @@ export default function PhotoPreviewScreen({
       transparent={false}
     >
       <SafeAreaView style={{ flex: 1, backgroundColor: '#000000' }}>
-        <View style={{ flex: 1 }}>
-          {/* Header with Cross icon and top margin */}
-          <View
+        {/* Fullscreen photo background */}
+        {photoUri && (
+          <Image
+            source={{ uri: photoUri }}
             style={{
-              flexDirection: 'row',
-              justifyContent: 'flex-end',
-              paddingHorizontal: 20,
-              paddingTop: 60,
+              ...StyleSheet.absoluteFillObject,
+              width: '100%',
+              height: '100%',
             }}
-          >
-            <TouchableOpacity
-              onPress={onClose}
-              style={{
-                width: 40,
-                height: 40,
-                borderRadius: 20,
-                backgroundColor: 'rgba(255, 255, 255, 0.2)',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              <X size={20} color="#FFFFFF" />
-            </TouchableOpacity>
-          </View>
+            resizeMode="cover"
+          />
+        )}
 
-          {/* Photo Display */}
-          {photoUri && (
-            <View
-              style={{
-                flex: 1,
-                justifyContent: 'center',
-                alignItems: 'center',
-                paddingHorizontal: 20,
-                marginTop: -40,
-              }}
-            >
-              <Image
-                source={{ uri: photoUri }}
-                style={{
-                  width: '100%',
-                  height: '70%',
-                  borderRadius: 24,
-                  resizeMode: 'cover',
-                }}
-              />
-            </View>
-          )}
-
-          {/* Bottom Buttons */}
-          <View
+        {/* Header (over photo) */}
+        <View
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            flexDirection: 'row',
+            justifyContent: 'flex-end',
+            paddingHorizontal: sw(20),
+            paddingTop: sh(60),
+            zIndex: 10,
+          }}
+        >
+          <TouchableOpacity
+            onPress={onClose}
             style={{
-              flexDirection: 'row',
+              width: sf(40),
+              height: sf(40),
+              borderRadius: sr(20),
+              backgroundColor: 'rgba(255, 255, 255, 0.2)',
+              alignItems: 'center',
               justifyContent: 'center',
-              gap: 20,
-              paddingHorizontal: 20,
-              paddingBottom: 40,
-              paddingTop: 20,
             }}
           >
-            {/* Download Button with Yellow Background */}
-            <TouchableOpacity
-              onPress={onDownload}
-              style={{
-                width: 60,
-                height: 60,
-                borderRadius: 30,
-                backgroundColor: '#FBB202',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-              disabled={isSending}
-            >
-              <Download size={28} color="#000000" />
-            </TouchableOpacity>
+            <X size={sf(20)} color="#FFFFFF" />
+          </TouchableOpacity>
+        </View>
 
-            {/* Send Button */}
-            <View style={{ flex: 1 }}>
-              <PrimaryButton
-                title={isSending ? "Sending..." : "Send"}
-                onPress={onSend}
-                colors={['#1E78F5', '#FBB202']}
-                variant="gradient"
-                style={{ alignSelf: 'stretch' }}
-                iconPosition="end"
-                disabled={isSending}
-              />
-            </View>
+        {/* Bottom Buttons (over photo) */}
+        <View
+          style={{
+            position: 'absolute',
+            left: 0,
+            right: 0,
+            bottom: 0,
+            flexDirection: 'row',
+            justifyContent: 'center',
+            gap: sw(20),
+            paddingHorizontal: sw(20),
+            paddingBottom: sh(40),
+            paddingTop: sh(20),
+            zIndex: 10,
+          }}
+        >
+          {/* Download Button with Yellow Background */}
+          <TouchableOpacity
+            onPress={onDownload}
+            style={{
+              width: sf(60),
+              height: sf(60),
+              borderRadius: sr(30),
+              backgroundColor: '#FBB202',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+            disabled={isSending}
+          >
+            <Download size={sf(28)} color="#000000" />
+          </TouchableOpacity>
+
+          {/* Send Button */}
+          <View style={{ flex: 1 }}>
+            <PrimaryButton
+              title={isSending ? 'Sending...' : 'Send'}
+              onPress={onSend}
+              colors={['#1E78F5', '#FBB202']}
+              variant="gradient"
+              style={{ alignSelf: 'stretch' }}
+              iconPosition="end"
+              disabled={isSending}
+            />
           </View>
         </View>
       </SafeAreaView>

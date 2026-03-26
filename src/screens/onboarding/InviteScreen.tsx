@@ -166,10 +166,6 @@ const InviteScreen = ({ navigation }: any) => {
     console.log('Copied:', REFERRAL_LINK);
   };
 
-  const handleShare = () => {
-    console.log('Share pressed');
-  };
-
   const handleSkip = () => {
     console.log('Skip pressed');
   };

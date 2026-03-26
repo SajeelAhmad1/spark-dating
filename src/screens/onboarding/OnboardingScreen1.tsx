@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, SafeAreaView, Dimensions } from 'react-native';
+import React, { useMemo } from 'react';
+import { View, SafeAreaView, useWindowDimensions } from 'react-native';
 import OnboardingCard from './OnboardingCard';
 
 import Profile1 from '@/assets/images/avatar1.svg';
@@ -10,59 +10,66 @@ import Profile5 from '@/assets/images/avatar5.svg';
 import CenterProfile from '@/assets/images/avatar6.svg';
 import LocationIcon from '@/assets/images/locationIcon.svg';
 import Svg, { Circle } from 'react-native-svg';
-
-const { width } = Dimensions.get('window');
+import { sf, sr, sh } from '@/utils/responsive';
 
 // ─── Geometry ──────────────────────────────────────────────────────────────
-const ORBIT_D = width * 0.78;
-const ORBIT_R = ORBIT_D / 2;
-const CX = ORBIT_R;
-const CY = ORBIT_R;
-
-const DASHED_ORBIT_D = ORBIT_D;
-const STROKE_WIDTH = 2;
-const DASH_LENGTH = 12;
-const GAP_LENGTH = 13;
+const STROKE_WIDTH = sf(2);
+const DASH_LENGTH = sf(12);
+const GAP_LENGTH = sf(13);
 
 const toRad = (deg: number) => (deg * Math.PI) / 180;
 
 const onCircle = (angleDeg: number, radius: number, size: number) => ({
-  left: CX + radius * Math.cos(toRad(angleDeg)) - size / 2,
-  top: CY + radius * Math.sin(toRad(angleDeg)) - size / 2,
+  left: radius + radius * Math.cos(toRad(angleDeg)) - size / 2,
+  top: radius + radius * Math.sin(toRad(angleDeg)) - size / 2,
 });
 
-const RINGS = [
-  { d: ORBIT_D * 0.55, color: 'rgba(30, 120, 245, 0.1)' }, // 10% opacity
-  { d: ORBIT_D * 0.45, color: 'rgba(30, 120, 245, 0.15)' }, // 15% opacity
-  { d: ORBIT_D * 0.35, color: 'rgba(30, 120, 245, 0.2)' }, // 20% opacity
-];
-
-// ─── Center avatar ─────────────────────────────────────────────────────────
-const CENTER_SIZE = 62;
-
-const AVATARS: { Component: any; angle: number; size: number }[] = [
-  { Component: Profile1, angle: -150, size: 68 }, // top-left    — smaller
-  { Component: Profile2, angle: -55, size: 52 }, // top-right   — smallest
-  { Component: Profile3, angle: 0, size: 62 }, // right       — medium
-  { Component: Profile5, angle: 58, size: 68 }, // bottom-right— medium
-  { Component: Profile4, angle: 140, size: 56 }, // bottom-left — smaller
-];
-
-const PINS = [
-  { size: 24, angle: -95, tilt: 0 }, // first pin rotated -15°
-  { size: 24, angle: -22, tilt: 20 }, // second pin rotated 10°
-  { size: 24, angle: 105, tilt: 0 }, // no tilt for third pin
-];
-
 const OnboardingScreen1 = ({ navigation }: any) => {
+  const { width } = useWindowDimensions();
+
+  const {
+    ORBIT_D,
+    ORBIT_R,
+    RINGS,
+    CENTER_SIZE,
+    AVATARS,
+    PINS,
+  } = useMemo(() => {
+    const orbitD = width * 0.78;
+    const orbitR = orbitD / 2;
+
+    return {
+      ORBIT_D: orbitD,
+      ORBIT_R: orbitR,
+      RINGS: [
+        { d: orbitD * 0.55, color: 'rgba(30, 120, 245, 0.1)' },
+        { d: orbitD * 0.45, color: 'rgba(30, 120, 245, 0.15)' },
+        { d: orbitD * 0.35, color: 'rgba(30, 120, 245, 0.2)' },
+      ],
+      CENTER_SIZE: sf(62),
+      AVATARS: [
+        { Component: Profile1, angle: -150, size: sf(68) },
+        { Component: Profile2, angle: -55, size: sf(52) },
+        { Component: Profile3, angle: 0, size: sf(62) },
+        { Component: Profile5, angle: 58, size: sf(68) },
+        { Component: Profile4, angle: 140, size: sf(56) },
+      ] as { Component: any; angle: number; size: number }[],
+      PINS: [
+        { size: sf(24), angle: -95, tilt: 0 },
+        { size: sf(24), angle: -22, tilt: 20 },
+        { size: sf(24), angle: 105, tilt: 0 },
+      ],
+    };
+  }, [width]);
+
   return (
     <SafeAreaView className="flex-1 bg-white">
       <View className="flex-1 justify-center items-center">
         <View style={{ width: ORBIT_D, height: ORBIT_D }}>
           {/* Single outer dashed ring */}
           <Svg
-            width={DASHED_ORBIT_D}
-            height={DASHED_ORBIT_D}
+            width={ORBIT_D}
+            height={ORBIT_D}
             style={{ position: 'absolute', top: 0, left: 0 }}
           >
             <Circle
@@ -88,8 +95,8 @@ const OnboardingScreen1 = ({ navigation }: any) => {
                   height: size,
                   borderRadius: size / 2,
                   backgroundColor: ring.color,
-                  top: CY - size / 2,
-                  left: CX - size / 2,
+                  top: ORBIT_R - size / 2,
+                  left: ORBIT_R - size / 2,
                 }}
               />
             );
@@ -102,8 +109,8 @@ const OnboardingScreen1 = ({ navigation }: any) => {
               width: CENTER_SIZE,
               height: CENTER_SIZE,
               borderRadius: CENTER_SIZE / 2,
-              top: CY - CENTER_SIZE / 2,
-              left: CX - CENTER_SIZE / 2,
+              top: ORBIT_R - CENTER_SIZE / 2,
+              left: ORBIT_R - CENTER_SIZE / 2,
               overflow: 'hidden',
               zIndex: 10,
             }}
@@ -125,13 +132,13 @@ const OnboardingScreen1 = ({ navigation }: any) => {
                   top: pos.top,
                   left: pos.left,
                   overflow: 'hidden',
-                  borderWidth: 1,
+                  borderWidth: sf(1),
                   borderColor: '#FBB202',
                   elevation: 6,
                   shadowColor: '#000',
-                  shadowOffset: { width: 0, height: 2 },
+                  shadowOffset: { width: 0, height: sh(2) },
                   shadowOpacity: 0.15,
-                  shadowRadius: 4,
+                  shadowRadius: sr(4),
                   zIndex: 5,
                 }}
               >
@@ -150,7 +157,7 @@ const OnboardingScreen1 = ({ navigation }: any) => {
                 height={pin.size}
                 style={{
                   position: 'absolute',
-                  top: pos.top - 12,
+                  top: pos.top - sh(12),
                   left: pos.left,
                   zIndex: 8,
                   transform: [{ rotate: `${pin.tilt ?? 0}deg` }],

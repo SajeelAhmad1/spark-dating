@@ -1,12 +1,12 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import OnboardingCard from './OnboardingCard';
 // import Chat from '@/assets/images/chat.png';
 // import ChatLocked from '@/assets/images/chatLocked.png';
 import Loading from '@/assets/images/loading.svg';
 
-export default function Onboarding2({ navigation }: any) {
+export default function Onboarding3({ navigation }: any) {
   return (
     <SafeAreaView className="flex-1 bg-[#EBEBEB]" edges={['top']}>
       {/* ── Illustration area ── */}
@@ -32,7 +32,7 @@ export default function Onboarding2({ navigation }: any) {
         title="Build Streaks 🔥"
         subtitle="Break the ice with a photo. It's the spark that starts every conversation."
         activeDot={2}
-        buttonLabel="Next"
+        buttonLabel="Get Started"
         onPress={() => navigation.navigate('LogoScreen')}
       />
     </SafeAreaView>

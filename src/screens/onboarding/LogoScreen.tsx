@@ -3,6 +3,7 @@ import PrimaryButton from '@/components/common/PrimaryButton';
 import Logo from '@/assets/images/logo.svg';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import LinearGradient from 'react-native-linear-gradient';
+import { sf, sr } from '@/utils/responsive';
 
 export default function LogoScreen({ navigation }: any) {
   return (
@@ -25,15 +26,22 @@ export default function LogoScreen({ navigation }: any) {
         {/* Center content */}
         <View className="flex-1 items-center justify-center px-2">
           {/* App icon */}
-          <View className="w-[88px] h-[88px] rounded-[18px]">
-            <Logo width={88} height={88} />
+          <View
+            style={{ width: sf(88), height: sf(88), borderRadius: sr(18) }}
+          >
+            <Logo width={sf(88)} height={sf(88)} />
           </View>
 
           {/* App name */}
-          <Text className="text-[#ffffff] font-normal text-[40px]">SPARK</Text>
+          <Text style={{ fontSize: sf(40) }} className="text-[#ffffff] font-normal">
+            SPARK
+          </Text>
 
           {/* Subtitle */}
-          <Text className="text-[#222222] text-[15px] font-regular leading-6 text-center">
+          <Text
+            style={{ fontSize: sf(15), lineHeight: sf(24) }}
+            className="text-[#222222] font-normal text-center"
+          >
             Discover real connections through shared interests{'\n'}and genuine
             conversations.
           </Text>

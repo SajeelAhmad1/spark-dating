@@ -197,7 +197,7 @@ const UploadPhotosScreen = ({ navigation }: any) => {
       }}>
         <PrimaryButton
           title="Complete Profile!"
-          onPress={() => {navigation.navigate('EnableLocationScreen')}}
+          onPress={() => { navigation.navigate('InviteScreen'); }}
           colors={['#1E78F5', '#FBB202']}
           variant="gradient"
           style={{ alignSelf: 'stretch' }}

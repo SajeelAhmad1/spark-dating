@@ -2,100 +2,60 @@ import React from 'react';
 import {
   View,
   Text,
-  Image,
   TouchableOpacity,
   ScrollView,
   SafeAreaView,
 } from 'react-native';
-import { X, Heart, ChevronLeft } from 'lucide-react-native';
+import { ChevronLeft } from 'lucide-react-native';
 import { REQUESTS } from '@/constants/requests';
+import RequestCard from '@/components/requests/RequestCard';
+import BottomTabBar from '@/components/common/BottomTabBar';
+import { MATCHES } from '@/constants/matches';
+import type { BottomTab } from '@/types/bottomTabs';
+import { sf, sh, sw } from '@/utils/responsive';
 
+export default function RequestsScreen({ navigation }: any) {
+  const [activeTab, setActiveTab] = React.useState<BottomTab>('Request');
+  const navLockRef = React.useRef(false);
 
-function MatchCard({ name, avatar }: { name: string; avatar: string }) {
-  return (
-    <View
-      className="flex-row items-center bg-white rounded-2xl px-4 py-3 mb-3 mx-4"
-      style={{
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 0 },
-        shadowOpacity: 0.002,
-        shadowRadius: 2,
-        elevation: 1,
-      }}
-    >
-      {/* Avatar */}
-      <Image
-        source={{ uri: avatar }}
-        className="w-12 h-12 rounded-full mr-3"
-      />
+  const handleTabPress = (tab: BottomTab) => {
+    if (navLockRef.current) return;
+    navLockRef.current = true;
+    setTimeout(() => {
+      navLockRef.current = false;
+    }, 350);
 
-      {/* Text */}
-      <View className="flex-1">
-        <Text
-          style={{
-            fontFamily: 'Poppins-SemiBold',
-            fontSize: 16,
-            lineHeight: 16,
-            color: '#000000',
-          }}
-        >
-          {name}
-        </Text>
-        <Text
-          style={{
-            fontFamily: 'Poppins-Regular',
-            fontSize: 13,
-            lineHeight: 13,
-            color: '#555555',
-            marginTop: 4,
-          }}
-        >
-          Wants to connect with you
-        </Text>
-      </View>
+    // Only update highlight when staying on the same screen.
+    if (tab === 'Request') {
+      setActiveTab('Request');
+      return;
+    }
 
-      {/* Action buttons */}
-      <View className="flex-row items-center gap-2">
-        {/* Cross */}
-        <TouchableOpacity
-          className="w-8 h-8 rounded-full items-center justify-center"
-          style={{
-            backgroundColor: '#EDEDED',
-            borderWidth: 0.5,
-            borderColor: 'rgba(30,30,30,0.2)',
-          }}
-        >
-          <X size={14} color="#4A4A4A" strokeWidth={2.5} />
-        </TouchableOpacity>
+    if (tab === 'Home') navigation.navigate('DiscoveryScreen');
+    if (tab === 'Camera')
+      navigation.navigate('MatchScreen', {
+        match: MATCHES[0],
+        autoOpenCamera: true,
+      });
+    if (tab === 'Chat') navigation.navigate('InboxScreen');
+    if (tab === 'Profile') navigation.navigate('ProfileScreen');
+  };
 
-        {/* Heart */}
-        <TouchableOpacity
-          className="w-8 h-8 rounded-full items-center justify-center"
-          style={{ backgroundColor: '#FF073E' }}
-        >
-          <Heart size={19} color="#FFFFFF" fill="#FFFFFF" />
-        </TouchableOpacity>
-      </View>
-    </View>
-  );
-}
-
-export default function RequestsScreen() {
   return (
     <SafeAreaView className="flex-1 bg-white">
 
       {/* Back button */}
-      <TouchableOpacity className="px-4 pt-3 pb-1">
+      <TouchableOpacity style={{ paddingHorizontal: sw(16), paddingTop: sh(12), paddingBottom: sh(4) }}>
         <ChevronLeft size={22} color="#000" />
       </TouchableOpacity>
 
       {/* Header */}
-      <View className="flex-row items-center px-4 mb-5 mt-1 gap-2">
+      <View className="flex-row items-center gap-2" style={{ paddingHorizontal: sw(16), marginBottom: sh(20), marginTop: sh(4) }}>
         <Text
           style={{
             fontFamily: 'Poppins-SemiBold',
-            fontSize: 28,
-            lineHeight: 28,
+            fontSize: sf(28),
+            lineHeight: sf(28),
             color: '#000000',
           }}
         >
@@ -121,11 +81,17 @@ export default function RequestsScreen() {
       </View>
 
       {/* Match List */}
-      <ScrollView showsVerticalScrollIndicator={false} className="flex-1">
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        className="flex-1"
+        contentContainerStyle={{ paddingBottom: sh(140) }}
+      >
         {REQUESTS.map(request => (
-          <MatchCard key={request.id} name={request.name} avatar={request.avatar} />
+          <RequestCard key={request.id} name={request.name} avatar={request.avatar} />
         ))}
       </ScrollView>
+
+      <BottomTabBar activeTab={activeTab} onTabPress={handleTabPress} />
 
     </SafeAreaView>
   );

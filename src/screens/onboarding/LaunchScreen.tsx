@@ -176,7 +176,7 @@ const LaunchScreen = ({ navigation }: any) => {
         {/* ── Bottom: Action ── */}
         <PrimaryButton
           title="Let's Find your Spark!"
-          onPress={() => navigation.navigate('NumberInputScreen')}
+          onPress={() => navigation.navigate('EnableLocationScreen')}
           colors={['#1E78F5', '#FBB202']}
           variant="gradient"
         />

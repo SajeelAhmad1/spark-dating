@@ -5,6 +5,7 @@ import GoogleIcon from '@/assets/images/google.svg';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import LinearGradient from 'react-native-linear-gradient';
 import { Phone } from 'lucide-react-native';
+import { sf, sr, sw, sh } from '@/utils/responsive';
 
 export default function SignUpScreen({ navigation }: any) {
   return (
@@ -23,25 +24,39 @@ export default function SignUpScreen({ navigation }: any) {
       />
 
       <SafeAreaView className="flex-1" edges={['top', 'bottom']}>
-        <View className="flex-1 items-center justify-center px-5">
-          <Text className="font-semibold text-[32px] text-[#ffffff] leading-[100%] tracking-normal text-center mb-32">
+        <View style={{ paddingHorizontal: sw(20) }} className="flex-1 items-center justify-center">
+          <Text
+            style={{ fontSize: sf(32), lineHeight: sf(32), marginBottom: sh(32) }}
+            className="font-semibold text-[#ffffff] tracking-normal text-center"
+          >
             Welcome back!
           </Text>
 
           <View
-            className="w-[72px] h-[72px] rounded-[18px]"
-            style={{ elevation: 0, shadowOpacity: 0 }}
+            style={{
+              width: sf(72),
+              height: sf(72),
+              borderRadius: sr(18),
+              elevation: 0,
+              shadowOpacity: 0,
+            }}
           >
-            <Logo width={72} height={72} />
+            <Logo width={sf(72)} height={sf(72)} />
           </View>
 
-          <Text className="font-semibold text-[24px] text-[#ffffff] tracking-[0.24px] text-center leading-8">
+          <Text
+            style={{ fontSize: sf(24), lineHeight: sf(32), letterSpacing: 0.24 }}
+            className="font-semibold text-[#ffffff] text-center"
+          >
             Match. Snap. Keep the{'\n'}Spark Alive.
           </Text>
         </View>
 
-        <View className="px-5 pb-6 gap-3">
-          <Text className="font-medium text-[16px] text-[#ffffff] leading-[20px] tracking-[0px] text-center mb-4">
+        <View style={{ paddingHorizontal: sw(20), paddingBottom: sh(24), gap: sh(12) }}>
+          <Text
+            style={{ fontSize: sf(16), lineHeight: sf(20), marginBottom: sh(16) }}
+            className="font-medium text-[#ffffff] text-center"
+          >
             By tapping "Sign In" you agree to or{' '}
             <Text className="text-[#FBB202]">Terms</Text>. Learn how we process
             your data in our{' '}
@@ -50,30 +65,30 @@ export default function SignUpScreen({ navigation }: any) {
           </Text>
           <PrimaryButton
             title="Continue with mobile"
-            onPress={() => navigation.navigate('NumberSigninScreen')}
+            onPress={() => navigation.navigate('NumberInputScreen')}
             colors={['#1E78F5', '#1E78F5']}
             iconBackground="#ffffff"
             variant="solid"
-            icon={<Phone size={20} color="#1E78F5" />}
+            icon={<Phone size={sf(20)} color="#1E78F5" />}
             iconPosition="start"
           />
 
           <PrimaryButton
             title="Continue with Google"
-            onPress={() => navigation.navigate('EmailSigninScreen')}
+            onPress={() => navigation.navigate('ProfileSetupScreen')}
             colors={['#ffffff']}
             iconBackground="#EDEDED"
             variant="outline"
-            icon={<GoogleIcon width={20} height={20} />}
+            icon={<GoogleIcon width={sf(20)} height={sf(20)} />}
             iconPosition="start"
           />
 
-          <View className="items-center mt-2">
-            <Text className="text-white/80 text-[13px]">
+          <View style={{ marginTop: sh(8) }} className="items-center">
+            <Text style={{ fontSize: sf(13) }} className="text-white/80">
               Already have an account?{' '}
               <Text
                 className="text-[#FBB202] font-semibold"
-                onPress={() => navigation.navigate('Login')}
+                onPress={() => navigation.navigate('SignInScreen')}
               >
                 Login
               </Text>

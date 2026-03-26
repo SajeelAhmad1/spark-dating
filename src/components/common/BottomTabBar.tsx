@@ -2,25 +2,27 @@ import React from 'react';
 import { View, Text, TouchableOpacity, useWindowDimensions } from 'react-native';
 import { Users, MessageSquare } from 'lucide-react-native';
 import Svg, { Path } from 'react-native-svg';
+import LinearGradient from 'react-native-linear-gradient';
 import SearchAvatar from '@/assets/images/searchAvatar.svg';
 import CameraIcon from '@/assets/images/cameraIcon.svg';
+import { sf, sr, sw, sh } from '@/utils/responsive';
 
-type Tab = 'Home' | 'Request' | 'Camera' | 'Chat' | 'Profile';
+import type { BottomTab } from '@/types/bottomTabs';
 
 interface BottomTabBarProps {
-  activeTab: Tab;
-  onTabPress: (tab: Tab) => void;
+  activeTab: BottomTab;
+  onTabPress: (tab: BottomTab) => void;
 }
 
 const ACTIVE_COLOR = '#1E78F5';
 const INACTIVE_COLOR = '#7D858E';
 const PILL_COLOR = '#F0EEE6';
 
-const HORIZONTAL_PADDING = 16;
-const PILL_HEIGHT = 72;
-const CAMERA_SIZE = 72;
+const HORIZONTAL_PADDING = sw(16);
+const PILL_HEIGHT = sh(72);
+const CAMERA_SIZE = sf(72);
 const NOTCH_RADIUS = CAMERA_SIZE / 3 + 6;
-const PILL_CORNER = 40;
+const PILL_CORNER = sr(40);
 
 function buildNotchPath(w: number, h: number): string {
   const r = PILL_CORNER;
@@ -48,14 +50,14 @@ function buildNotchPath(w: number, h: number): string {
 const BottomTabBar = ({ activeTab, onTabPress }: BottomTabBarProps) => {
   const { width: screenWidth } = useWindowDimensions();
   const pillWidth = screenWidth - HORIZONTAL_PADDING * 2;
-  const iconSize = 24;
+  const iconSize = sf(24);
 
   const TabItem = ({
     tab,
     label,
     icon,
   }: {
-    tab: Tab;
+    tab: BottomTab;
     label: string;
     icon: React.ReactNode;
   }) => {
@@ -69,7 +71,7 @@ const BottomTabBar = ({ activeTab, onTabPress }: BottomTabBarProps) => {
           flex: 1,
           alignItems: 'center',
           justifyContent: 'center',
-          paddingVertical: 10,
+          paddingVertical: sh(10),
           gap: 2,
         }}
       >
@@ -77,8 +79,8 @@ const BottomTabBar = ({ activeTab, onTabPress }: BottomTabBarProps) => {
         <Text
           style={{
             fontFamily: 'Poppins-Regular',
-            fontSize: 12,
-            lineHeight: 14,
+            fontSize: sf(12),
+            lineHeight: sf(14),
             color: isActive ? ACTIVE_COLOR : INACTIVE_COLOR,
           }}
         >
@@ -92,12 +94,22 @@ const BottomTabBar = ({ activeTab, onTabPress }: BottomTabBarProps) => {
     <View
       style={{
         paddingHorizontal: HORIZONTAL_PADDING,
-        paddingBottom: 16,
+        paddingBottom: sh(16),
         paddingTop: CAMERA_SIZE / 2,
         alignItems: 'center',
         backgroundColor: 'transparent',
+        position: 'relative',
       }}
     >
+      {/* Consistent bottom bar background on all screens */}
+      {/* <LinearGradient
+        colors={['#1E78F5', '#FBB202']}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 0 }}
+        pointerEvents="none"
+        style={{ position: 'absolute', left: 0, right: 0, top: 0, bottom: 0 }}
+      /> */}
+
       {/* ── Camera button — center aligned on the pill's top edge ── */}
       <View
         style={{
@@ -120,10 +132,11 @@ const BottomTabBar = ({ activeTab, onTabPress }: BottomTabBarProps) => {
           height: PILL_HEIGHT,
           shadowColor: '#000',
           shadowOpacity: 0.10,
-          shadowRadius: 16,
-          shadowOffset: { width: 0, height: 4 },
+          shadowRadius: sr(16),
+          shadowOffset: { width: 0, height: sh(4) },
           elevation: 10,
           backgroundColor: 'transparent',
+          zIndex: 1,
         }}
       >
         {/* SVG pill shape with arc notch */}
@@ -148,7 +161,7 @@ const BottomTabBar = ({ activeTab, onTabPress }: BottomTabBarProps) => {
             bottom: 0,
             flexDirection: 'row',
             alignItems: 'center',
-            paddingHorizontal: 8,
+            paddingHorizontal: sw(8),
           }}
         >
           <TabItem
@@ -159,20 +172,20 @@ const BottomTabBar = ({ activeTab, onTabPress }: BottomTabBarProps) => {
                 style={{
                   borderWidth: activeTab === 'Home' ? 1 : 0,
                   borderColor: '#FFFFFF',
-                  borderRadius: 6,
+                  borderRadius: sr(6),
                 }}
               >
-                <View style={{ width: iconSize + 6, height: iconSize + 6 }}>
+                <View style={{ width: iconSize + sw(6), height: iconSize + sw(6) }}>
                   {/* Back card */}
                   <View
                     style={{
                       position: 'absolute',
-                      top: 2,
-                      left: 6,
-                      width: iconSize - 2,
+                      top: sh(2),
+                      left: sw(6),
+                      width: iconSize - sw(2),
                       height: iconSize,
                       backgroundColor: activeTab === 'Home' ? '#5BA4F5' : INACTIVE_COLOR,
-                      borderRadius: 4,
+                      borderRadius: sr(4),
                       opacity: 0.55,
                       transform: [{ rotate: '-8deg' }],
                     }}
@@ -181,12 +194,12 @@ const BottomTabBar = ({ activeTab, onTabPress }: BottomTabBarProps) => {
                   <View
                     style={{
                       position: 'absolute',
-                      top: 2,
+                      top: sh(2),
                       left: 0,
-                      width: iconSize - 2,
+                      width: iconSize - sw(2),
                       height: iconSize,
                       backgroundColor: activeTab === 'Home' ? ACTIVE_COLOR : INACTIVE_COLOR,
-                      borderRadius: 4,
+                      borderRadius: sr(4),
                       transform: [{ rotate: '4deg' }],
                     }}
                   />
@@ -203,7 +216,7 @@ const BottomTabBar = ({ activeTab, onTabPress }: BottomTabBarProps) => {
                 style={{
                   borderWidth: activeTab === 'Request' ? 1 : 0,
                   borderColor: '#FFFFFF',
-                  borderRadius: 6,
+                  borderRadius: sr(6),
                 }}
               >
                 <Users
@@ -226,7 +239,7 @@ const BottomTabBar = ({ activeTab, onTabPress }: BottomTabBarProps) => {
                 style={{
                   borderWidth: activeTab === 'Chat' ? 1 : 0,
                   borderColor: '#FFFFFF',
-                  borderRadius: 6,
+                  borderRadius: sr(6),
                 }}
               >
                 <MessageSquare
@@ -244,15 +257,15 @@ const BottomTabBar = ({ activeTab, onTabPress }: BottomTabBarProps) => {
             icon={
               <View
                 style={{
-                  width: iconSize + 6,
-                  height: iconSize + 6,
-                  borderRadius: (iconSize + 6) / 2,
+                  width: iconSize + sw(6),
+                  height: iconSize + sw(6),
+                  borderRadius: (iconSize + sw(6)) / 2,
                   overflow: 'hidden',
                   borderWidth: activeTab === 'Profile' ? 1 : 0,
                   borderColor: '#FFFFFF',
                 }}
               >
-                <SearchAvatar width={iconSize + 6} height={iconSize + 6} />
+                <SearchAvatar width={iconSize + sw(6)} height={iconSize + sw(6)} />
               </View>
             }
           />

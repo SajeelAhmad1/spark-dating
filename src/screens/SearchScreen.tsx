@@ -3,6 +3,7 @@ import { View, Text, Animated, Easing } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Svg, { Circle } from 'react-native-svg';
 import SearchAvatar from '@/assets/images/searchAvatar.svg';
+import { sf } from '@/utils/responsive';
 
 // ── Orbit Ring ─────────────────────────────────────────────
 const OrbitRing = ({
@@ -36,7 +37,7 @@ const OrbitRing = ({
         useNativeDriver: true,
       }),
     ).start();
-  }, []);
+  }, [duration, delay, rotation]);
 
   const rotate = rotation.interpolate({
     inputRange: [0, 1],
@@ -106,23 +107,26 @@ const OrbitRing = ({
 
 // ── Screen ─────────────────────────────────────────────────
 const SearchScreen = ({ navigation }: any) => {
+  const orbitContainerSize = sf(300);
+  const avatarSize = sf(94);
+
   useEffect(() => {
     const timer = setTimeout(() => {
       navigation.navigate('DiscoveryScreen');
     }, 5000);
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [navigation]);
 
   return (
     <SafeAreaView className="flex-1 bg-white items-center justify-center">
       {/* Orbit container */}
       <View
         className="items-center justify-center"
-        style={{ width: 300, height: 300 }}
+        style={{ width: orbitContainerSize, height: orbitContainerSize }}
       >
         <OrbitRing
-          size={300}
+          size={orbitContainerSize}
           duration={7000}
           color1="#1E78F540"
           color2="#FBB20240"
@@ -130,7 +134,7 @@ const SearchScreen = ({ navigation }: any) => {
           delay={0}
         />
         <OrbitRing
-          size={245}
+          size={sf(245)}
           duration={6000}
           color1="#FBB20240"
           color2="#1E78F540"
@@ -140,7 +144,7 @@ const SearchScreen = ({ navigation }: any) => {
           reverse
         />
         <OrbitRing
-          size={190}
+          size={sf(190)}
           duration={5000}
           color1="#1E78F540"
           color2="#FBB20240"
@@ -149,7 +153,7 @@ const SearchScreen = ({ navigation }: any) => {
           delay={300}
         />
         <OrbitRing
-          size={110}
+          size={sf(110)}
           duration={4500}
           color1="#1E78F540"
           color2="#FBB20240"
@@ -163,13 +167,13 @@ const SearchScreen = ({ navigation }: any) => {
         <View
           className="rounded-full overflow-hidden bg-gray-100"
           style={{
-            width: 94,
-            height: 94,
+            width: avatarSize,
+            height: avatarSize,
             borderWidth: 3,
             borderColor: '#ffffff',
           }}
         >
-          <SearchAvatar width={94} height={94} />
+          <SearchAvatar width={avatarSize} height={avatarSize} />
         </View>
       </View>
 
@@ -178,12 +182,12 @@ const SearchScreen = ({ navigation }: any) => {
         className="text-black text-center mt-10"
         style={{
           fontFamily: 'Poppins-Regular',
-          fontSize: 16,
-          lineHeight: 16,
+          fontSize: sf(16),
+          lineHeight: sf(16),
           letterSpacing: 0,
         }}
       >
-        Finding peoples near you
+        Finding people near you
       </Text>
     </SafeAreaView>
   );

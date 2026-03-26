@@ -9,7 +9,6 @@ import {
   View,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import { Spacing } from '@/theme';
 
 // ─── Types ────────────────────────────────────────────────
 type ButtonVariant = 'gradient' | 'solid' | 'outline';

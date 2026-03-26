@@ -7,309 +7,25 @@ import {
   ScrollView,
   SafeAreaView,
 } from 'react-native';
-import { ChevronLeft, Search, Lock, Camera } from 'lucide-react-native';
+import { ChevronLeft, Search, Lock } from 'lucide-react-native';
 import BottomTabBar from '@/components/common/BottomTabBar';
-import CameraIcon from '@/assets/images/cameraIcon.svg';
 import { CONVERSATIONS } from '@/constants/conversations';
-import { Conversation } from '@/constants/conversations';
-
-type FilterType = 'All' | 'Active Streaks' | 'Expiring Soon' | 'Locked Chats';
-
-const FILTERS: FilterType[] = [
-  'All',
-  'Active Streaks',
-  'Expiring Soon',
-  'Locked Chats',
-];
-
-function filterConversations(
-  conversations: Conversation[],
-  filter: FilterType,
-  query: string,
-): Conversation[] {
-  let filtered = conversations;
-
-  if (query.trim()) {
-    filtered = filtered.filter(c =>
-      c.name.toLowerCase().includes(query.toLowerCase()),
-    );
-  }
-
-  switch (filter) {
-    case 'Active Streaks':
-      return filtered.filter(c => c.status === 'active');
-    case 'Expiring Soon':
-      return filtered.filter(c => c.status === 'locking');
-    case 'Locked Chats':
-      return filtered.filter(c => c.status === 'locked');
-    default:
-      return filtered;
-  }
-}
-
-// ─── Sub-components ───────────────────────────────────────────────────────────
-
-const StreakBadge = ({
-  count,
-  type,
-}: {
-  count?: number;
-  type?: 'orange' | 'gold';
-}) => {
-  if (!type) return null;
-  return (
-    <View
-      style={{
-        flexDirection: 'row',
-        alignItems: 'center',
-        borderRadius: 22,
-        backgroundColor: 'rgba(251,178,2,0.4)',
-        borderWidth: 0.6,
-        borderColor: '#DC9B00',
-        gap: 2,
-        paddingTop: 2,
-        paddingBottom: 2,
-        paddingLeft: 8,
-        paddingRight: 8,
-      }}
-    >
-      <Text style={{ fontSize: 8, lineHeight: 14 }}>🔥</Text>
-
-      <Text style={{ fontSize: 13, color: '#DC9B00', fontWeight: 'semibold' }}>
-        {count ? count : '⏳'}
-      </Text>
-    </View>
-  );
-};
-
-/**
- * Small circular camera button — orange gradient style matching the design.
- * ~40×40 with a camera icon centered inside.
- */
-const CameraButton = () => (
-  <TouchableOpacity>
-    <CameraIcon width={52} height={52} />
-  </TouchableOpacity>
-);
-
-/**
- * Avatar circle — shows a person emoji as placeholder.
- * Pass isLocked to show the dark lock avatar.
- */
-const Avatar = ({
-  isLocked,
-  hasNotifDot,
-}: {
-  isLocked?: boolean;
-  hasNotifDot?: boolean;
-}) => (
-  <View style={{ width: 50, height: 50, marginRight: 12 }}>
-    {isLocked ? (
-      <View
-        style={{
-          width: 48,
-          height: 48,
-          borderRadius: 25,
-          backgroundColor: '#222222',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-      >
-        <Lock size={20} color="#FFFFFF" strokeWidth={2} />
-      </View>
-    ) : (
-      <View
-        style={{
-          width: 50,
-          height: 50,
-          borderRadius: 25,
-          backgroundColor: '#C8A882',
-          alignItems: 'center',
-          justifyContent: 'center',
-          overflow: 'hidden',
-        }}
-      >
-        <Text style={{ fontSize: 26 }}>👩</Text>
-      </View>
-    )}
-
-    {/* Red notification dot */}
-    {hasNotifDot && (
-      <View
-        style={{
-          position: 'absolute',
-          top: -1,
-          right: -1,
-          width: 16,
-          height: 16,
-          borderRadius: 8,
-          backgroundColor: '#FF3B30',
-          alignItems: 'center',
-          justifyContent: 'center',
-          borderWidth: 2,
-          borderColor: '#FFFFFF',
-        }}
-      >
-        <Text style={{ color: '#FFFFFF', fontSize: 11, fontWeight: '700', lineHeight: 11  }}>
-          1
-        </Text>
-      </View>
-    )}
-  </View>
-);
-
-const ConversationItem = ({ item }: { item: Conversation }) => {
-  const isLocked = item.status === 'locked';
-  const isLocking = item.status === 'locking';
-
-  return (
-    <View
-      style={{
-        borderRadius: 16,
-        marginBottom: 10,
-        shadowColor: '#000000',
-        shadowOffset: { width: 0, height: 0 },
-        shadowOpacity: 0.09,
-        shadowRadius: 1,
-        elevation: 1,
-        backgroundColor: '#FFFFFF',
-      }}
-    >
-      <TouchableOpacity
-        activeOpacity={0.75}
-        style={{
-          flexDirection: 'row',
-          alignItems: 'center',
-          paddingHorizontal: 14,
-          paddingVertical: 12,
-          borderRadius: 16,
-          overflow: 'hidden',
-          backgroundColor: item.isUnread ? 'rgba(251,178,2,0.07)' : '#FFFFFF',
-        }}
-      >
-        {/* Avatar */}
-        <Avatar
-          isLocked={isLocked}
-          hasNotifDot={item.hasNotifDot}
-        />
-
-        {/* Text info */}
-        <View style={{ flex: 1, minWidth: 0 }}>
-          {/* Name + streak badge */}
-          <View
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              gap: 6,
-              marginBottom: 3,
-            }}
-          >
-            <Text
-              style={{
-                fontSize: 16,
-                lineHeight: 16,
-                fontWeight: '600',
-                color: '#000000',
-              }}
-            >
-              {item.name}
-            </Text>
-            {!isLocked && (
-              <StreakBadge count={item.streakCount} type={item.streakType} />
-            )}
-          </View>
-
-          {/* Last message */}
-          <Text
-            numberOfLines={1}
-            style={{
-              fontSize: 13,
-              lineHeight: 13,
-              fontWeight: item.isUnread ? '600' : '400',
-              color: item.isUnread ? '#000000' : '#555555',
-              marginBottom: 3,
-            }}
-          >
-            {item.lastMessage}
-          </Text>
-
-          {/* Time */}
-          {item.time ? (
-            <Text
-              style={{
-                fontSize: 11,
-                lineHeight: 20,
-                fontWeight: '500',
-                color: item.timeWarning ? '#FF3B30' : '#7D858E',
-              }}
-            >
-              ⏱ {item.time}
-            </Text>
-          ) : null}
-        </View>
-
-        {/* Right action */}
-        {isLocked ? (
-          <View
-            style={{
-              width: 40,
-              height: 40,
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            <Lock size={22} color="#7D858E" strokeWidth={1.8} />
-          </View>
-        ) : (
-          <CameraButton />
-        )}
-      </TouchableOpacity>
-    </View>
-  );
-};
-
-// ─── Section Header ───────────────────────────────────────────────────────────
-
-const SectionHeader = ({
-  icon,
-  label,
-  mt,
-}: {
-  icon: React.ReactNode;
-  label: string;
-  mt?: number;
-}) => (
-  <View
-    style={{
-      flexDirection: 'row',
-      alignItems: 'center',
-      gap: 6,
-      marginBottom: 12,
-      marginTop: mt ?? 0,
-    }}
-  >
-    {icon}
-    <Text
-      style={{
-        fontSize: 16,
-        lineHeight: 16,
-        fontWeight: '500',
-        color: '#000000',
-      }}
-    >
-      {label}
-    </Text>
-  </View>
-);
+import type { BottomTab } from '@/types/bottomTabs';
+import { INBOX_FILTERS } from '@/constants/inbox';
+import type { InboxFilterType } from '@/types/inbox';
+import { filterConversations } from '@/utils/inbox';
+import ConversationItem from '@/components/inbox/ConversationItem';
+import SectionHeader from '@/components/inbox/SectionHeader';
+import { sf, sr, sw, sh } from '@/utils/responsive';
+import { MATCHES } from '@/constants/matches';
 
 // ─── Main Screen ──────────────────────────────────────────────────────────────
 
 export default function InboxScreen({ navigation }: any) {
-  const [activeFilter, setActiveFilter] = useState<FilterType>('All');
+  const [activeFilter, setActiveFilter] = useState<InboxFilterType>('All');
   const [searchQuery, setSearchQuery] = useState('');
-  const [activeTab, setActiveTab] = useState<
-    'Home' | 'Request' | 'Camera' | 'Chat' | 'Profile'
-  >('Chat');
+  const [activeTab, setActiveTab] = useState<BottomTab>('Chat');
+  const navLockRef = React.useRef(false);
 
   const filtered = filterConversations(
     CONVERSATIONS,
@@ -321,7 +37,28 @@ export default function InboxScreen({ navigation }: any) {
   const lockingConversations = filtered.filter(c => c.status === 'locking');
   const lockedConversations = filtered.filter(c => c.status === 'locked');
 
-  const showAllSections = activeFilter === 'All' || !!searchQuery.trim();
+  const handleTabPress = (tab: BottomTab) => {
+    if (navLockRef.current) return;
+    navLockRef.current = true;
+    setTimeout(() => {
+      navLockRef.current = false;
+    }, 350);
+
+    // Only update highlight when staying on the same screen.
+    if (tab === 'Chat') {
+      setActiveTab('Chat');
+      return;
+    }
+
+    if (tab === 'Home') navigation.navigate('DiscoveryScreen');
+    if (tab === 'Request') navigation.navigate('RequestsScreen');
+    if (tab === 'Camera')
+      navigation.navigate('MatchScreen', {
+        match: MATCHES[0],
+        autoOpenCamera: true,
+      });
+    if (tab === 'Profile') navigation.navigate('ProfileScreen');
+  };
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: '#FFFFFF' }}>
@@ -332,7 +69,7 @@ export default function InboxScreen({ navigation }: any) {
           alignItems: 'center',
           justifyContent: 'center',
           backgroundColor: '#FFFFFF',
-          paddingHorizontal: 20,
+          paddingHorizontal: sw(20),
         }}
         className="py-6 pt-8"
       >
@@ -340,7 +77,7 @@ export default function InboxScreen({ navigation }: any) {
           onPress={() => navigation?.goBack()}
           style={{
             position: 'absolute',
-            left: 20,
+            left: sw(20),
             top: 0,
             bottom: 0,
             flexDirection: 'row',
@@ -348,10 +85,10 @@ export default function InboxScreen({ navigation }: any) {
             gap: 2,
           }}
         >
-          <ChevronLeft size={18} color="#555555" strokeWidth={2} />
+          <ChevronLeft size={sf(18)} color="#555555" strokeWidth={2} />
           <Text
             style={{
-              fontSize: 13,
+              fontSize: sf(13),
               color: '#8D8D8D',
               fontWeight: '400',
             }}
@@ -362,8 +99,8 @@ export default function InboxScreen({ navigation }: any) {
 
         <Text
           style={{
-            fontSize: 20,
-            lineHeight: 20,
+            fontSize: sf(20),
+            lineHeight: sf(20),
             fontWeight: '600',
             color: '#000000',
           }}
@@ -373,15 +110,15 @@ export default function InboxScreen({ navigation }: any) {
       </View>
 
       {/* ── Search Bar ── */}
-      <View style={{ paddingHorizontal: 20, marginBottom: 14 }}>
+      <View style={{ paddingHorizontal: sw(20), marginBottom: sh(14) }}>
         <View
           style={{
             flexDirection: 'row',
             alignItems: 'center',
-            height: 48,
+            height: sh(48),
             backgroundColor: '#FFFFFF',
-            borderRadius: 12,
-            paddingHorizontal: 14,
+            borderRadius: sr(12),
+            paddingHorizontal: sw(14),
             gap: 8,
             borderWidth: 1,
             borderColor: '#FFFFFF',
@@ -392,7 +129,7 @@ export default function InboxScreen({ navigation }: any) {
             elevation: 2,
           }}
         >
-          <Search size={16} color="#8D8D8D" strokeWidth={2} />
+          <Search size={sf(16)} color="#8D8D8D" strokeWidth={2} />
           <TextInput
             placeholder="Search conversations..."
             placeholderTextColor="#8D8D8D"
@@ -400,8 +137,8 @@ export default function InboxScreen({ navigation }: any) {
             onChangeText={setSearchQuery}
             style={{
               flex: 1,
-              fontSize: 14,
-              lineHeight: 14,
+              fontSize: sf(14),
+              lineHeight: sf(14),
               color: '#333333',
               fontWeight: '400',
               padding: 0,
@@ -415,13 +152,13 @@ export default function InboxScreen({ navigation }: any) {
         horizontal
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={{
-          paddingHorizontal: 20,
+          paddingHorizontal: sw(20),
           gap: 8,
           paddingBottom: 4,
         }}
         style={{ flexGrow: 0, marginBottom: 16 }}
       >
-        {FILTERS.map(filter => {
+        {INBOX_FILTERS.map(filter => {
           const isActive = activeFilter === filter;
           return (
             <TouchableOpacity
@@ -430,9 +167,9 @@ export default function InboxScreen({ navigation }: any) {
               style={{
                 flexDirection: 'row',
                 alignItems: 'center',
-                paddingHorizontal: 16,
-                paddingVertical: 8,
-                borderRadius: 99,
+                paddingHorizontal: sw(16),
+                paddingVertical: sh(8),
+                borderRadius: sr(99),
                 backgroundColor: isActive ? '#1E78F5' : '#FFFFFF',
                 shadowColor: '#000',
                 shadowOffset: { width: 0, height: 0 },
@@ -443,18 +180,18 @@ export default function InboxScreen({ navigation }: any) {
               activeOpacity={0.75}
             >
               {filter === 'Active Streaks' && (
-                <Text style={{ fontSize: 14, marginRight: 4 }}>🔥</Text>
+                <Text style={{ fontSize: sf(14), marginRight: sw(4) }}>🔥</Text>
               )}
               {filter === 'Expiring Soon' && (
-                <Text style={{ fontSize: 14, marginRight: 4 }}>⏳</Text>
+                <Text style={{ fontSize: sf(14), marginRight: sw(4) }}>⏳</Text>
               )}
               {filter === 'Locked Chats' && (
-                <Text style={{ fontSize: 14, marginRight: 4 }}>🔒</Text>
+                <Text style={{ fontSize: sf(14), marginRight: sw(4) }}>🔒</Text>
               )}
               <Text
                 style={{
-                  fontSize: 16,
-                  lineHeight: 16,
+                  fontSize: sf(16),
+                  lineHeight: sf(16),
                   fontWeight: '500',
                   color: isActive ? '#FFFFFF' : '#B6B9C9',
                 }}
@@ -469,14 +206,17 @@ export default function InboxScreen({ navigation }: any) {
       {/* ── Conversation List ── */}
       <ScrollView
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ paddingHorizontal: 20, paddingBottom: 24 }}
+        contentContainerStyle={{
+          paddingHorizontal: sw(20),
+          paddingBottom: sh(140),
+        }}
         style={{ flex: 1 }}
       >
         {/* Active Streaks */}
         {activeConversations.length > 0 && (
           <>
             <SectionHeader
-              icon={<Text style={{ fontSize: 18 }}>🔥</Text>}
+              icon={<Text style={{ fontSize: sf(18) }}>🔥</Text>}
               label="Active Streaks"
             />
             {activeConversations.map(item => (
@@ -490,7 +230,7 @@ export default function InboxScreen({ navigation }: any) {
           <>
             <SectionHeader
               mt={activeConversations.length > 0 ? 8 : 0}
-              icon={<Text style={{ fontSize: 16 }}>⏳</Text>}
+              icon={<Text style={{ fontSize: sf(16) }}>⏳</Text>}
               label="Locking Soon"
             />
             {lockingConversations.map(item => (
@@ -520,8 +260,8 @@ export default function InboxScreen({ navigation }: any) {
 
         {/* Empty state */}
         {filtered.length === 0 && (
-          <View style={{ alignItems: 'center', marginTop: 60 }}>
-            <Text style={{ fontSize: 15, color: '#8D8D8D' }}>
+          <View style={{ alignItems: 'center', marginTop: sh(60) }}>
+            <Text style={{ fontSize: sf(15), color: '#8D8D8D' }}>
               No conversations found
             </Text>
           </View>
@@ -531,7 +271,7 @@ export default function InboxScreen({ navigation }: any) {
       {/* ── Bottom Tab Bar ── */}
       <BottomTabBar
         activeTab={activeTab}
-        onTabPress={tab => setActiveTab(tab)}
+        onTabPress={handleTabPress}
       />
     </SafeAreaView>
   );

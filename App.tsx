@@ -10,8 +10,8 @@ import SignUpScreen from '@/screens/onboarding/SignUpScreen';
 import InviteScreen from '@/screens/onboarding/InviteScreen';
 import WaitingScreen from '@/screens/onboarding/WaitingScreen';
 import LaunchScreen from '@/screens/onboarding/LaunchScreen';
-import NumberSigninScreen from '@/screens/onboarding/NumberSigninScreen';
-import EmailSigninScreen from '@/screens/onboarding/EmailSigninScreen';
+import SignInScreen from '@/screens/SignInScreen';
+import ProfileScreen from '@/screens/ProfileScreen';
 import NumberInputScreen from '@/screens/onboarding/NumberInputScreen';
 import NumberVerifyScreen from '@/screens/onboarding/NumberVerifyScreen';
 import VerificationSuccessScreen from '@/screens/onboarding/VerificationSuccessScreen';
@@ -33,32 +33,71 @@ export default function App() {
   return (
     <GestureHandlerRootView className="flex-1">
       <NavigationContainer>
-        <Stack.Navigator screenOptions={{ headerShown: false }}>
-          {/* <Stack.Screen name="Onboarding1" component={OnboardingScreen1} />
+        <Stack.Navigator
+          initialRouteName="ProfileScreen"
+          screenOptions={{ headerShown: false }}
+        >
+          <Stack.Screen name="Onboarding1" component={OnboardingScreen1} />
           <Stack.Screen name="Onboarding2" component={OnboardingScreen2} />
           <Stack.Screen name="Onboarding3" component={OnboardingScreen3} />
           <Stack.Screen name="LogoScreen" component={LogoScreen} />
+
           <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
-          <Stack.Screen name="InviteScreen" component={InviteScreen} />
-          <Stack.Screen name="WaitingScreen" component={WaitingScreen} />
-          <Stack.Screen name="LaunchScreen" component={LaunchScreen} />
-          <Stack.Screen name="NumberSigninScreen" component={NumberSigninScreen} />
-          <Stack.Screen name="EmailSigninScreen" component={EmailSigninScreen} />
-          <Stack.Screen name="NumberInputScreen" component={NumberInputScreen} />
-          <Stack.Screen name="NumberVerifyScreen" component={NumberVerifyScreen} />
-          <Stack.Screen name="VerificationSuccessScreen" component={VerificationSuccessScreen} />
-          <Stack.Screen name="ProfileSetupScreen" component={ProfileSetupScreen} />
-          <Stack.Screen name="PhysicalAttributesScreen" component={PhysicalAttributesScreen} />
+          <Stack.Screen name="SignInScreen" component={SignInScreen} />
+
+          <Stack.Screen
+            name="NumberInputScreen"
+            component={NumberInputScreen}
+          />
+          <Stack.Screen
+            name="NumberVerifyScreen"
+            component={NumberVerifyScreen}
+          />
+          <Stack.Screen
+            name="VerificationSuccessScreen"
+            component={VerificationSuccessScreen}
+          />
+
+          <Stack.Screen
+            name="ProfileSetupScreen"
+            component={ProfileSetupScreen}
+          />
+          <Stack.Screen
+            name="PhysicalAttributesScreen"
+            component={PhysicalAttributesScreen}
+          />
           <Stack.Screen name="InterestsScreen" component={InterestsScreen} />
-          <Stack.Screen name="UploadPhotosScreen" component={UploadPhotosScreen} />
-          <Stack.Screen name="EnableLocationScreen" component={EnableLocationScreen} />
+          <Stack.Screen
+            name="UploadPhotosScreen"
+            component={UploadPhotosScreen}
+          />
+
+          <Stack.Screen
+            name="InviteScreen"
+            component={InviteScreen}
+          />
+          <Stack.Screen
+            name="WaitingScreen"
+            component={WaitingScreen}
+          />
+          <Stack.Screen
+            name="LaunchScreen"
+            component={LaunchScreen}
+          />
+
+          <Stack.Screen
+            name="EnableLocationScreen"
+            component={EnableLocationScreen}
+          />
           <Stack.Screen name="SearchScreen" component={SearchScreen} />
-          <Stack.Screen name="DiscoveryScreen" component={DiscoveryScreen} /> */}
-          {/* <Stack.Screen name="DiscoveryScreen" component={DiscoveryScreen} /> */}
-          {/* <Stack.Screen name="MatchScreen" component={MatchScreen} /> */}
-          {/* <Stack.Screen name="RequestsScreen" component={RequestsScreen} /> */}
-          {/* <Stack.Screen name="InboxScreen" component={InboxScreen} /> */}
+
+          <Stack.Screen name="DiscoveryScreen" component={DiscoveryScreen} />
+          <Stack.Screen name="MatchScreen" component={MatchScreen} />
+          <Stack.Screen name="RequestsScreen" component={RequestsScreen} />
+          <Stack.Screen name="InboxScreen" component={InboxScreen} />
           <Stack.Screen name="ChatScreen" component={ChatScreen} />
+
+          <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </GestureHandlerRootView>

@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
-import {
-  View,
-  Text,
-  Image,
-  TouchableOpacity,
-  SafeAreaView,
-  TextInput,
-  useWindowDimensions,
-} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, TouchableOpacity, SafeAreaView, useWindowDimensions } from 'react-native';
 import { X } from 'lucide-react-native';
-import CameraIcon from '@/assets/images/cameraIcon.svg';
 import CameraScreen from './CameraScreen';
 import PhotoPreviewScreen from './PhotoPreviewScreen';
+import MatchTitle from '@/components/match/MatchTitle';
+import PhotoStack from '@/components/match/PhotoStack';
+import MessageInputBar from '@/components/match/MessageInputBar';
+import { calculateMatchPhotoLayout } from '@/utils/match';
+import { sf, sr, sw, sh } from '@/utils/responsive';
+import { MATCHES } from '@/constants/matches';
 
-const MatchScreen = () => {
+const MatchScreen = ({ navigation, route }: any) => {
+  const match = route?.params?.match ?? MATCHES[0];
+  const autoOpenCamera: boolean = !!route?.params?.autoOpenCamera;
+
   const [isCamOpen, setIsCamOpen] = useState(false);
   const [isPhotoPreviewOpen, setIsPhotoPreviewOpen] = useState(false);
   const [capturedPhoto, setCapturedPhoto] = useState<string | null>(null);
@@ -21,15 +21,18 @@ const MatchScreen = () => {
   const [isSending, setIsSending] = useState(false);
   const { width } = useWindowDimensions();
 
-  // Larger photos to match Figma
-  const PHOTO_WIDTH = width * 0.40;
-  const PHOTO_HEIGHT = PHOTO_WIDTH * 1.5;
+  const { PHOTO_WIDTH, PHOTO_HEIGHT, CONTAINER_HEIGHT } =
+    calculateMatchPhotoLayout(width);
 
-  // Container tall enough for both photos + rotation bleed
-  const CONTAINER_HEIGHT = PHOTO_HEIGHT + 120;
+  useEffect(() => {
+    if (autoOpenCamera) setIsCamOpen(true);
+  }, [autoOpenCamera]);
 
-  // Smaller circle so it doesn't dominate the title row
-  const CIRCLE_SIZE = 156;
+  const closeCameraAndPreview = () => {
+    setIsCamOpen(false);
+    setIsPhotoPreviewOpen(false);
+    setCapturedPhoto(null);
+  };
 
   // Function to send photo message
   const sendPhotoMessage = async (photoUri: string) => {
@@ -69,6 +72,14 @@ const MatchScreen = () => {
       setCapturedPhoto(null);
       setInputMessage('');
       setIsPhotoPreviewOpen(false);
+
+      // Move to chat with the same user that was selected on Discovery.
+      navigation.navigate('ChatScreen', {
+        chatUserName: match.name,
+        chatUserImageUri: match.image,
+        initialPhotoUri: photoUri,
+        initialLocked: false,
+      });
       
     } catch (error) {
       console.error('Error sending photo:', error);
@@ -112,217 +123,36 @@ const MatchScreen = () => {
         style={{
           flex: 1,
           alignItems: 'center',
-          paddingHorizontal: 24,
-          paddingTop: 28,
-          paddingBottom: 24,
+          paddingHorizontal: sw(24),
+          paddingTop: sh(28),
+          paddingBottom: sh(24),
         }}
       >
-        {/* ── Title ── */}
-        <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          <Text
-            style={{
-              lineHeight: 46,
-            }}
-            className="font-bold text-[44px] text-[#1C1C1E]"
-          >
-            {"It's a"}
-          </Text>
-          {/* Perfect circle — width === height */}
-          <View
-            style={{
-              width: CIRCLE_SIZE,
-              height: CIRCLE_SIZE,
-              borderRadius: CIRCLE_SIZE / 2,
-              backgroundColor: '#1E78F5',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            <Text
-              style={{
-                lineHeight: 46,
-                textAlign: 'center',
-              }}
-              className="font-bold text-[44px] text-[#FFFFFF]"
-            >
-              {'match!'}
-            </Text>
-          </View>
-        </View>
+        <MatchTitle />
 
-        {/* ── Photo Stack — flex:1 so it expands to fill available space ── */}
-        <View
-          style={{
-            flex: 1,
-            width: '100%',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          <View
-            style={{
-              width: '70%',
-              height: CONTAINER_HEIGHT,
-            }}
-          >
-            {/* Right photo — smaller, rotated +12deg, behind left photo */}
-            <View
-              style={{
-                position: 'absolute',
-                right: width * 0.00,
-                width: PHOTO_WIDTH,
-                height: PHOTO_HEIGHT,
-                borderRadius: 18,
-                transform: [{ rotate: '10deg' }],
-                elevation: 3,
-                shadowColor: '#000',
-                shadowOffset: { width: 2, height: 4 },
-                shadowOpacity: 0.18,
-                shadowRadius: 6,
-                overflow: 'hidden',
-                backgroundColor: '#ddd',
-              }}
-            >
-              <Image
-                source={{
-                  uri: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&q=80',
-                }}
-                style={{ width: '100%', height: '100%' }}
-                resizeMode="cover"
-              />
-            </View>
-
-            {/* Left photo — larger, rotated -12deg, in front (higher elevation) */}
-            <View
-              style={{
-                position: 'absolute',
-                left: width * 0.00,
-                top: 100,
-                width: PHOTO_WIDTH,
-                height: PHOTO_HEIGHT,
-                borderRadius: 18,
-                transform: [{ rotate: '-10deg' }],
-                elevation: 8,
-                shadowColor: '#000',
-                shadowOffset: { width: -2, height: 4 },
-                shadowOpacity: 0.18,
-                shadowRadius: 6,
-                overflow: 'hidden',
-                backgroundColor: '#ddd',
-              }}
-            >
-              <Image
-                source={{
-                  uri: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=600&q=80',
-                }}
-                style={{ width: '100%', height: '100%' }}
-                resizeMode="cover"
-              />
-            </View>
-
-            {/* Top heart — in the gap between the two photos, near top */}
-            <View
-              style={{
-                position: 'absolute',
-                top: -30,          
-                left: 0,
-                right: 0,
-                alignItems: 'center',
-                zIndex: 20,
-                transform: [{ rotate: '10deg' }],
-              }}
-            >
-              <View
-                style={{
-                  width: 50,
-                  height: 50,
-                  borderRadius: 30,
-                  backgroundColor: '#FFFFFF',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-              >
-                <Text style={{ fontSize: 24 }}>❤️</Text>
-              </View>
-            </View>
-
-            {/* Bottom-left heart — mid-lower of the left photo */}
-            <View
-              style={{
-                position: 'absolute',
-                bottom: -10,
-                left: width * 0.02,
-                zIndex: 20,
-              }}
-            >
-              <View
-                style={{
-                  width: 50,
-                  height: 50,
-                  borderRadius: 30,
-                  backgroundColor: '#FFFFFF',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  transform: [{ rotate: '-10deg' }],
-                }}
-              >
-                <Text style={{ fontSize: 24 }}>❤️</Text>
-              </View>
-            </View>
-          </View>
-        </View>
+        <PhotoStack
+          screenWidth={width}
+          photoWidth={PHOTO_WIDTH}
+          photoHeight={PHOTO_HEIGHT}
+          containerHeight={CONTAINER_HEIGHT}
+        />
 
         {/* ── Subtitle ── */}
         <Text
           style={{
-            lineHeight: 20,
+            lineHeight: sf(20),
+            fontSize: sf(16),
           }}
-          className='font-medium text-[16px] text-[#000000] mb-4 text-center'
+          className='font-medium text-[#000000] mb-4 text-center'
         >
-          {'You and Emma liked each other.'}
+          {`You and ${match.name} liked each other.`}
         </Text>
 
-        {/* ── Input ── */}
-        <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            borderWidth: 1,
-            borderColor: '#000000',
-            borderRadius: 999,
-            paddingHorizontal: 18,
-            paddingVertical: 4,
-            width: '100%',
-            marginBottom: 20,
-            backgroundColor: '#000000',
-          }}
-        >
-          <TextInput
-            placeholder="Show Emma what you're doing..."
-            placeholderTextColor="#FFFFFF"
-            value={inputMessage}
-            onChangeText={setInputMessage}
-            style={{
-              flex: 1,
-              fontFamily: 'Poppins-Regular',
-              fontSize: 16,
-              lineHeight: 18,
-              padding: 4,
-              color: '#FFFFFF',
-            }}
-          />
-
-          {/* Camera Icon Button */}
-          <TouchableOpacity onPress={() => setIsCamOpen(true)}>
-            <CameraIcon width={32} height={32} />
-          </TouchableOpacity>
-        </View>
+        <MessageInputBar
+          value={inputMessage}
+          onChangeText={setInputMessage}
+          onOpenCamera={() => setIsCamOpen(true)}
+        />
 
         {/* Camera Modal */}
         <CameraScreen
@@ -343,16 +173,17 @@ const MatchScreen = () => {
 
         {/* ── Close button ── */}
         <TouchableOpacity
+          onPress={closeCameraAndPreview}
           style={{
-            width: 40,
-            height: 40,
-            borderRadius: 20,
+            width: sf(40),
+            height: sf(40),
+            borderRadius: sr(20),
             backgroundColor: '#1E78F5',
             alignItems: 'center',
             justifyContent: 'center',
           }}
         >
-          <X size={18} color="#FFFFFF" strokeWidth={2.5} />
+          <X size={sf(18)} color="#FFFFFF" strokeWidth={2.5} />
         </TouchableOpacity>
 
       </View>
