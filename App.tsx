@@ -28,6 +28,7 @@ import InboxScreen from '@/screens/InboxScreen';
 import ChatScreen from '@/screens/ChatScreen';
 import EditProfileScreen from './src/screens/EditProfileScreen';
 import SettingsScreen from '@/screens/SettingsScreen';
+import BlockedUsersScreen from '@/screens/BlockedUsersScreen';
 
 const Stack = createStackNavigator();
 
@@ -36,7 +37,7 @@ export default function App() {
     <GestureHandlerRootView className="flex-1">
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="SettingsScreen"
+          initialRouteName="BlockedUsersScreen"
           screenOptions={{ headerShown: false }}
         >
           <Stack.Screen name="Onboarding1" component={OnboardingScreen1} />
@@ -102,6 +103,7 @@ export default function App() {
           <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
           <Stack.Screen name="EditProfileScreen" component={EditProfileScreen} />
           <Stack.Screen name="SettingsScreen" component={SettingsScreen} />
+          <Stack.Screen name="BlockedUsersScreen" component={BlockedUsersScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </GestureHandlerRootView>
