@@ -28,6 +28,8 @@ import type { Message } from '@/types/chat';
 import { INITIAL_MESSAGES } from '@/constants/chat';
 import { generateId, getTimeString } from '@/utils/chat';
 import { sf, sr, sw, sh } from '@/utils/responsive';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
 
 // ─── Main Screen ──────────────────────────────────────────────────────────────
 
@@ -58,7 +60,15 @@ export default function ChatScreen({ navigation, route }: any) {
     }
     return INITIAL_MESSAGES;
   });
-  const [messageText, setMessageText] = useState('');
+
+  const messageSchema = z.string();
+  const { watch, setValue, getValues } = useForm<{ messageText: string }>({
+    defaultValues: {
+      messageText: '',
+    },
+  });
+
+  const messageText = watch('messageText');
 
   const [isCameraOpen, setIsCameraOpen] = useState(false);
   const [capturedPhotoUri, setCapturedPhotoUri] = useState<string | null>(null);
@@ -73,6 +83,9 @@ export default function ChatScreen({ navigation, route }: any) {
     const trimmed = messageText.trim();
     if (!trimmed) return;
 
+    const result = messageSchema.safeParse(trimmed);
+    if (!result.success) return;
+
     const newMsg: Message = {
       id: generateId(),
       type: 'text',
@@ -83,7 +96,7 @@ export default function ChatScreen({ navigation, route }: any) {
     };
 
     setMessages(prev => [...prev, newMsg]);
-    setMessageText('');
+    setValue('messageText', '');
     setTimeout(() => scrollViewRef.current?.scrollToEnd({ animated: true }), 100);
   };
 
@@ -389,7 +402,7 @@ export default function ChatScreen({ navigation, route }: any) {
               placeholder="Type a message..."
               placeholderTextColor="#B6B9C9"
               value={messageText}
-              onChangeText={setMessageText}
+              onChangeText={v => setValue('messageText', v)}
               onSubmitEditing={handleSendText}
               returnKeyType="send"
               blurOnSubmit={false}

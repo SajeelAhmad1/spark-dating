@@ -5,8 +5,12 @@ import { sf, sh } from '@/utils/responsive';
 
 export default function PhoneEmailField({
   activeTab,
+  value,
+  onChangeText,
 }: {
   activeTab: AuthSigninTab;
+  value: string;
+  onChangeText: (v: string) => void;
 }) {
   return (
     <View className="gap-y-2">
@@ -19,6 +23,8 @@ export default function PhoneEmailField({
         keyboardType={activeTab === 'phone' ? 'phone-pad' : 'email-address'}
         style={{ fontSize: sf(12), paddingVertical: sh(8) }}
         className="text-[#7D858E] border-b border-[#E8EAED]"
+        value={value}
+        onChangeText={onChangeText}
       />
     </View>
   );

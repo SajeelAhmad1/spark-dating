@@ -18,19 +18,32 @@ import ConversationItem from '@/components/inbox/ConversationItem';
 import SectionHeader from '@/components/inbox/SectionHeader';
 import { sf, sr, sw, sh } from '@/utils/responsive';
 import { MATCHES } from '@/constants/matches';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
 
 // ─── Main Screen ──────────────────────────────────────────────────────────────
 
 export default function InboxScreen({ navigation }: any) {
   const [activeFilter, setActiveFilter] = useState<InboxFilterType>('All');
-  const [searchQuery, setSearchQuery] = useState('');
   const [activeTab, setActiveTab] = useState<BottomTab>('Chat');
   const navLockRef = React.useRef(false);
+
+  const searchSchema = z.string();
+  const { watch, setValue } = useForm<{ searchQuery: string }>({
+    defaultValues: {
+      searchQuery: '',
+    },
+  });
+
+  const searchQuery = watch('searchQuery');
+  const safeSearchQuery = searchSchema.safeParse(searchQuery).success
+    ? searchQuery
+    : '';
 
   const filtered = filterConversations(
     CONVERSATIONS,
     activeFilter,
-    searchQuery,
+    safeSearchQuery,
   );
 
   const activeConversations = filtered.filter(c => c.status === 'active');
@@ -134,7 +147,7 @@ export default function InboxScreen({ navigation }: any) {
             placeholder="Search conversations..."
             placeholderTextColor="#8D8D8D"
             value={searchQuery}
-            onChangeText={setSearchQuery}
+            onChangeText={v => setValue('searchQuery', v)}
             style={{
               flex: 1,
               fontSize: sf(14),
