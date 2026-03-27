@@ -24,10 +24,10 @@ export default function SignUpScreen({ navigation }: any) {
       />
 
       <SafeAreaView className="flex-1" edges={['top', 'bottom']}>
-        <View style={{ paddingHorizontal: sw(20) }} className="flex-1 justify-between pt-20 ">
+        <View style={{ paddingHorizontal: sw(20) }} className="flex-1 justify-between items-center pt-20 ">
 
           <Text
-            style={{ fontSize: sf(28), lineHeight: sf(28), marginBottom: sh(32) }}
+            style={{ fontSize: sf(32), marginBottom: sh(32) }}
             className="font-semibold text-white text-center"
           >
             Welcome back!
@@ -43,7 +43,7 @@ export default function SignUpScreen({ navigation }: any) {
               shadowOpacity: 0,
             }}
           >
-            <Logo width={sf(72)} height={sf(72)} />
+            <Logo width={sf(88)} height={sf(88)} />
           </View>
 
           <Text
@@ -71,8 +71,9 @@ export default function SignUpScreen({ navigation }: any) {
             colors={['#1E78F5', '#1E78F5']}
             iconBackground="#ffffff"
             variant="solid"
-            icon={<Phone size={sf(20)} color="#1E78F5" />}
+            icon={<Phone width={sf(28)} height={sf(28)} color="#1E78F5" />}
             iconPosition="start"
+             textStyle={{fontSize: sf(16), fontWeight: '500'}}
           />
 
           <PrimaryButton
@@ -81,13 +82,14 @@ export default function SignUpScreen({ navigation }: any) {
             colors={['#ffffff']}
             iconBackground="#EDEDED"
             variant="outline"
-            icon={<GoogleIcon width={sf(20)} height={sf(20)} />}
+            icon={<GoogleIcon width={sf(28)} height={sf(28)} />}
             iconPosition="start"
-            textStyle={{fontSize: sf(20), fontWeight: '500'}}
+            style={{ backgroundColor: 'white', }}
+            textStyle={{fontSize: sf(16), fontWeight: '500', color: '#1E78F5'}}
           />
 
           <View style={{ marginTop: sh(8) }} className="items-center">
-            <Text style={{ fontSize: sf(16) }} className="text-black font-medium">
+            <Text style={{ fontSize: sf(16) }} className="text-white font-normal">
               Already have an account?{' '}
               <Text
                 className="text-[#1E78F5] font-medium"

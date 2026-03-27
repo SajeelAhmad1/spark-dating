@@ -11,7 +11,7 @@ import {
   onboardingPhoneFormSchema,
 } from '@/validations/onboarding';
 
-const NumberEnterScreen = ({navigation}: any) => {
+const NumberEnterScreen = ({ navigation }: any) => {
   const [show, setShow] = useState(false);
 
   // ✅ Store full country object
@@ -31,16 +31,17 @@ const NumberEnterScreen = ({navigation}: any) => {
   return (
     <SafeAreaView className="flex-1 bg-white">
       <View className="flex-1 px-5 pt-4 mt-20 pb-6">
-
         {/* ── Header ── */}
         <View className="mt-16 gap-y-2">
-          <Text className="text-black leading-[100%] tracking-[0%] font-semibold"
-          style={{ fontSize: sf(28), lineHeight: sf(28), letterSpacing: 0 }}
+          <Text
+            className="text-black    font-semibold"
+            style={{ fontSize: sf(28) }}
           >
             My mobile number
           </Text>
-          <Text className="text-[#7D858E]  font-normal leading-[100%] tracking-[0%]"
-          style={{ fontSize: sf(15), lineHeight: sf(15), letterSpacing: 0 }}
+          <Text
+            className="text-[#7D858E]  font-normal   "
+            style={{ fontSize: sf(15) }}
           >
             Your streak is waiting 🔥
           </Text>
@@ -48,18 +49,15 @@ const NumberEnterScreen = ({navigation}: any) => {
 
         {/* ── Phone Input ── */}
         <View className="mt-8 flex-row items-center border border-[#E8EAED] rounded-xl px-4 py-3 gap-x-3">
-          
           {/* Country Selector */}
           <TouchableOpacity
             className="flex-row items-center gap-x-1"
             onPress={() => setShow(true)}
           >
-            <Text className=""
-            style={{ fontSize: sf(20), lineHeight: sf(20), letterSpacing: 0 }}
-            >{country.flag}</Text>
-            <Text className="text-black"
-            style={{ fontSize: sf(16), lineHeight: sf(24), letterSpacing: 0 }}
-            >
+            <Text className="" style={{ fontSize: sf(20) }}>
+              {country.flag}
+            </Text>
+            <Text className="text-black" style={{ fontSize: sf(16) }}>
               {country.dial_code}
             </Text>
             <ChevronDown size={16} color="#000000" />
@@ -71,18 +69,19 @@ const NumberEnterScreen = ({navigation}: any) => {
           {/* Number Input */}
           <TextInput
             placeholder="300 1234567"
-            placeholderTextColor="#7D858E"
+            placeholderTextColor="black"
             keyboardType="phone-pad"
-            value={phoneNumber} 
-            className="flex-1 text-black  leading-[150%] tracking-[0px] font-medium"
-            style={{ fontSize: sf(16), lineHeight: sf(24), letterSpacing: 0 }}
-            onChangeText={v => setValue('phoneNumber', v)} 
+            value={phoneNumber}
+            className="flex-1 text-black  font-medium"
+            style={{ fontSize: sf(16) }}
+            onChangeText={v => setValue('phoneNumber', v)}
           />
         </View>
 
         {/* ── Helper Text ── */}
-        <Text className="text-[#7D858E] font-normal leading-[100%] tracking-[0%] mt-4"
-        style={{ fontSize: sf(15), lineHeight: sf(15), letterSpacing: 0 }}
+        <Text
+          className="text-[#7D858E] font-normal    mt-4"
+          style={{ fontSize: sf(15) }}
         >
           We'll text you a code to verify you're really you. Message and data
           rates may apply.{' '}
@@ -96,25 +95,32 @@ const NumberEnterScreen = ({navigation}: any) => {
           <PrimaryButton
             title="Send verification Code"
             onPress={() => {
-              const result = onboardingPhoneSchema.safeParse(getValues().phoneNumber);
+              const result = onboardingPhoneSchema.safeParse(
+                getValues().phoneNumber,
+              );
               if (!result.success) {
                 // eslint-disable-next-line no-console
-                console.warn('Phone number validation failed', result.error.flatten());
+                console.warn(
+                  'Phone number validation failed',
+                  result.error.flatten(),
+                );
               }
               navigation.navigate('NumberVerifyScreen');
             }}
             colors={['#1E78F5', '#FBB202']}
             variant="gradient"
             style={{ alignSelf: 'stretch' }}
-            textStyle={{color: '#ffffff', fontSize: sf(20), fontWeight: '500', lineHeight: sf(20), letterSpacing: 0}}
+            textStyle={{
+              color: '#ffffff',
+              fontSize: sf(20),
+              fontWeight: '500',
+            }}
           />
         </View>
 
         {/* ── Already have account ── */}
         <View className="mt-4 items-center">
-          <Text className="text-[#7D858E] leading-[100%] tracking-[0%]"
-          style={{ fontSize: sf(16), lineHeight: sf(24), letterSpacing: 0 }}
-          >
+          <Text className="text-[#7D858E]  font-normal " style={{ fontSize: sf(16) }}>
             Already have an account?{' '}
             <Text className="text-[#1E78F5] underline font-medium">Login</Text>
           </Text>
@@ -125,7 +131,7 @@ const NumberEnterScreen = ({navigation}: any) => {
       <CountryPicker
         lang="en"
         show={show}
-        pickerButtonOnPress={(item) => {
+        pickerButtonOnPress={item => {
           setCountry(item);
           setShow(false);
         }}

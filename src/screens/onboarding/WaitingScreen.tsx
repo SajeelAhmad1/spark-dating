@@ -17,16 +17,16 @@ const WaitingScreen = ({ navigation }: any) => (
     <View className="flex-1 px-5 py-10">
 
       {/* ── Main Content ── */}
-      <View className="flex-1 items-center justify-center gap-y-6">
+      <View className="flex-1 items-center justify-center gap-y-4">
 
         {/* Icon */}
-        <View className="w-20 h-20 rounded-full bg-[#1E78F5] items-center justify-center">
-          <Users2 width={40} height={40} color="#ffffff" />
+        <View className="w-[104px] h-[104px] rounded-full bg-[#1E78F5] items-center justify-center mb-4">
+          <Users2 width={56} height={56} color="#ffffff" />
         </View>
 
         {/* Title */}
         <Text
-          style={{ fontSize: sf(24), lineHeight: sf(24), letterSpacing: 0 }}
+          style={{ fontSize: sf(24),  }}
           className="text-black text-center font-semibold"
         >
           We're Almost There! 🚀
@@ -34,7 +34,7 @@ const WaitingScreen = ({ navigation }: any) => (
 
         {/* Subtitle */}
         <Text
-          style={{ fontFamily: 'Poppins-Regular', fontSize: sf(16), lineHeight: sf(16), letterSpacing: 0 }}
+          style={{ fontFamily: 'Poppins-Regular', fontSize: sf(16), }}
           className="text-[#7D858E] text-center"
         >
           Spark goes live when{' '}
@@ -49,10 +49,10 @@ const WaitingScreen = ({ navigation }: any) => (
         {/* Progress */}
         <View className="w-full gap-y-2">
           <View className="flex-row items-center justify-between">
-            <Text style={{ fontFamily: 'Poppins-Medium', fontSize: sf(16), lineHeight: sf(16), letterSpacing: 0 }} className="text-black">
+            <Text style={{ fontFamily: 'Poppins-Medium', fontSize: sf(16), }} className="text-black">
               Launch Progress
             </Text>
-            <Text style={{ fontFamily: 'Poppins-Medium', fontSize: sf(16), lineHeight: sf(16), letterSpacing: 0 }} className="text-[#1E78F5]">
+            <Text style={{ fontFamily: 'Poppins-Medium', fontSize: sf(16),  }} className="text-[#1E78F5]">
               {CURRENT}/{TARGET}
             </Text>
           </View>
@@ -65,8 +65,8 @@ const WaitingScreen = ({ navigation }: any) => (
           </View>
 
           <Text
-            style={{ fontFamily: 'Poppins-Medium', fontSize: sf(14), lineHeight: sf(20), letterSpacing: 0 }}
-            className="text-[#DC9B00] text-right"
+            style={{ fontFamily: 'Poppins-Medium', fontSize: sf(14), }}
+            className="text-[#DC9B00] text-center"
           >
             {REMAINING} more to go!
           </Text>
@@ -74,7 +74,7 @@ const WaitingScreen = ({ navigation }: any) => (
 
         {/* Notification Card */}
         <View
-          className="w-full flex-row items-center rounded-2xl bg-[#EDEDED] px-4 py-4"
+          className="w-full flex-row  items-center rounded-2xl bg-[#EDEDED] px-4 h-[100px]"
         >
           <View
             className="w-[40px] h-[40px] rounded-full items-center justify-center shrink-0"
@@ -83,10 +83,10 @@ const WaitingScreen = ({ navigation }: any) => (
             <Bell size={24} color="#DC9B00" />
           </View>
           <View className="flex-1 shrink ml-2">
-            <Text style={{ fontFamily: 'Poppins-SemiBold', fontSize: sf(16), lineHeight: sf(16), letterSpacing: 0 }} className="text-black">
+            <Text style={{ fontFamily: 'Poppins-SemiBold', fontSize: sf(16), }} className="text-black">
               You'll be notified
             </Text>
-            <Text style={{ fontFamily: 'Poppins-Regular', fontSize: sf(13), lineHeight: sf(13), letterSpacing: 0 }} className="text-[#555555]">
+            <Text style={{ fontFamily: 'Poppins-Regular', fontSize: sf(13),  }} className="text-[#555555]">
               We will send you a notification when we reach {TARGET} users
             </Text>
           </View>
@@ -100,9 +100,9 @@ const WaitingScreen = ({ navigation }: any) => (
         onPress={() => navigation.navigate("LaunchScreen")}
         colors={['#1E78F5', '#DC9B00']}
         variant="gradient"
-        icon={<Share2 size={20} color="#ffffff" />}
+        // icon={<Share2 size={20} color="#ffffff" />}
         iconPosition="start"
-        textStyle={{fontSize: sf(18), fontWeight: '500', lineHeight: sf(18), letterSpacing: 0, color: '#ffffff'}}
+        textStyle={{fontSize: sf(18), fontWeight: '500', color: '#ffffff'}}
       />
 
     </View>

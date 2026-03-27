@@ -7,21 +7,21 @@ export default function PasswordField({
   password,
   onChangeText,
   showPassword,
-  onToggleShowPassword,
+  onToggleShowPassword, 
 }: {
   password: string;
   onChangeText: (v: string) => void;
   showPassword: boolean;
-  onToggleShowPassword: () => void;
+  onToggleShowPassword: () => void; 
 }) {
   return (
-    <View className="gap-y-2">
+    <View className="gap-y-2 pt-4">
       <Text className="text-black font-semibold"
       style={{ fontSize: sf(18), lineHeight: sf(18), letterSpacing: 0 }} 
       >
         Password
       </Text>
-      <View className="flex-row items-center border-b border-[#E8EAED]">
+      <View className="flex-row items-center border-b border-[#B6B9C9]">
         <TextInput
           placeholder="••••••••••••"
           placeholderTextColor="#7D858E"

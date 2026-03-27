@@ -25,12 +25,12 @@ export default function RememberMeToggle({
         }`}
       >
         {rememberMe && (
-          <Text style={{ fontSize: sf(11), lineHeight: sf(13) }} className="text-white">
+          <Text style={{ fontSize: sf(11), lineHeight: sf(14) }} className="text-white">
             ✓
           </Text>
         )}
       </View>
-      <Text style={{ fontSize: sf(13) }} className="text-black">
+      <Text style={{ fontSize: sf(14) }} className="text-black font-medium">
         Remember me
       </Text>
     </TouchableOpacity>

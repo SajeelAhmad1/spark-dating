@@ -46,7 +46,7 @@ export default function SignInScreen({
 
   return (
     <SafeAreaView className="flex-1 bg-white">
-      <View className="flex-1 px-5 pt-4 pb-6">
+      <View className="flex-1 px-5 pt-6 pb-4">
         {/* Back Button */}
         <TouchableOpacity style={{ width: 32, height: 32 }} onPress={() => {}}>
           <ChevronLeft size={24} color="#000000" />
@@ -73,7 +73,7 @@ export default function SignInScreen({
         />
 
         {/* Fields */}
-        <View className="mt-6 gap-y-5">
+        <View className="pt-8">
           <PhoneEmailField
             activeTab={activeTab}
             value={activeTab === 'phone' ? phoneNumber : email}
@@ -98,7 +98,7 @@ export default function SignInScreen({
 
           <TouchableOpacity onPress={() => {}}>
             <Text className="text-[#1E78F5] font-medium leading-[100%]"
-            style={{ fontSize: sf(14), lineHeight: sf(14), letterSpacing: 0 }}
+          style={{ fontSize: sf(14),  }}
             >
               Forgot password!
             </Text>

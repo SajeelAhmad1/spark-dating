@@ -141,14 +141,14 @@ const UploadPhotosScreen = ({ navigation }: any) => {
             }}
           >
             <View style={{
-              width: 32,
-              height: 32,
+              width: 17.5,
+              height: 17.5,
               borderRadius: 16,
               backgroundColor: '#FBB202',
               alignItems: 'center',
               justifyContent: 'center',
             }}>
-              <Plus size={18} color="#fff" strokeWidth={2.5} />
+              <Plus size={8.33} color="#fff" strokeWidth={2.5} />
             </View>
             <Text style={{ fontSize: sf(14), color: '#FBB202', fontWeight: '500' }}>
               Add
@@ -168,10 +168,10 @@ const UploadPhotosScreen = ({ navigation }: any) => {
         </TouchableOpacity>
 
         <View style={{ marginTop: 12, gap: 6 }}>
-          <Text style={{ fontSize: sf(28), fontWeight: '600', color: '#000000', lineHeight: sf(28) }}>
+          <Text style={{ fontSize: sf(28), fontWeight: '600', color: '#000000',  }}>
             Show your authentic self
           </Text>
-          <Text style={{ fontSize: sf(15), fontWeight: '400', color: '#7D858E', lineHeight: sf(15) }}>
+          <Text style={{ fontSize: sf(15), fontWeight: '400', color: '#7D858E', }}>
             Add photos to start connecting (required before messaging).
           </Text>
         </View>
@@ -202,7 +202,7 @@ const UploadPhotosScreen = ({ navigation }: any) => {
           colors={['#1E78F5', '#FBB202']}
           variant="gradient"
           style={{ alignSelf: 'stretch' }}
-          textStyle={{fontSize: sf(20), fontWeight: '500', lineHeight: sf(20), letterSpacing: 0}}
+          textStyle={{fontSize: sf(20), fontWeight: '500',}}
         />
       </View>
     </SafeAreaView>

@@ -58,9 +58,9 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({
       return (
         <View
           style={{
-            width: 32,
-            height: 32,
-            borderRadius: 16,
+            width: sf(48),
+            height: sf(48),
+            borderRadius: 999,
             backgroundColor: iconBackground,
             alignItems: 'center',
             justifyContent: 'center',
@@ -83,7 +83,7 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({
     // Middle: icon + text side by side, both centered
     if (icon && iconPosition === 'middle') {
       return (
-        <View style={[styles.row, paddingHorizontal !== undefined && { paddingHorizontal }]}>
+        <View style={[styles.row, paddingHorizontal !== undefined && { paddingHorizontal }]} >
           <View style={styles.iconMiddle}>{renderIcon()}</View>
           <Text style={[styles.text, textStyle]}>{title}</Text>
         </View>
@@ -140,7 +140,7 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({
           styles.gradient,
           { height, borderRadius },
           paddingHorizontal !== undefined && { paddingHorizontal },
-        ]}
+        ]} 
       >
         {renderContent()}
       </LinearGradient>
@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
   },
   iconAbsoluteStart: {
     position: 'absolute',
-    left: 16,
+    left: 7,
   },
   iconAbsoluteEnd: {
     position: 'absolute',

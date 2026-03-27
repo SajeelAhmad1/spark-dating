@@ -33,10 +33,11 @@ const OnboardingCard: React.FC<Props> = ({
       style={{ width: '100%' }}
     >
       <View
-        className="bg-white rounded-t-[32px] pt-12 pb-10"
+        className="bg-white rounded-t-[32px] pt-10 pb-8 min-h-[300px] "
         style={{ width: '100%' }}
       >
-        {/* Title */}
+       <View className="" style={{ width: '100%' }}>
+         {/* Title */}
         <Text
           className="font-semibold text-center text-[#000000] px-6 mb-2"
           style={{ fontSize: sf(24), lineHeight: sf(32), letterSpacing: 0, }}
@@ -51,9 +52,11 @@ const OnboardingCard: React.FC<Props> = ({
         >
           {subtitle}
         </Text>
+       </View>
 
-        {/* Dots */}
-        <View className="flex-row justify-center items-center mb-4" style={{ gap: 6 }}>
+        <View className="flex-1 justify-end " style={{ width: '100%' }}>
+          {/* Dots */}
+        <View className="flex-row justify-center items-center mb-5" style={{ gap: 6 }}>
           {[0, 1, 2].map(i => (
             <View
               key={i}
@@ -75,6 +78,7 @@ const OnboardingCard: React.FC<Props> = ({
             colors={[Colors.gradientStart, Colors.gradientEnd]}
             textStyle={{ fontSize: sf(18), fontWeight: '500', lineHeight: sf(18), letterSpacing: 0 }}
           />
+        </View>
         </View>
       </View>
     </Shadow>

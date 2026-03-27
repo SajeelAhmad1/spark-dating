@@ -31,8 +31,8 @@ const STATS = [
 // ─── Sub Components ───────────────────────────────────────
 
 const GiftIcon = () => (
-  <View className="w-[80px] h-[80px] rounded-full bg-[#1E78F5] items-center justify-center mb-4">
-    <Gift width={40} height={40} color="#ffffff" />
+  <View className="w-[104px] h-[104px] rounded-full bg-[#1E78F5] items-center justify-center mb-8">
+    <Gift width={56} height={56} color="#ffffff" />
   </View>
 );
 
@@ -41,15 +41,13 @@ const Title = () => (
     style={{
       fontFamily: 'Poppins-SemiBold',
       fontWeight: '600',
-      fontSize: sf(24),
-      lineHeight: sf(24),
-      letterSpacing: 0,
+      fontSize: sf(24), 
       color: '#000000',
       textAlign: 'center',
       marginBottom: 8,
     }}
   >
-    Get Premium Free!
+    Get Premium Free! 🎉
   </Text>
 );
 
@@ -58,50 +56,45 @@ const Subtitle = () => (
     style={{
       fontFamily: 'Poppins-Regular',
       fontWeight: '400',
-      fontSize: sf(16),
-      lineHeight: sf(24),
-      letterSpacing: 0,
+      fontSize: sf(16), 
       color: '#7D858E',
       textAlign: 'center',
       marginBottom: 8,
     }}
   >
     Invite{' '}
-    <Text style={{ color: '#1E78F5' }}>2 friends</Text>
+    <Text style={{ color: '#1E78F5', fontWeight: '500' }}>2 friends</Text>
     {' '}to Spark and unlock{' '}
-    <Text style={{ color: '#DC9B00' }}>Premium access</Text>
+    <Text style={{ color: '#DC9B00', fontWeight: '500'  }}>Premium access</Text>
     {' '}for free — no strings attached!
   </Text>
 );
 
 const ReferralLinkBox = ({ onCopy }: { onCopy: () => void }) => (
   <View
-    className="w-full rounded-2xl"
+    className="w-full rounded-2xl h-[110px]"
     style={{ backgroundColor: '#F7F8FA', padding: 16 }}
   >
     <Text
       style={{
         fontFamily: 'Poppins-Regular',
         fontWeight: '400',
-        fontSize: sf(16),
-        lineHeight: sf(16),
-        letterSpacing: 0,
+        fontSize: sf(16), 
         color: '#7D858E',
         marginBottom: 10,
       }}
+      className='text-[#7D858E]'
     >
       Your Referral Link
     </Text>
 
-    <View className="flex-row items-center justify-between">
+    <View className="flex-row items-center justify-between h-[44px] bg-white rounded-[8px] px-2">
       <Text
         numberOfLines={1}
         style={{
           fontFamily: 'Poppins-Medium',
           fontWeight: '500',
-          fontSize: sf(14),
-          lineHeight: sf(14),
-          letterSpacing: 0,
+          fontSize: sf(14), 
           color: '#000000',
           flex: 1,
         }}
@@ -127,16 +120,14 @@ const StatCard = ({
   border,
 }: (typeof STATS)[0]) => (
   <View
-    className="flex-1 rounded-2xl items-center py-4 ml-2"
+    className="flex-1  rounded-2xl items-center justify-center ml-2 h-[72px] "
     style={{ backgroundColor: bg, borderWidth: 0.2, borderColor: border }}
   >
     <Text
       style={{
         fontFamily: 'Poppins-SemiBold',
         fontWeight: '600',
-        fontSize: sf(20),
-        lineHeight: sf(20),
-        letterSpacing: 0,
+        fontSize: sf(20), 
         color,
         textAlign: 'center',
         marginBottom: 4,
@@ -148,9 +139,7 @@ const StatCard = ({
       style={{
         fontFamily: 'Poppins-Regular',
         fontWeight: '400',
-        fontSize: sf(13),
-        lineHeight: sf(13),
-        letterSpacing: 0,
+        fontSize: sf(13), 
         color: '#555555',
         textAlign: 'center',
       }}
@@ -198,7 +187,7 @@ const InviteScreen = ({ navigation }: any) => {
             variant="gradient"
             icon={<Share2 size={20} color="#ffffff" />}
             iconPosition="middle"
-            textStyle={{ fontSize: sf(18), lineHeight: sf(18), letterSpacing: 0, color: '#ffffff' }}
+            textStyle={{ fontSize: sf(18), color: '#ffffff' }}
           />
 
           <TouchableOpacity onPress={handleSkip}>
@@ -206,9 +195,7 @@ const InviteScreen = ({ navigation }: any) => {
               style={{
                 fontFamily: 'Poppins-Medium',
                 fontWeight: '500',
-                fontSize: sf(16),
-                lineHeight: sf(16),
-                letterSpacing: 0,
+                fontSize: sf(16), 
                 color: '#7D858E',
                 textAlign: 'center',
               }}

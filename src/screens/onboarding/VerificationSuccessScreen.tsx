@@ -14,18 +14,18 @@ const VerificationSuccessScreen = ({navigation}: any) => {
         <View
           className="items-center justify-center mb-6"
           style={{
-            width: 80,
-            height: 80,
-            borderRadius: 40,
+            width: sf(100),
+            height: sf(100),
+            borderRadius: 999,
             backgroundColor: '#4CD964',
           }}
         >
-          <Check size={40} color="#FFFFFF" strokeWidth={3} />
+          <Check size={46} color="#FFFFFF" strokeWidth={3} />
         </View>
 
         {/* ── Title ── */}
-        <Text className="text-black font-semibold leading-[24px] tracking-[0px] mb-8"
-        style={{ fontSize: sf(24), lineHeight: sf(24), letterSpacing: 0 }}
+        <Text className="text-black font-semibold mb-8"
+        style={{ fontSize: sf(24),}}
         >
           Your Number is verified.
         </Text>
@@ -38,17 +38,17 @@ const VerificationSuccessScreen = ({navigation}: any) => {
             colors={['#1E78F5', '#FBB202']}
             variant="gradient"
             style={{ alignSelf: 'stretch' }}
-            textStyle={{fontSize: sf(20), fontWeight: '500', lineHeight: sf(20), letterSpacing: 0}}
+            textStyle={{fontSize: sf(20), fontWeight: '500',}}
           />
         </View>
 
         {/* ── Terms ── */}
         <TouchableOpacity className="mt-4" onPress={() => {}}>
-          <Text className="text-[#7D858E] font-normal leading-[100%] tracking-[0%]" 
-          style={{ fontSize: sf(16), lineHeight: sf(16), letterSpacing: 0 }}
+          <Text className="text-[#7D858E] font-normal" 
+          style={{ fontSize: sf(16),}}
           >
             Agree our{' '}
-            <Text className="text-[#1E78F5] underline">Terms & Condition</Text>
+            <Text className=" underline">Terms & Condition</Text>
           </Text>
         </TouchableOpacity>
 

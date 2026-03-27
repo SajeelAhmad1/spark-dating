@@ -9,5 +9,7 @@ module.exports = {
       },
     ],
     'nativewind/babel',
+
+    '@babel/plugin-transform-export-namespace-from',
   ],
 };

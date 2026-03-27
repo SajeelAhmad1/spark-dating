@@ -20,8 +20,8 @@ export default function SignInBottomActions({
           textStyle={{fontSize: sf(20), fontWeight: '500'}}
         />
 
-        <Text className="text-black font-normal"
-        style={{ fontSize: sf(16), lineHeight: sf(16), letterSpacing: 0 }}
+        <Text className="text-black font-medium"
+        style={{ fontSize: sf(16),}}
         >
           Don't have an account?{' '}
           <Text className="text-[#1E78F5] font-medium">Sign Up</Text>

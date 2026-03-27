@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -33,6 +33,7 @@ import BlockedUsersScreen from '@/screens/BlockedUsersScreen';
 const Stack = createStackNavigator();
 
 export default function App() {
+
   return (
     <GestureHandlerRootView className="flex-1">
       <NavigationContainer>
@@ -75,18 +76,9 @@ export default function App() {
             component={UploadPhotosScreen}
           />
 
-          <Stack.Screen
-            name="InviteScreen"
-            component={InviteScreen}
-          />
-          <Stack.Screen
-            name="WaitingScreen"
-            component={WaitingScreen}
-          />
-          <Stack.Screen
-            name="LaunchScreen"
-            component={LaunchScreen}
-          />
+          <Stack.Screen name="InviteScreen" component={InviteScreen} />
+          <Stack.Screen name="WaitingScreen" component={WaitingScreen} />
+          <Stack.Screen name="LaunchScreen" component={LaunchScreen} />
 
           <Stack.Screen
             name="EnableLocationScreen"
@@ -101,9 +93,15 @@ export default function App() {
           <Stack.Screen name="ChatScreen" component={ChatScreen} />
 
           <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
-          <Stack.Screen name="EditProfileScreen" component={EditProfileScreen} />
+          <Stack.Screen
+            name="EditProfileScreen"
+            component={EditProfileScreen}
+          />
           <Stack.Screen name="SettingsScreen" component={SettingsScreen} />
-          <Stack.Screen name="BlockedUsersScreen" component={BlockedUsersScreen} />
+          <Stack.Screen
+            name="BlockedUsersScreen"
+            component={BlockedUsersScreen}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </GestureHandlerRootView>

@@ -23,7 +23,7 @@ export default function PhoneEmailField({
         placeholderTextColor="#7D858E"
         keyboardType={activeTab === 'phone' ? 'phone-pad' : 'email-address'}
         style={{ fontSize: sf(12), paddingVertical: sh(8) }}
-        className="text-[#7D858E] border-b border-[#E8EAED]"
+        className="text-[#7D858E] border-b border-[#B6B9C9]"
         value={value}
         onChangeText={onChangeText}
       />

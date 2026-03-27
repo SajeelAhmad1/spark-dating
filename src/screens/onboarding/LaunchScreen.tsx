@@ -34,20 +34,18 @@ const FEATURES = [
 const LaunchScreen = ({ navigation }: any) => {
   return (
     <SafeAreaView className="flex-1">
-      <View className="flex-1 px-5 py-10">
+      <View className="flex-1 px-5 py-6">
         {/* ── Main Content ── */}
-        <View className="flex-1 items-center justify-center gap-y-6">
+        <View className="flex-1 items-center justify-center gap-y-4">
           {/* Icon */}
-          <View className="w-20 h-20 rounded-full bg-[#1E78F5] items-center justify-center">
-            <Zap size={40} color="#ffffff" fill="#ffffff" />
+          <View className="w-[104px] h-[104px] rounded-full bg-[#1E78F5] items-center justify-center mb-4">
+            <Zap width={35} height={56} color="#ffffff" fill="#ffffff" />
           </View>
 
           {/* Title */}
           <Text
             style={{
-              fontSize: sf(24),
-              lineHeight: sf(24),
-              letterSpacing: 0,
+              fontSize: sf(24), 
             }}
             className="text-black text-center font-semibold"
           >
@@ -58,31 +56,27 @@ const LaunchScreen = ({ navigation }: any) => {
           <Text
             style={{
               fontFamily: 'Poppins-Regular',
-              fontSize: sf(16),
-              lineHeight: sf(16),
-              letterSpacing: 0,
+              fontSize: sf(16), 
             }}
             className="text-[#7D858E] text-center"
           >
             SparkLink is officially live with{' '}
-            <Text style={{ fontFamily: 'Poppins-SemiBold', color: '#1E78F5' }}>
+            <Text style={{ fontFamily: 'Poppins-Medium', color: '#1E78F5' }}>
               1000+ users
-            </Text>{' '}
+            </Text>
             🎉
           </Text>
 
           {/* Daily Stats Card */}
           <LinearGradient
             colors={['#1E78F51A', '#FBB2021A']}
-            style={{ borderRadius: 16, width: '100%', padding: 16, gap: 8 }}
+            style={{ borderRadius: sf(16), width: '100%', padding: sf(16), }}
           >
             {/* Card Header */}
             <Text
               style={{
                 fontFamily: 'Poppins-Regular',
-                fontSize: sf(16),
-                lineHeight: sf(16),
-                letterSpacing: 0,
+                fontSize: sf(16), 
               }}
               className="text-black text-center"
             >
@@ -91,9 +85,7 @@ const LaunchScreen = ({ navigation }: any) => {
             <Text
               style={{
                 fontFamily: 'Poppins-SemiBold',
-                fontSize: sf(20),
-                lineHeight: sf(20),
-                letterSpacing: 0,
+                fontSize: sf(20), 
               }}
               className="text-[#1E78F5] text-center"
             >
@@ -102,9 +94,7 @@ const LaunchScreen = ({ navigation }: any) => {
             <Text
               style={{
                 fontFamily: 'Poppins-Regular',
-                fontSize: sf(16),
-                lineHeight: sf(16),
-                letterSpacing: 0,
+                fontSize: sf(16), 
               }}
               className="text-[#555555] text-center"
             >
@@ -117,7 +107,7 @@ const LaunchScreen = ({ navigation }: any) => {
                 {FEATURES.slice(0, 2).map(({ id, label, icon }) => (
                   <View
                     key={id}
-                    className="flex-1 bg-white rounded-2xl items-center justify-center gap-y-2 py-4"
+                    className="flex-1 bg-white rounded-2xl items-center justify-center space-y-3 h-[88px] "
                   >
                     {icon}
                     <Text
@@ -138,15 +128,13 @@ const LaunchScreen = ({ navigation }: any) => {
                 {FEATURES.slice(2, 4).map(({ id, label, icon }) => (
                   <View
                     key={id}
-                    className="flex-1 bg-white rounded-2xl items-center justify-center gap-y-2 py-4"
+                    className="flex-1 bg-white rounded-2xl items-center justify-center space-y-3 h-[88px]"
                   >
                     {icon}
                     <Text
                       style={{
                         fontFamily: 'Poppins-Regular',
-                        fontSize: sf(16),
-                        lineHeight: sf(16),
-                        letterSpacing: 0,
+                        fontSize: sf(16), 
                       }}
                       className="text-[#7D858E]"
                     >
@@ -158,13 +146,11 @@ const LaunchScreen = ({ navigation }: any) => {
             </View>
 
             {/* Premium Banner */}
-            <View className="items-center mt-1">
+            <View className="items-center mt-3">
               <Text
                 style={{
                   fontFamily: 'Poppins-SemiBold',
-                  fontSize: sf(16),
-                  lineHeight: sf(16),
-                  letterSpacing: 0,
+                  fontSize: sf(16), 
                 }}
                 className="text-black text-center"
               >
