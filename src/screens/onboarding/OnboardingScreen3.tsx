@@ -1,38 +1,87 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Text, useWindowDimensions, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import OnboardingCard from './OnboardingCard';
-// import Chat from '@/assets/images/chat.png';
-// import ChatLocked from '@/assets/images/chatLocked.png';
-import Loading from '@/assets/images/loading.svg';
+import CameraIcon from '@/assets/images/cameraIcon.svg';
 
 export default function Onboarding3({ navigation }: any) {
+  const { width, height } = useWindowDimensions();
+
+  const imgWidth = Math.round(width * 0.55);
+  const imgHeight = Math.round(imgWidth * 2);
+
+  const illustrationHeight = height * 0.58;
+
   return (
-    <SafeAreaView className="flex-1 bg-[#EBEBEB]" edges={['top']}>
+    <SafeAreaView className="flex-1 bg-white" edges={['top']}>
       {/* ── Illustration area ── */}
-      <View className="flex-1 relative items-center justify-center overflow-hidden">
-        {/* Left phone — rotated left, anchored to left edge */}
-        <View className="absolute left-[-18px] top-40 -translate-y-32 z-10">
-          {/* <ChatLocked width={172} height={353} /> */}
+      <View
+        style={{
+          flex: 1,
+          height: illustrationHeight,
+          position: 'relative',
+          alignItems: 'center',
+          justifyContent: 'center',
+          overflow: 'hidden',
+        }}
+      >
+
+        <View
+          style={{
+            position: 'absolute',
+            left: -(imgWidth * 0.01),
+            top: illustrationHeight * 0.6 - imgHeight * 0.65,
+          }}
+        >
+          <Image
+            source={require('@/assets/images/chatLocked.png')}
+            style={{ width: imgWidth, height: imgHeight }}
+          />
         </View>
 
-        {/* Center loading circle with blue glow */}
-        <View className="z-30 w-[76px] h-[76px] rounded-full bg-[#E8F0FF] items-center justify-center">
-          <Loading width={68} height={68} />
+        {/* Camera icon — centered horizontally, 45% down illustration */}
+        <View
+          style={{
+            position: 'absolute',
+            top: illustrationHeight * 0.5 - 20,
+            left: width / 2 - 36,
+            zIndex: 30,
+            width: 72,
+            height: 72,
+            borderRadius: 36,
+            backgroundColor: '#E8F0FF',
+            alignItems: 'center',
+            justifyContent: 'center',
+            shadowColor: '#4A80F0',
+            shadowOffset: { width: 0, height: 0 },
+            shadowOpacity: 0.3,
+            shadowRadius: 16,
+            elevation: 8,
+          }}
+        >
+          <CameraIcon width={56} height={56} />
         </View>
 
-        {/* Right phone — rotated right, anchored to right edge */}
-        <View className="absolute right-[-4px] top-24 z-10">
-          {/* <Chat width={172} height={353} /> */}
+        <View
+          style={{
+            position: 'absolute',
+            right: -(imgWidth * 0.01),
+            top: illustrationHeight * 0.5 - imgHeight * 0.38,
+          }}
+        >
+          <Image
+            source={require('@/assets/images/chat.png')}
+            style={{ width: imgWidth, height: imgHeight }}
+          />
         </View>
       </View>
 
       {/* ── Bottom card ── */}
       <OnboardingCard
-        title="Build Streaks 🔥"
-        subtitle="Break the ice with a photo. It's the spark that starts every conversation."
+        title="Keep your streak alive every 24 hours"
+        subtitle="Keep your connection alive with daily snaps. The longer your streak, the stronger your bond."
         activeDot={2}
-        buttonLabel="Get Started"
+        buttonLabel="Next"
         onPress={() => navigation.navigate('LogoScreen')}
       />
     </SafeAreaView>

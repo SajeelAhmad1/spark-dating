@@ -26,8 +26,13 @@ export default function SignUpScreen({ navigation }: any) {
       <SafeAreaView className="flex-1" edges={['top', 'bottom']}>
         <View style={{ paddingHorizontal: sw(20) }} className="flex-1 items-center justify-center">
           <Text
+<<<<<<< Updated upstream
             style={{ fontSize: sf(32), lineHeight: sf(32), marginBottom: sh(32) }}
             className="font-semibold text-[#ffffff] tracking-normal text-center"
+=======
+            style={{ fontSize: sf(28), lineHeight: sf(28), marginBottom: sh(32) }}
+            className="font-semibold text-black text-center"
+>>>>>>> Stashed changes
           >
             Welcome back!
           </Text>

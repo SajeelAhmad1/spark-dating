@@ -37,7 +37,7 @@ export default function App() {
     <GestureHandlerRootView className="flex-1">
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="BlockedUsersScreen"
+          initialRouteName="Onboarding1"
           screenOptions={{ headerShown: false }}
         >
           <Stack.Screen name="Onboarding1" component={OnboardingScreen1} />
