@@ -4,6 +4,7 @@ import { Share2, Copy } from 'lucide-react-native';
 import Gift from '@/assets/images/gift.svg';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import PrimaryButton from '@/components/common/PrimaryButton';
+import { sf } from '@/utils/responsive';
 
 // ─── Constants ────────────────────────────────────────────
 const REFERRAL_LINK = 'https://spark.app/invite/SPARK-QT53V4';
@@ -40,8 +41,8 @@ const Title = () => (
     style={{
       fontFamily: 'Poppins-SemiBold',
       fontWeight: '600',
-      fontSize: 24,
-      lineHeight: 24,
+      fontSize: sf(24),
+      lineHeight: sf(24),
       letterSpacing: 0,
       color: '#000000',
       textAlign: 'center',
@@ -57,8 +58,8 @@ const Subtitle = () => (
     style={{
       fontFamily: 'Poppins-Regular',
       fontWeight: '400',
-      fontSize: 16,
-      lineHeight: 24,
+      fontSize: sf(16),
+      lineHeight: sf(24),
       letterSpacing: 0,
       color: '#7D858E',
       textAlign: 'center',
@@ -82,8 +83,8 @@ const ReferralLinkBox = ({ onCopy }: { onCopy: () => void }) => (
       style={{
         fontFamily: 'Poppins-Regular',
         fontWeight: '400',
-        fontSize: 16,
-        lineHeight: 16,
+        fontSize: sf(16),
+        lineHeight: sf(16),
         letterSpacing: 0,
         color: '#7D858E',
         marginBottom: 10,
@@ -98,8 +99,8 @@ const ReferralLinkBox = ({ onCopy }: { onCopy: () => void }) => (
         style={{
           fontFamily: 'Poppins-Medium',
           fontWeight: '500',
-          fontSize: 14,
-          lineHeight: 14,
+          fontSize: sf(14),
+          lineHeight: sf(14),
           letterSpacing: 0,
           color: '#000000',
           flex: 1,
@@ -133,8 +134,8 @@ const StatCard = ({
       style={{
         fontFamily: 'Poppins-SemiBold',
         fontWeight: '600',
-        fontSize: 20,
-        lineHeight: 20,
+        fontSize: sf(20),
+        lineHeight: sf(20),
         letterSpacing: 0,
         color,
         textAlign: 'center',
@@ -147,8 +148,8 @@ const StatCard = ({
       style={{
         fontFamily: 'Poppins-Regular',
         fontWeight: '400',
-        fontSize: 13,
-        lineHeight: 13,
+        fontSize: sf(13),
+        lineHeight: sf(13),
         letterSpacing: 0,
         color: '#555555',
         textAlign: 'center',
@@ -197,6 +198,7 @@ const InviteScreen = ({ navigation }: any) => {
             variant="gradient"
             icon={<Share2 size={20} color="#ffffff" />}
             iconPosition="middle"
+            textStyle={{ fontSize: sf(18), lineHeight: sf(18), letterSpacing: 0, color: '#ffffff' }}
           />
 
           <TouchableOpacity onPress={handleSkip}>
@@ -204,8 +206,8 @@ const InviteScreen = ({ navigation }: any) => {
               style={{
                 fontFamily: 'Poppins-Medium',
                 fontWeight: '500',
-                fontSize: 16,
-                lineHeight: 16,
+                fontSize: sf(16),
+                lineHeight: sf(16),
                 letterSpacing: 0,
                 color: '#7D858E',
                 textAlign: 'center',

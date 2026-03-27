@@ -3,6 +3,7 @@ import { View, Text } from 'react-native';
 import { Shadow } from 'react-native-shadow-2';
 import PrimaryButton from '@/components/common/PrimaryButton';
 import { Colors } from '@/theme';
+import { sf } from '@/utils/responsive';
 
 interface Props {
   title: string;
@@ -21,48 +22,35 @@ const OnboardingCard: React.FC<Props> = ({
 }) => {
   return (
     <Shadow
-      distance={24}
-      startColor="#00000040"
-      offset={[0, 12]}
+      // distance={24}
+      // startColor="#00000040"
+      // offset={[0, -2]}
+        distance={10}
+  offset={[0, 0]}
+  // startColor="rgba(0,0,0,0.25)"
+  endColor="rgba(0,0,0,0)"
       sides={{ top: true, bottom: false, start: false, end: false }}
-      style={{ width: '100%', height: '40%' }}
+      style={{ width: '100%' }}
     >
-<<<<<<< Updated upstream
-      {/* Title */}
-      <Text
-        className="text-[24px] font-semibold text-center text-[#000000] px-5 mb-2"
-        style={{ lineHeight: 30 }}
-=======
       <View
         className="bg-white rounded-t-[32px] pt-12 pb-10"
         style={{ width: '100%' }}
->>>>>>> Stashed changes
       >
         {/* Title */}
         <Text
-          className="text-[24px] font-semibold text-center text-[#000000] px-5 mb-2"
-          style={{ lineHeight: 32, letterSpacing: 0 }}
+          className="font-semibold text-center text-[#000000] px-6 mb-2"
+          style={{ fontSize: sf(24), lineHeight: sf(32), letterSpacing: 0, }}
         >
           {title}
         </Text>
 
-<<<<<<< Updated upstream
-      {/* Subtitle */}
-      <Text
-        className="text-[16px] text-[#7D858E] text-center px-5 mb-10"
-        style={{ lineHeight: 20 }}
-      >
-        {subtitle}
-      </Text>
-=======
         {/* Subtitle */}
         <Text
-          className="text-[16px] font-normal text-[#7D858E] text-center px-5"
-          style={{ lineHeight: 20, letterSpacing: 0, height: 80 }}
+          className=" font-normal text-[#7D858E] text-center px-10"
+          style={{ fontSize: sf(16), lineHeight: sf(20), letterSpacing: 0, height: sf(80) }}
         >
           {subtitle}
         </Text>
->>>>>>> Stashed changes
 
         {/* Dots */}
         <View className="flex-row justify-center items-center mb-4" style={{ gap: 6 }}>
@@ -85,24 +73,11 @@ const OnboardingCard: React.FC<Props> = ({
             title={buttonLabel}
             onPress={onPress}
             colors={[Colors.gradientStart, Colors.gradientEnd]}
-            textStyle={{ fontSize: 18, fontWeight: '500', lineHeight: 18, letterSpacing: 0 }}
+            textStyle={{ fontSize: sf(18), fontWeight: '500', lineHeight: sf(18), letterSpacing: 0 }}
           />
         </View>
       </View>
-<<<<<<< Updated upstream
-
-      {/* Button */}
-      <View className="px-5">
-        <PrimaryButton
-          title={buttonLabel}
-          onPress={onPress}
-          colors={[Colors.gradientStart, Colors.gradientEnd]}
-        />
-      </View>
-    </View>
-=======
     </Shadow>
->>>>>>> Stashed changes
   );
 };
 

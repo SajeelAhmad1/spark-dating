@@ -78,8 +78,9 @@ const BottomTabBar = ({ activeTab, onTabPress }: BottomTabBarProps) => {
         <Text
           style={{
             fontFamily: 'Poppins-Regular',
-            fontSize: sf(12),
-            lineHeight: sf(14),
+            fontSize: sf(13),
+            lineHeight: sf(13),
+            letterSpacing: 0,
             color: isActive ? ACTIVE_COLOR : INACTIVE_COLOR,
           }}
         >

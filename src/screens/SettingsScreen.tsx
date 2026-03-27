@@ -49,7 +49,7 @@ const SettingsScreen = ({ navigation }: any) => {
               fontFamily: 'Poppins-Regular',
               fontSize: sf(16),
               fontWeight: '400',
-              color: '#7D858E',
+              color: '#A1A1A1',
               letterSpacing: 0,
             }}
           >
@@ -120,7 +120,7 @@ const SettingsScreen = ({ navigation }: any) => {
           <Text
             style={{
               fontFamily: 'Poppins-Regular',
-              fontSize: sf(14),
+              fontSize: sf(13),
               fontWeight: '400',
               color: '#555555',
               letterSpacing: 0,
@@ -259,6 +259,7 @@ const SettingsScreen = ({ navigation }: any) => {
             colors={['#1E78F5', '#FBB202']}
             variant="gradient"
             style={{ alignSelf: 'stretch' }}
+            textStyle={{fontSize: sf(16), fontWeight: '500'}}
           />
 
           {/* ── Support ── */}
@@ -277,6 +278,7 @@ const SettingsScreen = ({ navigation }: any) => {
               colors={['#1E78F5']}
               variant="solid"
               style={{ alignSelf: 'stretch' }}
+              textStyle={{fontSize: sf(20), fontWeight: '500'}}
             />
             <PrimaryButton
               title="Delete Account"
@@ -284,6 +286,7 @@ const SettingsScreen = ({ navigation }: any) => {
               colors={['#FF073E']}
               variant="solid"
               style={{ alignSelf: 'stretch' }}
+              textStyle={{fontSize: sf(20), fontWeight: '500'}}
             />
           </View>
         </ScrollView>

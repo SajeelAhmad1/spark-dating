@@ -11,6 +11,7 @@ import {
 import { ChevronLeft, ChevronDown } from 'lucide-react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import PrimaryButton from '@/components/common/PrimaryButton';
+import { sf } from '@/utils/responsive';
 
 const GENDERS = ['Male', 'Female', 'Other'];
 
@@ -55,7 +56,7 @@ const ProfileSetupScreen = ({navigation}: any) => {
     borderRadius: 15,
     height: 56,
     paddingHorizontal: 16,
-    fontSize: 15,
+    fontSize: sf(15),
     color: '#000000',
   };
 
@@ -74,10 +75,14 @@ const ProfileSetupScreen = ({navigation}: any) => {
 
         {/* ── Header ── */}
         <View className="gap-y-2" style={{ marginTop: 12 }}>
-          <Text className="text-black text-[28px] font-semibold leading-[28px]">
+          <Text className="text-black font-semibold leading-[28px]"
+          style={{ fontSize: sf(28), lineHeight: sf(28), letterSpacing: 0 }}
+          >
             Tell Us About You
           </Text>
-          <Text className="text-[#7D858E] text-[15px] font-normal leading-[15px]">
+          <Text className="text-[#7D858E] font-normal leading-[15px]"
+          style={{ fontSize: sf(15), lineHeight: sf(15), letterSpacing: 0 }}
+          >
             Complete your profile to get started
           </Text>
         </View>
@@ -85,7 +90,9 @@ const ProfileSetupScreen = ({navigation}: any) => {
         {/* ── First & Last Name ── */}
         <View className="mt-6 flex-row gap-x-3">
           <View className="flex-1">
-            <Text className="text-black text-[15px] font-semibold mb-2">First Name</Text>
+            <Text className="text-black font-semibold leading-[100%] tracking-[0%] mb-2"
+            style={{ fontSize: sf(15), lineHeight: sf(15), letterSpacing: 0 }}
+            >First Name</Text>
             <TextInput
               placeholder="JJ"
               placeholderTextColor="#7D858E"
@@ -95,7 +102,9 @@ const ProfileSetupScreen = ({navigation}: any) => {
             />
           </View>
           <View className="flex-1">
-            <Text className="text-black text-[15px] font-semibold mb-2">Last Name</Text>
+            <Text className="text-black font-semibold leading-[100%] tracking-[0%] mb-2"
+            style={{ fontSize: sf(15), lineHeight: sf(15), letterSpacing: 0 }}
+            >Last Name</Text>
             <TextInput
               placeholder="Smith"
               placeholderTextColor="#7D858E"
@@ -108,7 +117,9 @@ const ProfileSetupScreen = ({navigation}: any) => {
 
         {/* ── Gender ── */}
         <View className="mt-6">
-          <Text className="text-black text-[15px] font-semibold mb-2">Gender</Text>
+          <Text className="text-black font-semibold leading-[100%] tracking-[0%] mb-2"
+          style={{ fontSize: sf(15), lineHeight: sf(15), letterSpacing: 0 }}
+          >Gender</Text>
           <View className="flex-row gap-x-3">
             {GENDERS.map((g) => {
               const selected = gender === g;
@@ -129,7 +140,7 @@ const ProfileSetupScreen = ({navigation}: any) => {
                 >
                   <Text
                     style={{
-                      fontSize: 15,
+                      fontSize: sf(15),
                       color: '#000000',
                       fontWeight: '400',
                     }}
@@ -144,7 +155,9 @@ const ProfileSetupScreen = ({navigation}: any) => {
 
         {/* ── Date of Birth ── */}
         <View className="mt-6">
-          <Text className="text-black text-[15px] font-semibold mb-2">Date of birth</Text>
+          <Text className="text-black  font-semibold leading-[100%] tracking-[0%] mb-2"
+          style={{ fontSize: sf(15), lineHeight: sf(15), letterSpacing: 0 }}
+          >Date of birth</Text>
           <View className="flex-row gap-x-3">
             {(['day', 'month', 'year'] as NonNullable<DropdownField>[]).map((field) => (
               <TouchableOpacity
@@ -162,7 +175,7 @@ const ProfileSetupScreen = ({navigation}: any) => {
                   paddingHorizontal: 12,
                 }}
               >
-                <Text style={{ fontSize: 15, color: '#000000' }}>
+                <Text style={{ fontSize: sf(15), color: '#000000' }}>
                   {dropdownValues[field]}
                 </Text>
                 <ChevronDown size={16} color="#000000" />
@@ -173,7 +186,9 @@ const ProfileSetupScreen = ({navigation}: any) => {
 
         {/* ── Bio ── */}
         <View className="mt-6">
-          <Text className="text-black text-[15px] font-normal mb-2">Add a Bio</Text>
+          <Text className="text-black font-normal leading-[100%] tracking-[0%] mb-2"
+          style={{ fontSize: sf(15), lineHeight: sf(15), letterSpacing: 0 }}
+          >Add a Bio</Text>
           <TextInput
             placeholder="Write something interesting..."
             placeholderTextColor="#7D858E"
@@ -188,7 +203,7 @@ const ProfileSetupScreen = ({navigation}: any) => {
               height: 120,
               paddingHorizontal: 16,
               paddingTop: 14,
-              fontSize: 15,
+              fontSize: sf(15),
               color: '#000000',
             }}
           />
@@ -203,6 +218,7 @@ const ProfileSetupScreen = ({navigation}: any) => {
           colors={['#1E78F5', '#FBB202']}
           variant="gradient"
           style={{ alignSelf: 'stretch' }}
+          textStyle={{fontSize: sf(20), fontWeight: '500', lineHeight: sf(20), letterSpacing: 0}}
         />
       </View>
 
@@ -240,7 +256,7 @@ const ProfileSetupScreen = ({navigation}: any) => {
                   >
                     <Text
                       style={{
-                        fontSize: 15,
+                        fontSize: sf(15),
                         color: isSelected ? '#FBB202' : '#000000',
                         fontWeight: isSelected ? '600' : '400',
                       }}

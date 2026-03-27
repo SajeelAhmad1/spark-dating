@@ -70,8 +70,8 @@ export default function RequestsScreen({ navigation }: any) {
           <Text
             style={{
               fontFamily: 'Poppins-SemiBold',
-              fontSize: 13,
-              lineHeight: 13,
+              fontSize: sf(13),
+              lineHeight: sf(13),
               color: '#000000',
             }}
           >

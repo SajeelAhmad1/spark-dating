@@ -4,6 +4,7 @@ import { Zap, Heart, Camera, Flame, MessageCircle } from 'lucide-react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import LinearGradient from 'react-native-linear-gradient';
 import PrimaryButton from '@/components/common/PrimaryButton';
+import { sf } from '@/utils/responsive';
 
 // ─── Constants ────────────────────────────────────────────
 const FEATURES = [
@@ -44,8 +45,8 @@ const LaunchScreen = ({ navigation }: any) => {
           {/* Title */}
           <Text
             style={{
-              fontSize: 24,
-              lineHeight: 24,
+              fontSize: sf(24),
+              lineHeight: sf(24),
               letterSpacing: 0,
             }}
             className="text-black text-center font-semibold"
@@ -57,14 +58,14 @@ const LaunchScreen = ({ navigation }: any) => {
           <Text
             style={{
               fontFamily: 'Poppins-Regular',
-              fontSize: 16,
-              lineHeight: 24,
+              fontSize: sf(16),
+              lineHeight: sf(16),
               letterSpacing: 0,
             }}
             className="text-[#7D858E] text-center"
           >
             SparkLink is officially live with{' '}
-            <Text style={{ fontFamily: 'Poppins-Regular', color: '#1E78F5' }}>
+            <Text style={{ fontFamily: 'Poppins-SemiBold', color: '#1E78F5' }}>
               1000+ users
             </Text>{' '}
             🎉
@@ -79,8 +80,8 @@ const LaunchScreen = ({ navigation }: any) => {
             <Text
               style={{
                 fontFamily: 'Poppins-Regular',
-                fontSize: 16,
-                lineHeight: 16,
+                fontSize: sf(16),
+                lineHeight: sf(16),
                 letterSpacing: 0,
               }}
               className="text-black text-center"
@@ -90,8 +91,8 @@ const LaunchScreen = ({ navigation }: any) => {
             <Text
               style={{
                 fontFamily: 'Poppins-SemiBold',
-                fontSize: 20,
-                lineHeight: 20,
+                fontSize: sf(20),
+                lineHeight: sf(20),
                 letterSpacing: 0,
               }}
               className="text-[#1E78F5] text-center"
@@ -101,8 +102,8 @@ const LaunchScreen = ({ navigation }: any) => {
             <Text
               style={{
                 fontFamily: 'Poppins-Regular',
-                fontSize: 16,
-                lineHeight: 16,
+                fontSize: sf(16),
+                lineHeight: sf(16),
                 letterSpacing: 0,
               }}
               className="text-[#555555] text-center"
@@ -122,8 +123,8 @@ const LaunchScreen = ({ navigation }: any) => {
                     <Text
                       style={{
                         fontFamily: 'Poppins-Regular',
-                        fontSize: 16,
-                        lineHeight: 16,
+                        fontSize: sf(16),
+                        lineHeight: sf(16),
                         letterSpacing: 0,
                       }}
                       className="text-[#7D858E]"
@@ -143,8 +144,8 @@ const LaunchScreen = ({ navigation }: any) => {
                     <Text
                       style={{
                         fontFamily: 'Poppins-Regular',
-                        fontSize: 16,
-                        lineHeight: 16,
+                        fontSize: sf(16),
+                        lineHeight: sf(16),
                         letterSpacing: 0,
                       }}
                       className="text-[#7D858E]"
@@ -161,8 +162,8 @@ const LaunchScreen = ({ navigation }: any) => {
               <Text
                 style={{
                   fontFamily: 'Poppins-SemiBold',
-                  fontSize: 16,
-                  lineHeight: 16,
+                  fontSize: sf(16),
+                  lineHeight: sf(16),
                   letterSpacing: 0,
                 }}
                 className="text-black text-center"
@@ -175,10 +176,11 @@ const LaunchScreen = ({ navigation }: any) => {
 
         {/* ── Bottom: Action ── */}
         <PrimaryButton
-          title="Let's Find your Spark!"
+          title="Let's Find your park!"
           onPress={() => navigation.navigate('EnableLocationScreen')}
           colors={['#1E78F5', '#FBB202']}
           variant="gradient"
+          textStyle={{fontSize: sf(18), fontWeight: '500', lineHeight: sf(18), letterSpacing: 0}}
         />
       </View>
     </SafeAreaView>

@@ -1,3 +1,4 @@
+import { sf } from '@/utils/responsive';
 import React from 'react';
 import { Image, Text, View } from 'react-native';
 
@@ -101,7 +102,7 @@ export default function PhotoStack({
               justifyContent: 'center',
             }}
           >
-            <Text style={{ fontSize: 24 }}>❤️</Text>
+            <Text style={{ fontSize: sf(24) }}>❤️</Text>
           </View>
         </View>
 
@@ -124,7 +125,7 @@ export default function PhotoStack({
               transform: [{ rotate: '-10deg' }],
             }}
           >
-            <Text style={{ fontSize: 24 }}>❤️</Text>
+            <Text style={{ fontSize: sf(24) }}>❤️</Text>
           </View>
         </View>
       </View>

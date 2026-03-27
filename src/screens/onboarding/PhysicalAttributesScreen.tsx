@@ -13,6 +13,7 @@ import PrimaryButton from '@/components/common/PrimaryButton';
 import BODY_TYPES from '@/constants/bodyTypes';
 import ETHNICITIES from '@/constants/ethnicities';
 import HEIGHTS from '@/constants/heights';
+import { sf } from '@/utils/responsive';
 
 type DropdownField = 'height' | 'bodyType' | 'ethnicity' | null;
 
@@ -65,10 +66,14 @@ const PhysicalAttributesScreen = ({ navigation }: any) => {
 
         {/* ── Header ── */}
         <View className="gap-y-2" style={{ marginTop: 12 }}>
-          <Text className="text-black text-[28px] font-semibold leading-[28px]">
+          <Text className="text-black  font-semibold leading-[28px]"
+          style={{ fontSize: sf(28), lineHeight: sf(28), letterSpacing: 0 }}
+          >
             Physical Attributes
           </Text>
-          <Text className="text-[#7D858E] text-[15px] font-normal leading-[15px]">
+          <Text className="text-[#7D858E] font-normal leading-[15px]"
+          style={{ fontSize: sf(15), lineHeight: sf(15), letterSpacing: 0 }}
+          >
             Help others learn more about you
           </Text>
         </View>
@@ -77,7 +82,9 @@ const PhysicalAttributesScreen = ({ navigation }: any) => {
         <View className="gap-y-5" style={{ marginTop: 12 }}>
           {fields.map(({ key, label, placeholder }) => (
             <View key={key}>
-              <Text className="text-black text-[15px] font-semibold mb-2">
+              <Text className="text-black font-semibold leading-[100%] tracking-[0%] mb-2"
+              style={{ fontSize: sf(15), lineHeight: sf(15), letterSpacing: 0 }}
+              >
                 {label}
               </Text>
               <TouchableOpacity
@@ -95,7 +102,7 @@ const PhysicalAttributesScreen = ({ navigation }: any) => {
               >
                 <Text
                   style={{
-                    fontSize: 15,
+                    fontSize: sf(15),
                     color: dropdownValues[key] ? '#000000' : '#7D858E',
                   }}
                 >
@@ -108,7 +115,9 @@ const PhysicalAttributesScreen = ({ navigation }: any) => {
         </View>
 
         {/* ── Skip Note ── */}
-        <Text className="text-[#FBB202] text-[14px] font-normal mt-5">
+        <Text className="text-[#FBB202] font-normal leading-[100%] tracking-[0%] mt-5"
+        style={{ fontSize: sf(15), lineHeight: sf(15), letterSpacing: 0 }}
+        >
           You can always skip this step and edit later
         </Text>
       </ScrollView>
@@ -121,6 +130,7 @@ const PhysicalAttributesScreen = ({ navigation }: any) => {
           colors={['#1E78F5', '#FBB202']}
           variant="gradient"
           style={{ alignSelf: 'stretch' }}
+          textStyle={{fontSize: sf(20), fontWeight: '500', lineHeight: sf(20), letterSpacing: 0}}
         />
       </View>
 
@@ -167,7 +177,7 @@ const PhysicalAttributesScreen = ({ navigation }: any) => {
                   >
                     <Text
                       style={{
-                        fontSize: 15,
+                        fontSize: sf(15),
                         color: isSelected ? '#FBB202' : '#000000',
                         fontWeight: isSelected ? '600' : '400',
                       }}

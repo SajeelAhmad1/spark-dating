@@ -24,19 +24,16 @@ export default function SignUpScreen({ navigation }: any) {
       />
 
       <SafeAreaView className="flex-1" edges={['top', 'bottom']}>
-        <View style={{ paddingHorizontal: sw(20) }} className="flex-1 items-center justify-center">
+        <View style={{ paddingHorizontal: sw(20) }} className="flex-1 justify-between pt-20 ">
+
           <Text
-<<<<<<< Updated upstream
-            style={{ fontSize: sf(32), lineHeight: sf(32), marginBottom: sh(32) }}
-            className="font-semibold text-[#ffffff] tracking-normal text-center"
-=======
             style={{ fontSize: sf(28), lineHeight: sf(28), marginBottom: sh(32) }}
-            className="font-semibold text-black text-center"
->>>>>>> Stashed changes
+            className="font-semibold text-white text-center"
           >
             Welcome back!
           </Text>
 
+        <View className="items-center gap-2">
           <View
             style={{
               width: sf(72),
@@ -50,23 +47,23 @@ export default function SignUpScreen({ navigation }: any) {
           </View>
 
           <Text
-            style={{ fontSize: sf(24), lineHeight: sf(32), letterSpacing: 0.24 }}
+            style={{ fontSize: sf(24),  }}
             className="font-semibold text-[#ffffff] text-center"
           >
             Match. Snap. Keep the{'\n'}Spark Alive.
           </Text>
-        </View>
+        </View> 
 
         <View style={{ paddingHorizontal: sw(20), paddingBottom: sh(24), gap: sh(12) }}>
           <Text
-            style={{ fontSize: sf(16), lineHeight: sf(20), marginBottom: sh(16) }}
+            style={{ fontSize: sf(16), marginBottom: sh(16) }}
             className="font-medium text-[#ffffff] text-center"
           >
             By tapping "Sign In" you agree to or{' '}
-            <Text className="text-[#FBB202]">Terms</Text>. Learn how we process
+            <Text className="text-[#1E78F5]">Terms</Text>. Learn how we process
             your data in our{' '}
-            <Text className="text-[#FBB202]">Privacy Policy</Text> and{' '}
-            <Text className="text-[#FBB202]">Cookies Policy</Text>
+            <Text className="text-[#1E78F5]">Privacy Policy</Text> and{' '}
+            <Text className="text-[#1E78F5]">Cookies Policy</Text>
           </Text>
           <PrimaryButton
             title="Continue with mobile"
@@ -86,19 +83,21 @@ export default function SignUpScreen({ navigation }: any) {
             variant="outline"
             icon={<GoogleIcon width={sf(20)} height={sf(20)} />}
             iconPosition="start"
+            textStyle={{fontSize: sf(20), fontWeight: '500'}}
           />
 
           <View style={{ marginTop: sh(8) }} className="items-center">
-            <Text style={{ fontSize: sf(13) }} className="text-white/80">
+            <Text style={{ fontSize: sf(16) }} className="text-black font-medium">
               Already have an account?{' '}
               <Text
-                className="text-[#FBB202] font-semibold"
+                className="text-[#1E78F5] font-medium"
                 onPress={() => navigation.navigate('SignInScreen')}
               >
                 Login
               </Text>
             </Text>
           </View>
+        </View>
         </View>
       </SafeAreaView>
     </View>

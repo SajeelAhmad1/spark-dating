@@ -59,7 +59,7 @@ const EnableLocationScreen = ({ navigation }: any) => {
             style={{
               fontFamily: 'Poppins-Regular',
               fontSize: sf(13),
-              lineHeight: sf(18),
+              lineHeight: sf(13),
               color: '#555555',
             }}
           >

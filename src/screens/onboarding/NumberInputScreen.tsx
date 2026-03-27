@@ -4,6 +4,7 @@ import { ChevronDown } from 'lucide-react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { CountryPicker } from 'react-native-country-codes-picker';
 import PrimaryButton from '@/components/common/PrimaryButton';
+import { sf } from '@/utils/responsive';
 
 const NumberEnterScreen = ({navigation}: any) => {
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -21,10 +22,14 @@ const NumberEnterScreen = ({navigation}: any) => {
 
         {/* ── Header ── */}
         <View className="mt-16 gap-y-2">
-          <Text className="text-black text-[28px] leading-[28px] font-semibold">
+          <Text className="text-black leading-[100%] tracking-[0%] font-semibold"
+          style={{ fontSize: sf(28), lineHeight: sf(28), letterSpacing: 0 }}
+          >
             My mobile number
           </Text>
-          <Text className="text-[#7D858E] text-[15px] leading-[15px]">
+          <Text className="text-[#7D858E]  font-normal leading-[100%] tracking-[0%]"
+          style={{ fontSize: sf(15), lineHeight: sf(15), letterSpacing: 0 }}
+          >
             Your streak is waiting 🔥
           </Text>
         </View>
@@ -37,8 +42,12 @@ const NumberEnterScreen = ({navigation}: any) => {
             className="flex-row items-center gap-x-1"
             onPress={() => setShow(true)}
           >
-            <Text className="text-[20px]">{country.flag}</Text>
-            <Text className="text-black text-[16px] leading-[24px]">
+            <Text className=""
+            style={{ fontSize: sf(20), lineHeight: sf(20), letterSpacing: 0 }}
+            >{country.flag}</Text>
+            <Text className="text-black"
+            style={{ fontSize: sf(16), lineHeight: sf(24), letterSpacing: 0 }}
+            >
               {country.dial_code}
             </Text>
             <ChevronDown size={16} color="#000000" />
@@ -54,12 +63,15 @@ const NumberEnterScreen = ({navigation}: any) => {
             keyboardType="phone-pad"
             value={phoneNumber}
             onChangeText={setPhoneNumber}
-            className="flex-1 text-black text-[16px] leading-[24px]"
+            className="flex-1 text-black  leading-[150%] tracking-[0px] font-medium"
+            style={{ fontSize: sf(16), lineHeight: sf(24), letterSpacing: 0 }}
           />
         </View>
 
         {/* ── Helper Text ── */}
-        <Text className="text-[#7D858E] text-[15px] leading-[20px] mt-4">
+        <Text className="text-[#7D858E] font-normal leading-[100%] tracking-[0%] mt-4"
+        style={{ fontSize: sf(15), lineHeight: sf(15), letterSpacing: 0 }}
+        >
           We'll text you a code to verify you're really you. Message and data
           rates may apply.{' '}
           <Text className="text-[#7D858E]">
@@ -75,14 +87,17 @@ const NumberEnterScreen = ({navigation}: any) => {
             colors={['#1E78F5', '#FBB202']}
             variant="gradient"
             style={{ alignSelf: 'stretch' }}
+            textStyle={{color: '#ffffff', fontSize: sf(20), fontWeight: '500', lineHeight: sf(20), letterSpacing: 0}}
           />
         </View>
 
         {/* ── Already have account ── */}
         <View className="mt-4 items-center">
-          <Text className="text-[#7D858E] text-[16px] leading-[16px]">
+          <Text className="text-[#7D858E] leading-[100%] tracking-[0%]"
+          style={{ fontSize: sf(16), lineHeight: sf(24), letterSpacing: 0 }}
+          >
             Already have an account?{' '}
-            <Text className="text-[#1E78F5] underline">Login</Text>
+            <Text className="text-[#1E78F5] underline font-medium">Login</Text>
           </Text>
         </View>
       </View>

@@ -1,3 +1,4 @@
+import { sf } from '@/utils/responsive';
 import React from 'react';
 import { Image, Text, View } from 'react-native';
 
@@ -37,7 +38,7 @@ export default function ChatAvatar({
           resizeMode="cover"
         />
       ) : (
-        <Text style={{ fontSize: size * 0.55 }}>{emoji}</Text>
+        <Text style={{ fontSize: sf(size * 0.55) }}>{emoji}</Text>
       )}
     </View>
   );

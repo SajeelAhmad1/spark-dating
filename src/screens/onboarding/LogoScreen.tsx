@@ -24,7 +24,7 @@ export default function LogoScreen({ navigation }: any) {
 
       <SafeAreaView className="flex-1" edges={['top', 'bottom']}>
         {/* Center content */}
-        <View className="flex-1 items-center justify-center px-2">
+        <View className="flex-1 gap-2 items-center justify-center px-2">
           {/* App icon */}
           <View
             style={{ width: sf(88), height: sf(88), borderRadius: sr(18) }}
@@ -33,14 +33,22 @@ export default function LogoScreen({ navigation }: any) {
           </View>
 
           {/* App name */}
-          <Text style={{ fontSize: sf(40) }} className="text-[#ffffff] font-normal">
+          <Text style={{ 
+            fontSize: sf(40), 
+            lineHeight: sf(40), 
+            letterSpacing: 0, 
+            fontFamily: 'ZenDots-Regular',
+            // fontFamily: 'Poppins-Medium',
+            fontWeight: '400',
+           }}
+             className="text-[#ffffff] font-normal">
             SPARK
           </Text>
 
           {/* Subtitle */}
           <Text
-            style={{ fontSize: sf(15), lineHeight: sf(24) }}
-            className="text-[#222222] font-normal text-center"
+            style={{ fontSize: sf(15)}}
+            className="text-[#222222] font-normal text-center pt-3"
           >
             Discover real connections through shared interests{'\n'}and genuine
             conversations.

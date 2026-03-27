@@ -3,6 +3,7 @@ import { View, Text, useWindowDimensions, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import OnboardingCard from './OnboardingCard';
 import CameraIcon from '@/assets/images/cameraIcon.svg';
+import { sf } from '@/utils/responsive';
 
 export default function Onboarding2({ navigation }: any) {
   const { width, height } = useWindowDimensions();
@@ -45,7 +46,7 @@ export default function Onboarding2({ navigation }: any) {
         <Text
           style={{
             position: 'absolute',
-            fontSize: 22,
+            fontSize: sf(22),
             zIndex: 20,
             top: illustrationHeight * 0.5 - 130,
             left: width * 0.35,
@@ -81,7 +82,7 @@ export default function Onboarding2({ navigation }: any) {
         <Text
           style={{
             position: 'absolute',
-            fontSize: 22,
+            fontSize: sf(22),
             zIndex: 20,
             top: illustrationHeight * 0.45 + 150,
             left: width * 0.58,

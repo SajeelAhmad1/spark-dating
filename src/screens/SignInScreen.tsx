@@ -8,6 +8,7 @@ import PhoneEmailField from '@/components/auth/PhoneEmailField';
 import PasswordField from '@/components/auth/PasswordField';
 import RememberMeToggle from '@/components/auth/RememberMeToggle';
 import SignInBottomActions from '@/components/auth/SignInBottomActions';
+import { sf } from '@/utils/responsive';
 
 export default function SignInScreen({
   navigation,
@@ -33,10 +34,14 @@ export default function SignInScreen({
 
         {/* Header */}
         <View className="gap-y-2" style={{ marginTop: 48 }}>
-          <Text className="text-black text-[28px] leading-[34px]">
+          <Text className="text-black font-semibold leading-[100%] tracking-[0%]"
+          style={{ fontSize: sf(28), lineHeight: sf(28), letterSpacing: 0 }}
+          >
             Welcome Back!
           </Text>
-          <Text className="text-[#7D858E] text-[14px] leading-[20px]">
+          <Text className="text-[#7D858E]  leading-[100%] tracking-[0%]"
+          style={{ fontSize: sf(15), lineHeight: sf(15), letterSpacing: 0 }}
+          >
             Please enter your number & password to signin
           </Text>
         </View>
@@ -66,7 +71,9 @@ export default function SignInScreen({
           />
 
           <TouchableOpacity onPress={() => {}}>
-            <Text className="text-[#1E78F5] text-[13px]">
+            <Text className="text-[#1E78F5] font-medium leading-[100%]"
+            style={{ fontSize: sf(14), lineHeight: sf(14), letterSpacing: 0 }}
+            >
               Forgot password!
             </Text>
           </TouchableOpacity>

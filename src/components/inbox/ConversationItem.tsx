@@ -5,6 +5,7 @@ import { Conversation } from '@/constants/conversations';
 import CameraButton from '@/components/inbox/CameraButton';
 import InboxAvatar from '@/components/inbox/InboxAvatar';
 import StreakBadge from '@/components/inbox/StreakBadge';
+import { sf } from '@/utils/responsive';
 
 export default function ConversationItem({ item }: { item: Conversation }) {
   const isLocked = item.status === 'locked';
@@ -47,8 +48,8 @@ export default function ConversationItem({ item }: { item: Conversation }) {
           >
             <Text
               style={{
-                fontSize: 16,
-                lineHeight: 16,
+                fontSize: sf(16),
+                lineHeight: sf(16),
                 fontWeight: '600',
                 color: '#000000',
               }}
@@ -64,8 +65,8 @@ export default function ConversationItem({ item }: { item: Conversation }) {
           <Text
             numberOfLines={1}
             style={{
-              fontSize: 13,
-              lineHeight: 13,
+              fontSize: sf(13),
+              lineHeight: sf(13),
               fontWeight: item.isUnread ? '600' : '400',
               color: item.isUnread ? '#000000' : '#555555',
               marginBottom: 3,
@@ -77,8 +78,8 @@ export default function ConversationItem({ item }: { item: Conversation }) {
           {item.time ? (
             <Text
               style={{
-                fontSize: 11,
-                lineHeight: 20,
+                fontSize: sf(11),
+                lineHeight: sf(11),
                 fontWeight: '500',
                 color: item.timeWarning ? '#FF3B30' : '#7D858E',
               }}

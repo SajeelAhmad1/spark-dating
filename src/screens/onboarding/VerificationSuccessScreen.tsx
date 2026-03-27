@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import { Check } from 'lucide-react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import PrimaryButton from '@/components/common/PrimaryButton';
+import { sf } from '@/utils/responsive';
 
 const VerificationSuccessScreen = ({navigation}: any) => {
   return (
@@ -23,7 +24,9 @@ const VerificationSuccessScreen = ({navigation}: any) => {
         </View>
 
         {/* ── Title ── */}
-        <Text className="text-black text-[22px] font-semibold leading-[22px] mb-8">
+        <Text className="text-black font-semibold leading-[24px] tracking-[0px] mb-8"
+        style={{ fontSize: sf(24), lineHeight: sf(24), letterSpacing: 0 }}
+        >
           Your Number is verified.
         </Text>
 
@@ -35,14 +38,17 @@ const VerificationSuccessScreen = ({navigation}: any) => {
             colors={['#1E78F5', '#FBB202']}
             variant="gradient"
             style={{ alignSelf: 'stretch' }}
+            textStyle={{fontSize: sf(20), fontWeight: '500', lineHeight: sf(20), letterSpacing: 0}}
           />
         </View>
 
         {/* ── Terms ── */}
         <TouchableOpacity className="mt-4" onPress={() => {}}>
-          <Text className="text-[#7D858E] text-[14px] font-normal">
+          <Text className="text-[#7D858E] font-normal leading-[100%] tracking-[0%]" 
+          style={{ fontSize: sf(16), lineHeight: sf(16), letterSpacing: 0 }}
+          >
             Agree our{' '}
-            <Text className="text-[#1E78F5] font-medium">Terms & Condition</Text>
+            <Text className="text-[#1E78F5] underline">Terms & Condition</Text>
           </Text>
         </TouchableOpacity>
 

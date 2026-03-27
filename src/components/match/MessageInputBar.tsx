@@ -1,6 +1,7 @@
 import React from 'react';
 import { TextInput, TouchableOpacity, View } from 'react-native';
 import CameraIcon from '@/assets/images/cameraIcon.svg';
+import { sf } from '@/utils/responsive';
 
 export default function MessageInputBar({
   value,
@@ -34,8 +35,8 @@ export default function MessageInputBar({
         style={{
           flex: 1,
           fontFamily: 'Poppins-Regular',
-          fontSize: 16,
-          lineHeight: 18,
+          fontSize: sf(16),
+          lineHeight: sf(16),
           padding: 4,
           color: '#FFFFFF',
         }}

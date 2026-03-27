@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { View, Text, TextInput, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import PrimaryButton from '@/components/common/PrimaryButton';
+import { sf } from '@/utils/responsive';
 
 const NumberVerifyScreen = ({navigation}: any) => {
   const [code, setCode] = useState(['', '', '', '']);
@@ -28,10 +29,14 @@ const NumberVerifyScreen = ({navigation}: any) => {
 
         {/* ── Header ── */}
         <View className="mt-16 gap-y-2">
-          <Text className="text-black text-[28px] leading-[28px] font-semibold">
+          <Text className="text-black  leading-[100%] tracking-[0%] font-semibold"
+          style={{ fontSize: sf(28), lineHeight: sf(28), letterSpacing: 0 }}
+          >
             Verify Your Number
           </Text>
-          <Text className="text-[#7D858E] text-[15px] leading-[15px] font-normal">
+          <Text className="text-[#7D858E] leading-[100%] tracking-[0%] font-normal"
+          style={{ fontSize: sf(15), lineHeight: sf(15), letterSpacing: 0 }}
+          >
             Enter the 4 digit code
           </Text>
         </View>
@@ -47,10 +52,13 @@ const NumberVerifyScreen = ({navigation}: any) => {
               onKeyPress={(e) => handleKeyPress(e, index)}
               keyboardType="number-pad"
               maxLength={1}
-              className="text-black text-[20px] font-semibold text-center"
+              className="text-black font-semibold text-center"
               style={{
-                width: 56,
-                height: 56,
+                fontSize: sf(20),
+                lineHeight: sf(24),
+                letterSpacing: 0,
+                width: sf(56),
+                height: sf(56),
                 borderRadius: 15,
                 borderWidth: 1,
                 borderColor: '#B6B9C9',
@@ -67,12 +75,15 @@ const NumberVerifyScreen = ({navigation}: any) => {
             colors={['#1E78F5', '#FBB202']}
             variant="gradient"
             style={{ alignSelf: 'stretch' }}
+            textStyle={{fontWeight: '500', fontSize: sf(20), lineHeight: sf(20), letterSpacing:0, color: '#ffffff'}}
           />
         </View>
 
         {/* ── Resend Code ── */}
         <TouchableOpacity className="mt-4 items-center" onPress={() => {}}>
-          <Text className="text-[#1E78F5] text-[16px] leading-[16px] font-medium">
+          <Text className="text-[#1E78F5] font-medium"
+          style={{ fontSize: sf(16), lineHeight: sf(16), letterSpacing: 0 }}
+          >
             Resend Code
           </Text>
         </TouchableOpacity>

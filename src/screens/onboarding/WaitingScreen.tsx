@@ -3,6 +3,7 @@ import { View, Text } from 'react-native';
 import { Share2, Bell, Users2 } from 'lucide-react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import PrimaryButton from '@/components/common/PrimaryButton';
+import { sf } from '@/utils/responsive';
 
 // ─── Constants ────────────────────────────────────────────
 const CURRENT = 454;
@@ -25,7 +26,7 @@ const WaitingScreen = ({ navigation }: any) => (
 
         {/* Title */}
         <Text
-          style={{ fontSize: 24, lineHeight: 24, letterSpacing: 0 }}
+          style={{ fontSize: sf(24), lineHeight: sf(24), letterSpacing: 0 }}
           className="text-black text-center font-semibold"
         >
           We're Almost There! 🚀
@@ -33,11 +34,13 @@ const WaitingScreen = ({ navigation }: any) => (
 
         {/* Subtitle */}
         <Text
-          style={{ fontFamily: 'Poppins-Regular', fontSize: 16, lineHeight: 20, letterSpacing: 0 }}
+          style={{ fontFamily: 'Poppins-Regular', fontSize: sf(16), lineHeight: sf(16), letterSpacing: 0 }}
           className="text-[#7D858E] text-center"
         >
           Spark goes live when{' '}
-          <Text style={{ fontFamily: 'Poppins-Regular', color: '#1E78F5' }}>
+          <Text style={{ fontFamily: 'Poppins-Medium', color: '#1E78F5' }}
+          className='font-medium'
+          >
             {TARGET.toLocaleString()} people
           </Text>{' '}
           join. Invite friends to speed it up!
@@ -46,10 +49,10 @@ const WaitingScreen = ({ navigation }: any) => (
         {/* Progress */}
         <View className="w-full gap-y-2">
           <View className="flex-row items-center justify-between">
-            <Text style={{ fontFamily: 'Poppins-Medium', fontSize: 16, lineHeight: 16, letterSpacing: 0 }} className="text-black">
+            <Text style={{ fontFamily: 'Poppins-Medium', fontSize: sf(16), lineHeight: sf(16), letterSpacing: 0 }} className="text-black">
               Launch Progress
             </Text>
-            <Text style={{ fontFamily: 'Poppins-Medium', fontSize: 16, lineHeight: 16, letterSpacing: 0 }} className="text-[#1E78F5]">
+            <Text style={{ fontFamily: 'Poppins-Medium', fontSize: sf(16), lineHeight: sf(16), letterSpacing: 0 }} className="text-[#1E78F5]">
               {CURRENT}/{TARGET}
             </Text>
           </View>
@@ -62,7 +65,7 @@ const WaitingScreen = ({ navigation }: any) => (
           </View>
 
           <Text
-            style={{ fontFamily: 'Poppins-Medium', fontSize: 14, lineHeight: 20, letterSpacing: 0 }}
+            style={{ fontFamily: 'Poppins-Medium', fontSize: sf(14), lineHeight: sf(20), letterSpacing: 0 }}
             className="text-[#DC9B00] text-right"
           >
             {REMAINING} more to go!
@@ -80,10 +83,10 @@ const WaitingScreen = ({ navigation }: any) => (
             <Bell size={24} color="#DC9B00" />
           </View>
           <View className="flex-1 shrink ml-2">
-            <Text style={{ fontFamily: 'Poppins-SemiBold', fontSize: 16, lineHeight: 24, letterSpacing: 0 }} className="text-black">
+            <Text style={{ fontFamily: 'Poppins-SemiBold', fontSize: sf(16), lineHeight: sf(16), letterSpacing: 0 }} className="text-black">
               You'll be notified
             </Text>
-            <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 13, lineHeight: 20, letterSpacing: 0 }} className="text-[#555555]">
+            <Text style={{ fontFamily: 'Poppins-Regular', fontSize: sf(13), lineHeight: sf(13), letterSpacing: 0 }} className="text-[#555555]">
               We will send you a notification when we reach {TARGET} users
             </Text>
           </View>
@@ -99,6 +102,7 @@ const WaitingScreen = ({ navigation }: any) => (
         variant="gradient"
         icon={<Share2 size={20} color="#ffffff" />}
         iconPosition="start"
+        textStyle={{fontSize: sf(18), fontWeight: '500', lineHeight: sf(18), letterSpacing: 0, color: '#ffffff'}}
       />
 
     </View>

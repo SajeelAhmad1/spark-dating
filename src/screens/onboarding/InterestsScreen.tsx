@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
 import { ChevronLeft } from 'lucide-react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import PrimaryButton from '@/components/common/PrimaryButton';
+import { sf } from '@/utils/responsive';
 
 const INTERESTS = [
   {
@@ -54,10 +55,10 @@ const InterestsScreen = ({ navigation }: any) => {
 
         {/* ── Header ── */}
         <View style={{ marginTop: 12, gap: 6 }}>
-          <Text style={{ fontSize: 28, fontWeight: '600', color: '#000000', lineHeight: 28 }}>
+          <Text style={{ fontSize: sf(28), fontWeight: '600', color: '#000000', lineHeight: sf(28) }}>
             Your Interests
           </Text>
-          <Text style={{ fontSize: 15, fontWeight: '400', color: '#7D858E', lineHeight: 15 }}>
+          <Text style={{ fontSize: sf(15), fontWeight: '400', color: '#7D858E', lineHeight: sf(15) }}>
             Choose at least 3 interests (max 5)
           </Text>
         </View>
@@ -69,10 +70,10 @@ const InterestsScreen = ({ navigation }: any) => {
 
               {/* Category Title */}
               <Text style={{
-                fontSize: 15,
+                fontSize: sf(15),
                 fontWeight: '600',
                 color: '#000000',
-                lineHeight: 15,
+                lineHeight: sf(15),
                 marginBottom: 12,
               }}>
                 {category}
@@ -98,10 +99,10 @@ const InterestsScreen = ({ navigation }: any) => {
                       }}
                     >
                       <Text style={{
-                        fontSize: 13,
+                        fontSize: sf(13),
                         fontWeight: '400',
                         color: isSelected ? '#000000' : '#7D858E',
-                        lineHeight: 13,
+                        lineHeight: sf(13),
                       }}>
                         {item}
                       </Text>
@@ -126,10 +127,10 @@ const InterestsScreen = ({ navigation }: any) => {
         gap: 12,
       }}>
         <Text style={{
-          fontSize: 15,
+          fontSize: sf(15),
           fontWeight: '500',
           color: '#FBB202',
-          lineHeight: 15,
+          lineHeight: sf(15),
         }}>
           {selected.length}/{MAX} selected
         </Text>
@@ -143,6 +144,7 @@ const InterestsScreen = ({ navigation }: any) => {
             alignSelf: 'stretch',
             opacity: canContinue ? 1 : 0.5,
           }}
+          textStyle={{fontSize: sf(20), fontWeight: '500', lineHeight: sf(20), letterSpacing: 0}}
         />
       </View>
     </SafeAreaView>

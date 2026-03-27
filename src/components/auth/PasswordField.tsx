@@ -16,7 +16,9 @@ export default function PasswordField({
 }) {
   return (
     <View className="gap-y-2">
-      <Text style={{ fontSize: sf(16) }} className="text-black">
+      <Text className="text-black font-semibold"
+      style={{ fontSize: sf(18), lineHeight: sf(18), letterSpacing: 0 }} 
+      >
         Password
       </Text>
       <View className="flex-row items-center border-b border-[#E8EAED]">
@@ -26,7 +28,7 @@ export default function PasswordField({
           secureTextEntry={!showPassword}
           value={password}
           onChangeText={onChangeText}
-          style={{ fontSize: sf(13), paddingVertical: sh(8) }}
+          style={{ fontSize: sf(12), paddingVertical: sh(8) }}
           className="flex-1 text-[#7D858E]"
         />
         <TouchableOpacity

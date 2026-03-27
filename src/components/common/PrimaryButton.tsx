@@ -1,3 +1,4 @@
+import { sf } from '@/utils/responsive';
 import React from 'react';
 import {
   TouchableOpacity,
@@ -168,8 +169,8 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontFamily: 'Poppins-Medium',
     fontWeight: '500',
-    fontSize: 16,
-    lineHeight: 16,
+    fontSize: sf(16),
+    lineHeight: sf(16),
     letterSpacing: 0,
   },
   iconAbsoluteStart: {

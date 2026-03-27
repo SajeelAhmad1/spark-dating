@@ -11,6 +11,7 @@ import { ChevronLeft, Plus, X } from 'lucide-react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { launchImageLibrary } from 'react-native-image-picker';
 import PrimaryButton from '@/components/common/PrimaryButton';
+import { sf } from '@/utils/responsive';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 const H_PADDING = 24;
@@ -93,7 +94,7 @@ const UploadPhotosScreen = ({ navigation }: any) => {
                 paddingVertical: 4,
                 borderRadius: 999,
               }}>
-                <Text style={{ color: '#fff', fontSize: 12, fontWeight: '500' }}>
+                <Text style={{ color: '#fff', fontSize: sf(12), fontWeight: '500' }}>
                   Primary
                 </Text>
               </View>
@@ -149,7 +150,7 @@ const UploadPhotosScreen = ({ navigation }: any) => {
             }}>
               <Plus size={18} color="#fff" strokeWidth={2.5} />
             </View>
-            <Text style={{ fontSize: 13, color: '#FBB202', fontWeight: '400' }}>
+            <Text style={{ fontSize: sf(14), color: '#FBB202', fontWeight: '500' }}>
               Add
             </Text>
           </TouchableOpacity>
@@ -167,10 +168,10 @@ const UploadPhotosScreen = ({ navigation }: any) => {
         </TouchableOpacity>
 
         <View style={{ marginTop: 12, gap: 6 }}>
-          <Text style={{ fontSize: 28, fontWeight: '600', color: '#000000', lineHeight: 28 }}>
+          <Text style={{ fontSize: sf(28), fontWeight: '600', color: '#000000', lineHeight: sf(28) }}>
             Show your authentic self
           </Text>
-          <Text style={{ fontSize: 15, fontWeight: '400', color: '#7D858E', lineHeight: 22 }}>
+          <Text style={{ fontSize: sf(15), fontWeight: '400', color: '#7D858E', lineHeight: sf(15) }}>
             Add photos to start connecting (required before messaging).
           </Text>
         </View>
@@ -201,6 +202,7 @@ const UploadPhotosScreen = ({ navigation }: any) => {
           colors={['#1E78F5', '#FBB202']}
           variant="gradient"
           style={{ alignSelf: 'stretch' }}
+          textStyle={{fontSize: sf(20), fontWeight: '500', lineHeight: sf(20), letterSpacing: 0}}
         />
       </View>
     </SafeAreaView>

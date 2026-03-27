@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 import { Lock } from 'lucide-react-native';
+import { sf } from '@/utils/responsive';
 
 export default function InboxAvatar({
   isLocked,
@@ -36,7 +37,7 @@ export default function InboxAvatar({
             overflow: 'hidden',
           }}
         >
-          <Text style={{ fontSize: 26 }}>👩</Text>
+          <Text style={{ fontSize: sf(26) }}>👩</Text>
         </View>
       )}
 
@@ -56,7 +57,7 @@ export default function InboxAvatar({
             borderColor: '#FFFFFF',
           }}
         >
-          <Text style={{ color: '#FFFFFF', fontSize: 11, fontWeight: '700', lineHeight: 11 }}>
+          <Text style={{ color: '#FFFFFF', fontSize: sf(11), fontWeight: '700', lineHeight: sf(11) }}>
             1
           </Text>
         </View>

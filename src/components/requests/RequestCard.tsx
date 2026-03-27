@@ -1,6 +1,7 @@
 import React from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { Heart, X } from 'lucide-react-native';
+import { sf } from '@/utils/responsive';
 
 export default function RequestCard({
   name,
@@ -29,8 +30,8 @@ export default function RequestCard({
         <Text
           style={{
             fontFamily: 'Poppins-SemiBold',
-            fontSize: 16,
-            lineHeight: 16,
+            fontSize: sf(16),
+            lineHeight: sf(16),
             color: '#000000',
           }}
         >
@@ -39,8 +40,8 @@ export default function RequestCard({
         <Text
           style={{
             fontFamily: 'Poppins-Regular',
-            fontSize: 13,
-            lineHeight: 13,
+            fontSize: sf(13),
+            lineHeight: sf(13),
             color: '#555555',
             marginTop: 4,
           }}

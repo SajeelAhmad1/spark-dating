@@ -2,6 +2,7 @@ import React from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import ChatAvatar from '@/components/chat/ChatAvatar';
 import { Message } from '@/types/chat';
+import { sf } from '@/utils/responsive';
 
 export default function MessageBubble({
   message,
@@ -69,12 +70,12 @@ export default function MessageBubble({
                   gap: 6,
                 }}
               >
-                <Text style={{ fontSize: 16, color: '#FFFFFF' }}>✦</Text>
+                <Text style={{ fontSize: sf(16), color: '#FFFFFF' }}>✦</Text>
                 <Text
                   style={{
                     fontFamily: 'Poppins-Medium',
                     fontWeight: '500',
-                    fontSize: 16,
+                    fontSize: sf(16),
                     lineHeight: 16,
                     color: '#FFFFFF',
                   }}
@@ -94,7 +95,7 @@ export default function MessageBubble({
                   style={{
                     fontFamily: 'Poppins-Regular',
                     fontWeight: '400',
-                    fontSize: 10,
+                    fontSize: sf(10),
                     lineHeight: 10,
                     color: '#7D858E',
                   }}
@@ -102,7 +103,7 @@ export default function MessageBubble({
                   {message.time}
                 </Text>
                 {message.seen && (
-                  <Text style={{ fontSize: 10, color: '#7D858E' }}>✓✓</Text>
+                  <Text style={{ fontSize: sf(10), color: '#7D858E' }}>✓✓</Text>
                 )}
               </View>
             </View>
@@ -134,12 +135,12 @@ export default function MessageBubble({
                 gap: 6,
               }}
             >
-              <Text style={{ fontSize: 16 }}>📷</Text>
+              <Text style={{ fontSize: sf(16) }}>📷</Text>
               <Text
                 style={{
                   fontFamily: 'Poppins-Medium',
                   fontWeight: '500',
-                  fontSize: 16,
+                  fontSize: sf(16),
                   lineHeight: 16,
                   color: '#DC9B00',
                 }}
@@ -159,7 +160,7 @@ export default function MessageBubble({
                 style={{
                   fontFamily: 'Poppins-Regular',
                   fontWeight: '400',
-                  fontSize: 10,
+                  fontSize: sf(10),
                   lineHeight: 10,
                   color: '#DC9B00',
                 }}
@@ -171,7 +172,7 @@ export default function MessageBubble({
                   style={{
                     fontFamily: 'Poppins-Regular',
                     fontWeight: '400',
-                    fontSize: 10,
+                    fontSize: sf(10),
                     lineHeight: 10,
                     color: '#DC9B00',
                   }}
@@ -212,7 +213,7 @@ export default function MessageBubble({
                 style={{
                   fontFamily: 'Poppins-Regular',
                   fontWeight: '400',
-                  fontSize: 16,
+                  fontSize: sf(16),
                   lineHeight: 16,
                   color: '#FFFFFF',
                 }}
@@ -232,7 +233,7 @@ export default function MessageBubble({
                 style={{
                   fontFamily: 'Poppins-Regular',
                   fontWeight: '400',
-                  fontSize: 10,
+                  fontSize: sf(10),
                   lineHeight: 10,
                   color: '#7D858E',
                 }}
@@ -240,7 +241,7 @@ export default function MessageBubble({
                 {message.time}
               </Text>
               {message.seen && (
-                <Text style={{ fontSize: 10, color: '#1E78F5' }}>✓✓</Text>
+                <Text style={{ fontSize: sf(10), color: '#1E78F5' }}>✓✓</Text>
               )}
             </View>
           </View>
@@ -275,7 +276,7 @@ export default function MessageBubble({
               style={{
                 fontFamily: 'Poppins-Regular',
                 fontWeight: '400',
-                fontSize: 16,
+                fontSize: sf(16),
                 lineHeight: 16,
                 color: '#000000',
               }}
@@ -287,7 +288,7 @@ export default function MessageBubble({
             style={{
               fontFamily: 'Poppins-Regular',
               fontWeight: '400',
-              fontSize: 10,
+              fontSize: sf(10),
               lineHeight: 10,
               color: '#7D858E',
               marginTop: 4,
