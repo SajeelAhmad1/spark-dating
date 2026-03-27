@@ -9,6 +9,8 @@ import MessageInputBar from '@/components/match/MessageInputBar';
 import { calculateMatchPhotoLayout } from '@/utils/match';
 import { sf, sr, sw, sh } from '@/utils/responsive';
 import { MATCHES } from '@/constants/matches';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
 
 const MatchScreen = ({ navigation, route }: any) => {
   const match = route?.params?.match ?? MATCHES[0];
@@ -17,7 +19,13 @@ const MatchScreen = ({ navigation, route }: any) => {
   const [isCamOpen, setIsCamOpen] = useState(false);
   const [isPhotoPreviewOpen, setIsPhotoPreviewOpen] = useState(false);
   const [capturedPhoto, setCapturedPhoto] = useState<string | null>(null);
-  const [inputMessage, setInputMessage] = useState('');
+  const inputMessageSchema = z.string();
+  const { watch, setValue, getValues } = useForm<{
+    inputMessage: string;
+  }>({
+    defaultValues: { inputMessage: '' },
+  });
+  const inputMessage = watch('inputMessage');
   const [isSending, setIsSending] = useState(false);
   const { width } = useWindowDimensions();
 
@@ -66,11 +74,16 @@ const MatchScreen = ({ navigation, route }: any) => {
       await new Promise(resolve => setTimeout(resolve, 1000));
       
       console.log('Photo sent:', photoUri);
+      const messageResult = inputMessageSchema.safeParse(getValues().inputMessage);
+      if (!messageResult.success) {
+        // eslint-disable-next-line no-console
+        console.warn('Message validation failed', messageResult.error.flatten());
+      }
       console.log('Message:', inputMessage);
       
       // Clear after successful send
       setCapturedPhoto(null);
-      setInputMessage('');
+      setValue('inputMessage', '');
       setIsPhotoPreviewOpen(false);
 
       // Move to chat with the same user that was selected on Discovery.
@@ -114,7 +127,7 @@ const MatchScreen = ({ navigation, route }: any) => {
   const handleClosePreview = () => {
     setIsPhotoPreviewOpen(false);
     setCapturedPhoto(null);
-    setInputMessage('');
+    setValue('inputMessage', '');
   };
 
   return (
@@ -150,7 +163,7 @@ const MatchScreen = ({ navigation, route }: any) => {
 
         <MessageInputBar
           value={inputMessage}
-          onChangeText={setInputMessage}
+          onChangeText={v => setValue('inputMessage', v)}
           onOpenCamera={() => setIsCamOpen(true)}
         />
 
