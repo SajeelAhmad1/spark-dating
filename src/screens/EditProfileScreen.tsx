@@ -24,6 +24,8 @@ import ETHNICITIES from '@/constants/ethnicities';
 import HEIGHTS from '@/constants/heights';
 import GENDER from '@/constants/gender';
 import DatePicker from 'react-native-date-picker';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
 
 type DropdownField = 'gender' | 'height' | 'bodyType' | 'ethnicity' | null;
 
@@ -44,35 +46,71 @@ const EditProfileScreen = ({ navigation }: any) => {
     '☕ Coffee',
     '📷 Photography',
   ]);
-
-  const [profile, setProfile] = useState({
-    firstName: 'Paul',
-    lastName: 'W',
-    bio: "Adventure lover & coffee enthusiast. Always looking for the next trip. Let's explore together! ✈️",
-    gender: 'Male',
-    height: '5\' 10"',
-    bodyType: 'Slim',
-    ethnicity: 'White',
-  });
-
-  const [birthDate, setBirthDate] = useState<Date>(new Date('1998-11-24'));
   const [datePickerOpen, setDatePickerOpen] = useState(false);
 
   const formatDate = (date: Date) =>
     `${String(date.getDate()).padStart(2, '0')}/${String(
       date.getMonth() + 1,
     ).padStart(2, '0')}/${date.getFullYear()}`;
+
+  const editProfileSchema = z.object({
+    firstName: z.string().min(1),
+    lastName: z.string().min(1),
+    bio: z.string(),
+    gender: z
+      .string()
+      .refine(v => Object.values(GENDER).includes(v), 'Invalid gender'),
+    height: z
+      .string()
+      .refine(v => Object.values(HEIGHTS).includes(v), 'Invalid height'),
+    bodyType: z
+      .string()
+      .refine(v => Object.values(BODY_TYPES).includes(v), 'Invalid body type'),
+    ethnicity: z
+      .string()
+      .refine(v => Object.values(ETHNICITIES).includes(v), 'Invalid ethnicity'),
+    birthday: z.date(),
+  });
+
+  type EditProfileFormValues = z.infer<typeof editProfileSchema>;
+
+  const { watch, setValue, getValues } = useForm<EditProfileFormValues>({
+    defaultValues: {
+      firstName: 'Paul',
+      lastName: 'W',
+      bio: "Adventure lover & coffee enthusiast. Always looking for the next trip. Let's explore together! ✈️",
+      gender: 'Male',
+      height: '5\' 10"',
+      bodyType: 'Slim',
+      ethnicity: 'White',
+      birthday: new Date('1998-11-24'),
+    },
+  });
+
+  const profile = watch() as EditProfileFormValues;
+  const birthDate = profile.birthday;
+
+  type ProfileKey = Exclude<keyof EditProfileFormValues, 'birthday'>;
+
   // On Save
   const handleSave = () => {
+    const values = getValues();
+    const result = editProfileSchema.safeParse(values);
+    if (!result.success) {
+      // eslint-disable-next-line no-console
+      console.warn('Edit profile validation failed', result.error.flatten());
+    }
+
     const payload = {
-      ...profile,
-      birthday: formatDate(birthDate),
+      ...values,
+      birthday: formatDate(values.birthday),
     };
     console.log(payload);
   };
 
-  const updateProfile = (key: string, value: string) =>
-    setProfile(prev => ({ ...prev, [key]: value }));
+  const updateProfile = (key: ProfileKey, value: string) => {
+    setValue(key, value);
+  };
 
   const dropdownOptions: Record<NonNullable<DropdownField>, string[]> = {
     gender: Object.values(GENDER),
@@ -490,6 +528,7 @@ const EditProfileScreen = ({ navigation }: any) => {
           </TouchableOpacity>
 
           <TouchableOpacity
+            onPress={handleSave}
             style={{
               width: sw(184),
               height: sh(56),
@@ -603,7 +642,7 @@ const EditProfileScreen = ({ navigation }: any) => {
         maximumDate={new Date()}
         onConfirm={date => {
           setDatePickerOpen(false);
-          setBirthDate(date);
+          setValue('birthday', date);
         }}
         onCancel={() => setDatePickerOpen(false)}
       />

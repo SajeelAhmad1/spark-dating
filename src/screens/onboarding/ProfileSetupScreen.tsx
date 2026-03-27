@@ -11,6 +11,8 @@ import {
 import { ChevronLeft, ChevronDown } from 'lucide-react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import PrimaryButton from '@/components/common/PrimaryButton';
+import { useZodForm } from '@/utils/form';
+import { createProfileSetupSchema } from '@/validations/onboarding';
 
 const GENDERS = ['Male', 'Female', 'Other'];
 
@@ -21,14 +23,34 @@ const YEARS = Array.from({ length: 100 }, (_, i) => String(2024 - i));
 type DropdownField = 'day' | 'month' | 'year' | null;
 
 const ProfileSetupScreen = ({navigation}: any) => {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [gender, setGender] = useState('Male');
-  const [day, setDay] = useState('24');
-  const [month, setMonth] = useState('May');
-  const [year, setYear] = useState('1999');
-  const [bio, setBio] = useState('');
   const [openDropdown, setOpenDropdown] = useState<DropdownField>(null);
+
+  const profileSchema = createProfileSetupSchema({
+    genders: GENDERS,
+    days: DAYS,
+    months: MONTHS,
+    years: YEARS,
+  });
+
+  const { watch, setValue, getValues } = useZodForm(profileSchema, {
+    defaultValues: {
+      firstName: '',
+      lastName: '',
+      gender: 'Male',
+      day: '24',
+      month: 'May',
+      year: '1999',
+      bio: '',
+    },
+  });
+
+  const firstName = watch('firstName');
+  const lastName = watch('lastName');
+  const gender = watch('gender');
+  const day = watch('day');
+  const month = watch('month');
+  const year = watch('year');
+  const bio = watch('bio');
 
   const dropdownOptions: Record<NonNullable<DropdownField>, string[]> = {
     day: DAYS,
@@ -43,9 +65,7 @@ const ProfileSetupScreen = ({navigation}: any) => {
   };
 
   const handleSelect = (field: NonNullable<DropdownField>, value: string) => {
-    if (field === 'day') setDay(value);
-    if (field === 'month') setMonth(value);
-    if (field === 'year') setYear(value);
+    setValue(field, value);
     setOpenDropdown(null);
   };
 
@@ -90,7 +110,7 @@ const ProfileSetupScreen = ({navigation}: any) => {
               placeholder="JJ"
               placeholderTextColor="#7D858E"
               value={firstName}
-              onChangeText={setFirstName}
+              onChangeText={v => setValue('firstName', v)}
               style={inputStyle}
             />
           </View>
@@ -100,7 +120,7 @@ const ProfileSetupScreen = ({navigation}: any) => {
               placeholder="Smith"
               placeholderTextColor="#7D858E"
               value={lastName}
-              onChangeText={setLastName}
+              onChangeText={v => setValue('lastName', v)}
               style={inputStyle}
             />
           </View>
@@ -115,7 +135,7 @@ const ProfileSetupScreen = ({navigation}: any) => {
               return (
                 <TouchableOpacity
                   key={g}
-                  onPress={() => setGender(g)}
+                  onPress={() => setValue('gender', g)}
                   style={{
                     flex: 1,
                     height: 56,
@@ -178,7 +198,7 @@ const ProfileSetupScreen = ({navigation}: any) => {
             placeholder="Write something interesting..."
             placeholderTextColor="#7D858E"
             value={bio}
-            onChangeText={setBio}
+            onChangeText={v => setValue('bio', v)}
             multiline
             textAlignVertical="top"
             style={{
@@ -199,7 +219,14 @@ const ProfileSetupScreen = ({navigation}: any) => {
       <View className="absolute bottom-0 left-0 right-0 px-5 pb-8 bg-white">
         <PrimaryButton
           title="Continue"
-          onPress={() => {navigation.navigate("PhysicalAttributesScreen")}}
+          onPress={() => {
+            const result = profileSchema.safeParse(getValues());
+            if (!result.success) {
+              // eslint-disable-next-line no-console
+              console.warn('Profile setup validation failed', result.error.flatten());
+            }
+            navigation.navigate('PhysicalAttributesScreen');
+          }}
           colors={['#1E78F5', '#FBB202']}
           variant="gradient"
           style={{ alignSelf: 'stretch' }}

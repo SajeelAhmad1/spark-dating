@@ -8,6 +8,14 @@ import PhoneEmailField from '@/components/auth/PhoneEmailField';
 import PasswordField from '@/components/auth/PasswordField';
 import RememberMeToggle from '@/components/auth/RememberMeToggle';
 import SignInBottomActions from '@/components/auth/SignInBottomActions';
+import { useZodForm } from '@/utils/form';
+import {
+  signInSchema,
+  phoneNumberSchema,
+  emailSchema,
+  passwordSchema,
+  rememberMeSchema,
+} from '@/validations/auth';
 
 export default function SignInScreen({
   navigation,
@@ -19,9 +27,21 @@ export default function SignInScreen({
   const initialTab = route?.params?.defaultTab ?? 'phone';
 
   const [activeTab, setActiveTab] = useState<AuthSigninTab>(initialTab);
-  const [password, setPassword] = useState('');
-  const [rememberMe, setRememberMe] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+
+  const { watch, setValue, getValues } = useZodForm(signInSchema, {
+    defaultValues: {
+      phoneNumber: '',
+      email: '',
+      password: '',
+      rememberMe: false,
+    },
+  });
+
+  const phoneNumber = watch('phoneNumber');
+  const email = watch('email');
+  const password = watch('password');
+  const rememberMe = watch('rememberMe');
 
   return (
     <SafeAreaView className="flex-1 bg-white">
@@ -49,10 +69,16 @@ export default function SignInScreen({
 
         {/* Fields */}
         <View className="mt-6 gap-y-5">
-          <PhoneEmailField activeTab={activeTab} />
+          <PhoneEmailField
+            activeTab={activeTab}
+            value={activeTab === 'phone' ? phoneNumber : email}
+            onChangeText={v =>
+              setValue(activeTab === 'phone' ? 'phoneNumber' : 'email', v)
+            }
+          />
           <PasswordField
             password={password}
-            onChangeText={setPassword}
+            onChangeText={v => setValue('password', v)}
             showPassword={showPassword}
             onToggleShowPassword={() => setShowPassword(p => !p)}
           />
@@ -62,7 +88,7 @@ export default function SignInScreen({
         <View className="flex-row items-center justify-between mt-5">
           <RememberMeToggle
             rememberMe={rememberMe}
-            onToggle={() => setRememberMe(r => !r)}
+            onToggle={() => setValue('rememberMe', !getValues().rememberMe)}
           />
 
           <TouchableOpacity onPress={() => {}}>
@@ -74,7 +100,32 @@ export default function SignInScreen({
 
         {/* Bottom Actions */}
         <SignInBottomActions
-          onLogin={() => navigation.navigate('EnableLocationScreen')}
+          onLogin={() => {
+            const values = getValues();
+            const contact =
+              activeTab === 'phone' ? values.phoneNumber : values.email;
+
+            const contactSchema =
+              activeTab === 'phone'
+                ? phoneNumberSchema
+                : emailSchema;
+
+            const contactResult = contactSchema.safeParse(contact);
+            const passwordResult = passwordSchema.safeParse(values.password);
+            const rememberResult = rememberMeSchema.safeParse(values.rememberMe);
+
+            // Keep existing behavior; only run validation for correctness.
+            if (!contactResult.success || !passwordResult.success || !rememberResult.success) {
+              // eslint-disable-next-line no-console
+              console.warn('Sign-in validation failed', {
+                contactError: contactResult.success ? null : contactResult.error.flatten(),
+                passwordError: passwordResult.success ? null : passwordResult.error.flatten(),
+                rememberError: rememberResult.success ? null : rememberResult.error.flatten(),
+              });
+            }
+
+            navigation.navigate('EnableLocationScreen');
+          }}
         />
       </View>
     </SafeAreaView>

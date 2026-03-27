@@ -4,9 +4,13 @@ import { ChevronDown } from 'lucide-react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { CountryPicker } from 'react-native-country-codes-picker';
 import PrimaryButton from '@/components/common/PrimaryButton';
+import { useZodForm } from '@/utils/form';
+import {
+  onboardingPhoneSchema,
+  onboardingPhoneFormSchema,
+} from '@/validations/onboarding';
 
 const NumberEnterScreen = ({navigation}: any) => {
-  const [phoneNumber, setPhoneNumber] = useState('');
   const [show, setShow] = useState(false);
 
   // ✅ Store full country object
@@ -14,6 +18,14 @@ const NumberEnterScreen = ({navigation}: any) => {
     flag: '🇳🇱',
     dial_code: '+31',
   });
+
+  const { watch, setValue, getValues } = useZodForm(onboardingPhoneFormSchema, {
+    defaultValues: {
+      phoneNumber: '',
+    },
+  });
+
+  const phoneNumber = watch('phoneNumber');
 
   return (
     <SafeAreaView className="flex-1 bg-white">
@@ -53,7 +65,7 @@ const NumberEnterScreen = ({navigation}: any) => {
             placeholderTextColor="#7D858E"
             keyboardType="phone-pad"
             value={phoneNumber}
-            onChangeText={setPhoneNumber}
+            onChangeText={v => setValue('phoneNumber', v)}
             className="flex-1 text-black text-[16px] leading-[150%] tracking-[0px] font-medium"
           />
         </View>
@@ -71,7 +83,14 @@ const NumberEnterScreen = ({navigation}: any) => {
         <View className="mt-6">
           <PrimaryButton
             title="Send verification Code"
-            onPress={() => navigation.navigate('NumberVerifyScreen')}
+            onPress={() => {
+              const result = onboardingPhoneSchema.safeParse(getValues().phoneNumber);
+              if (!result.success) {
+                // eslint-disable-next-line no-console
+                console.warn('Phone number validation failed', result.error.flatten());
+              }
+              navigation.navigate('NumberVerifyScreen');
+            }}
             colors={['#1E78F5', '#FBB202']}
             variant="gradient"
             style={{ alignSelf: 'stretch' }}

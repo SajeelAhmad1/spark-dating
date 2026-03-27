@@ -1,23 +1,31 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef } from 'react';
 import { View, Text, TextInput, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import PrimaryButton from '@/components/common/PrimaryButton';
+import { useZodForm } from '@/utils/form';
+import { otpSchema } from '@/validations/onboarding';
 
 const NumberVerifyScreen = ({navigation}: any) => {
-  const [code, setCode] = useState(['', '', '', '']);
   const inputs = useRef<(TextInput | null)[]>([]);
 
+  const { watch, setValue, getValues } = useZodForm(otpSchema, {
+    defaultValues: {
+      digits: ['', '', '', ''],
+    },
+  });
+
+  const digits = watch('digits');
+
   const handleChange = (text: string, index: number) => {
-    const newCode = [...code];
-    newCode[index] = text;
-    setCode(newCode);
-    if (text && index < 3) {
+    const nextDigit = text.slice(-1);
+    setValue(`digits.${index}` as const, nextDigit);
+    if (nextDigit && index < 3) {
       inputs.current[index + 1]?.focus();
     }
   };
 
   const handleKeyPress = (e: any, index: number) => {
-    if (e.nativeEvent.key === 'Backspace' && !code[index] && index > 0) {
+    if (e.nativeEvent.key === 'Backspace' && !digits[index] && index > 0) {
       inputs.current[index - 1]?.focus();
     }
   };
@@ -38,7 +46,7 @@ const NumberVerifyScreen = ({navigation}: any) => {
 
         {/* ── OTP Inputs ── */}
         <View className="mt-8 flex-row gap-x-4 justify-center">
-          {code.map((digit, index) => (
+          {digits.map((digit, index) => (
             <TextInput
               key={index}
             //   ref={(ref) => (inputs.current[index] = ref)}
@@ -63,7 +71,14 @@ const NumberVerifyScreen = ({navigation}: any) => {
         <View className="mt-8">
           <PrimaryButton
             title="Verify"
-            onPress={() => {navigation.navigate("VerificationSuccessScreen")}}
+            onPress={() => {
+              const result = otpSchema.safeParse(getValues());
+              if (!result.success) {
+                // eslint-disable-next-line no-console
+                console.warn('OTP validation failed', result.error.flatten());
+              }
+              navigation.navigate('VerificationSuccessScreen');
+            }}
             colors={['#1E78F5', '#FBB202']}
             variant="gradient"
             style={{ alignSelf: 'stretch' }}

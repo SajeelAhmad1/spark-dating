@@ -12,14 +12,23 @@ import { ChevronLeft, Search } from 'lucide-react-native';
 import { sf, sr, sw, sh } from '@/utils/responsive';
 import PrimaryButton from '@/components/common/PrimaryButton';
 import { BLOCKED_USERS, BlockedUser } from '@/constants/blockedUsers';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
 
 const BlockedUsersScreen = ({ navigation }: any) => {
-  const [search, setSearch] = useState('');
   const [blockedUsers, setBlockedUsers] =
     useState<BlockedUser[]>(BLOCKED_USERS);
 
+  const searchSchema = z.string();
+  const { watch, setValue } = useForm<{ search: string }>({
+    defaultValues: { search: '' },
+  });
+
+  const search = watch('search');
+  const safeSearch = searchSchema.safeParse(search).success ? search : '';
+
   const filtered = blockedUsers.filter(u =>
-    u.name.toLowerCase().includes(search.toLowerCase()),
+    u.name.toLowerCase().includes(safeSearch.toLowerCase()),
   );
 
   const handleUnblock = (id: string) => {
@@ -76,7 +85,7 @@ const BlockedUsersScreen = ({ navigation }: any) => {
           <Search size={sf(16)} color="#7D858E" />
           <TextInput
             value={search}
-            onChangeText={setSearch}
+            onChangeText={v => setValue('search', v)}
             placeholder="Search blocked users"
             placeholderTextColor="#7D858E"
             style={{
